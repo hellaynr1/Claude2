@@ -12,7 +12,7 @@ These notes load automatically at the start of every Claude Code session on this
 - Explain things in plain language and keep answers short.
 - Point out when there's a smarter way to do what I'm asking, or a better way to use Claude.
 - When you build something, show me the result (a link or screenshot) instead of just describing it.
-- Ask before deleting anything or pushing to GitHub.
+- Ask before deleting anything. Saving to this repo and pushing it is pre-approved (see Auto-save).
 
 ## Tools in this repo
 - `.mcp.json` adds the Playwright MCP server, so Claude can open and test web pages in a browser.
@@ -20,5 +20,14 @@ These notes load automatically at the start of every Claude Code session on this
 
 ## My projects
 - Daybook: productivity workspace (tasks, calendar, goals, habits, focus timer, notes, alarms). https://claude.ai/artifact/YNuKimVQYiEoxTvTG2ZTUi
-- Second Brain: 3D galaxy of everything I've learned with Claude. https://claude.ai/artifact/RGPX3G4upwNNFNPNxY8Jnz
+- Second Brain: 3D galaxy I can talk to: capture notes (typing or dictation), AI files and links them, Ask answers from my notes. https://claude.ai/artifact/RGPX3G4upwNNFNPNxY8Jnz
   When we learn something worth keeping, offer to add it here (in CLAUDE.md or a skill) and to the Second Brain.
+
+## Auto-save (every session)
+I want everything we build and learn kept. At the end of any session where we built, changed or learned something:
+1. Add a dated entry to `brain/log.md`: what we did, what I learned, links to anything published.
+2. Put new lessons and preferences in this file (short) and new how-tos in a skill under `.claude/skills/`.
+3. Save the latest source of any app you built for me in `projects/` (for example `projects/second-brain.html`, `projects/daybook.html`).
+4. Add new lessons, skills and tools to the Second Brain's built-in stars (the `BASE` list in `projects/second-brain.html`) and republish it to the same link.
+5. Commit and push to GitHub without asking. Tell me in one line what was saved.
+Keep this file lean: rules about me here, know-how in skills, history in `brain/log.md`.
