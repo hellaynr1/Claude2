@@ -13,4 +13,4 @@ These notes load automatically at the start of every Claude Code session on this
 
 ## Tools in this repo
 - `.mcp.json` adds the Playwright MCP server, so Claude can open and test web pages in a browser.
-- `.claude/skills/` holds custom skills. Each skill is a folder with a `SKILL.md` file: `daily-plan` (plan my day) and `web-data` (free APIs and scraping).
+- `.claude/skills/` holds custom skills. Each skill is a folder with a `SKILL.md` file: `daily-plan` (plan my day), `web-data` (free APIs and scraping) and `video-notes` (read videos through their transcripts).
