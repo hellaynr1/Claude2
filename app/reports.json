@@ -1,6 +1,12 @@
 [
  {
   "d": "2026-10-17",
+  "at": "2026-10-17T12:09:47+00:00",
+  "type": "saving",
+  "t": "Claude usage logged (memory/metrics/claude-usage.csv): weekly 67% used on Saturday, resets Wednesday 15:00."
+ },
+ {
+  "d": "2026-10-17",
   "at": "2026-10-17T12:02:43+00:00",
   "type": "update",
   "t": "Weekly content calendar on: every Monday 07:45, 3 Investedia pieces (reel with voice + carousels) drafted, compliance-checked and proposed as a pull request. First run Monday 19 October."
