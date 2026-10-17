@@ -18,7 +18,7 @@ These notes load automatically at the start of every Claude Code session on this
 
 ## Tools in this repo
 - `.mcp.json` adds the Playwright MCP server, so Claude can open and test web pages in a browser.
-- `.claude/skills/` holds custom skills. Each skill is a folder with a `SKILL.md` file: `daily-plan` (plan my day), `web-data` (free APIs and scraping), `video-notes` (read videos through their transcripts) and `systems` (save and run my repeatable workflows in `systems/`).
+- `.claude/skills/` holds custom skills. Each skill is a folder with a `SKILL.md` file: `daily-plan` (plan my day), `web-data` (free APIs and scraping), `video-notes` (read videos through their transcripts), `systems` (save and run my repeatable workflows in `systems/`) and `learning-tracker` (my AI learning progress in `learning/progress.md`).
 
 ## My projects
 - Daybook: productivity workspace (tasks, calendar, goals, habits, focus timer, notes, alarms). https://claude.ai/artifact/YNuKimVQYiEoxTvTG2ZTUi

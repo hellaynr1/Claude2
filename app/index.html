@@ -316,6 +316,7 @@ button { cursor: pointer; }
 .lesson.done button.t { color: var(--muted); text-decoration: line-through; }
 .tick { width: 20px; height: 20px; border-radius: 6px; border: 1.5px solid var(--learn); background: none; padding: 0; display: grid; place-items: center; color: var(--space); font-size: 12px; font-weight: 700; }
 .tick[aria-pressed="true"] { background: var(--learn); }
+.tick.half { color: var(--learn); font-size: 18px; line-height: 1; }
 .progress { height: 6px; border-radius: 999px; background: var(--hover); overflow: hidden; }
 .progress i { display: block; height: 100%; background: var(--learn); border-radius: 999px; }
 .draft { font-size: 11px; font-weight: 600; letter-spacing: .06em; text-transform: uppercase; color: var(--brand); border: 1px dashed var(--brand); border-radius: 6px; padding: 1px 6px; justify-self: start; }
@@ -519,6 +520,26 @@ button { cursor: pointer; }
     { id: "sys-how", c: "systems", t: "How systems work", d: "2026-10-17", s: "Give Claude roles, a combination of skills and steps, or say \"save this as a system\" after a task you liked. It's saved as a file, a star here and a note in your vault. Say \"run the <name> system\" to repeat it.", x: [], l: ["skills-learn", "sys-sync"] },
     { id: "sys-optimizer", c: "systems", t: "System: daily optimizer", d: "2026-10-17", s: "A Claude session that runs on its own every day at 20:45 (Brussels): reads the brain log and setup repo, studies what worked, and drafts improvements to CLAUDE.md, skills, systems and the galaxy. It only proposes: changes arrive as a GitHub pull request with a phone notification. Merge = approve, close = reject.", x: ["On since 2026-10-17 · first run tonight", "Can't read Google Drive yet (no connectors on the scheduled task)"], url: "https://github.com/hellaynr1/Claude2/blob/main/systems/weekly-optimizer.md", l: ["remote-automation", "sys-sync", "claude-memory"] },
     { id: "remote-automation", c: "learn", step: 15, t: "Remote automation", d: "2026-10-17", s: "Claude Code can run in the cloud on a schedule, without you at the computer. Safe setup: it researches and prepares, then asks you to approve before anything changes. Pull requests are the approval button: read, then merge to approve or close to reject.", x: [], l: ["sys-optimizer", "claude-code-learn", "agents"] },
+    { id: "claude-projects", c: "learn", step: 16, t: "Projects: give Claude context", d: "2026-10-17", s: "In claude.ai, a Project keeps files and instructions together, so every chat in it already knows your business. Put your brand guide and goals in a Guidify Project once, and stop repeating yourself.", x: [], l: [] },
+    { id: "system-prompts", c: "learn", step: 17, t: "Instructions Claude follows", d: "2026-10-17", s: "Standing instructions (a system prompt, Project instructions or CLAUDE.md) tell Claude who it is and how to answer, before you ask anything. Short, specific rules beat long essays.", x: [], l: [] },
+    { id: "structured-output", c: "learn", step: 18, t: "Asking for tables, lists & checklists", d: "2026-10-17", s: "Say the exact format: \"a table with columns Idea, Format, Hook\" or \"a checklist of 5 steps\". Clear formats make answers easy to copy into Notion, Canva or a spreadsheet.", x: [], l: [] },
+    { id: "iterating", c: "learn", step: 19, t: "Improve answers step by step", d: "2026-10-17", s: "Great results come from rounds: ask, look, then say what to change (\"shorter\", \"more casual\", \"add a hook\"). Treat Claude like a teammate you give feedback to.", x: [], l: [] },
+    { id: "web-basics", c: "learn", step: 20, t: "HTML, CSS & JavaScript in one minute", d: "2026-10-17", s: "Every website is three layers: HTML is the content (text, buttons), CSS is the look (colors, fonts), JavaScript is the behavior (what happens when you tap). Your Second Brain is all three in one file.", x: [], l: [] },
+    { id: "git-basics", c: "learn", step: 21, t: "Git & GitHub: save points for code", d: "2026-10-17", s: "Git saves versions of your files (commits). GitHub stores them online. Push uploads your commits; a pull request proposes changes someone approves. Your Claude2 repo uses all of this.", x: [], l: [] },
+    { id: "free-hosting", c: "learn", step: 22, t: "Putting a website online for free", d: "2026-10-17", s: "Static sites (just files, no server) can be hosted free on GitHub Pages, Netlify or Vercel. The Second Brain web app runs this way: files on GitHub, opened in any browser.", x: [], l: [] },
+    { id: "databases", c: "learn", step: 23, t: "Databases: where apps keep data", d: "2026-10-17", s: "A database stores data so it survives refreshes and works on every device. Your app now keeps notes in your browser and syncs a copy to your Puter account; a real database like Supabase is the next level.", x: [], l: [] },
+    { id: "automations", c: "learn", step: 24, t: "Automations & webhooks", d: "2026-10-17", s: "An automation runs steps for you when something happens: a new form entry → add to a sheet → send an email. Tools like Zapier, Make or n8n connect apps; a webhook is the \"something happened\" message between them.", x: [], l: [] },
+    { id: "voice-ai", c: "learn", step: 25, t: "Voice in apps: speech to text & back", d: "2026-10-17", s: "Speech-to-text turns your voice into words (your phone's dictation); text-to-speech reads words aloud. Talk mode chains them with Claude: you speak → text → Claude → spoken answer.", x: [], l: [] },
+    { id: "ai-content", c: "learn", step: 26, t: "An AI content workflow for Instagram", d: "2026-10-17", s: "Pick a theme → ask Claude for 10 ideas → choose 3 → have it draft hooks, captions and Reel scripts → edit in your voice → design in Canva with your brand kit → post and track results.", x: [], l: [] },
+    { id: "hooks-captions", c: "learn", step: 27, t: "Hooks & captions that stop the scroll", d: "2026-10-17", s: "The first line decides if people keep reading. Ask Claude for 10 hook styles (question, bold claim, POV, number), test them, and keep notes on which work for your audience.", x: [], l: [] },
+    { id: "ai-messages", c: "learn", step: 28, t: "AI for emails, DMs & client replies", d: "2026-10-17", s: "Give Claude the situation, your goal and your tone, then ask for a short reply. Always read before sending, never paste clients' private details, and keep your own voice.", x: [], l: [] },
+    { id: "ai-research", c: "learn", step: 29, t: "Research & competitor analysis", d: "2026-10-17", s: "Ask Claude to compare competitors on price, offer and content style, then verify with real sources. Use it to find gaps: what your audience asks that nobody answers well.", x: [], l: [] },
+    { id: "metrics", c: "learn", step: 30, t: "Measuring what works", d: "2026-10-17", s: "Track a few numbers weekly: followers, saves, shares, link clicks, leads. Ask Claude to spot patterns in your numbers, then double down on what works.", x: [], l: [] },
+    { id: "embeddings", c: "learn", step: 31, t: "Embeddings & smarter search", d: "2026-10-17", s: "Embeddings turn text into numbers that capture meaning, so search can find \"cash flow\" when you typed \"money coming in\". It's the next upgrade for searching your Second Brain.", x: [], l: [] },
+    { id: "build-agent", c: "learn", step: 32, t: "Building your own AI agent", d: "2026-10-17", s: "An agent = a model + tools + a loop: it decides which tool to use, sees the result, and continues until done. Start tiny: one tool, one clear job, a human approving actions.", x: [], l: [] },
+    { id: "evals", c: "learn", step: 33, t: "Testing AI answers (evals)", d: "2026-10-17", s: "To know if a prompt got better, test it on the same 10 to 20 examples every time and score the answers. Gut feeling isn't enough once real customers see the results.", x: [], l: [] },
+    { id: "token-costs", c: "learn", step: 34, t: "Costs & token efficiency", d: "2026-10-17", s: "You pay per token in and out. Send only the context that's needed, use smaller models for simple jobs, and keep chats focused. Your Talk mode uses the cheapest model for this reason.", x: [], l: [] },
+    { id: "ai-ethics", c: "learn", step: 35, t: "Honest AI in marketing & finance", d: "2026-10-17", s: "Label AI-made images when it matters, never fake results or reviews, and for investing content always add \"not financial advice\" and check facts. Trust is your brand's biggest asset.", x: [], l: [] },
     { id: "sb-plan", c: "projects", t: "Second Brain: audit & plan", d: "2026-10-17", s: "Plan to grow the Second Brain into a real app: one database as the source of truth (Supabase), a Next.js web app with the galaxy, Ask with real search, a memory API + MCP server so Claude and ChatGPT share the same knowledge, nightly review with approvals, Drive backups.", x: ["M1 done (2026-10-17): export/import, Google Drive backup, AI suggestions you approve, type/status/importance/project fields, version history, better Ask search", "Free route: keep AI inside the Claude page (included in the plan); free Supabase + Vercel later for shared memory", "Next: M2 free shared-memory foundation"], url: "https://github.com/hellaynr1/Claude2/blob/main/docs/second-brain-plan.md", l: ["second-brain", "sys-optimizer", "rag", "api-learn", "mcp-scopes"] },
     { id: "sync-rule", c: "prefs", t: "Everything in sync", d: "2026-10-17", s: "Whenever Claude builds or changes something, it updates the Second Brain, Google Drive and the GitHub setup repo at the same time.", x: [], l: ["auto-save", "drive-brand-folder"] },
   ];
@@ -1002,14 +1023,23 @@ button { cursor: pointer; }
     }
     if (panel === "learn") {
       const steps = nodes.filter(n => n.c === "learn" && !n.hub).sort((a, b) => (a.step ?? 99) - (b.step ?? 99));
-      const done = steps.filter(n => learned.has(n.id)).length, pct = steps.length ? Math.round(done / steps.length * 100) : 0;
-      const next = steps.find(n => !learned.has(n.id));
-      p.replaceChildren(el("div", { class: "panel-head" }, el("h2", { text: "Learn AI & Claude" }), el("p", { text: `${done} of ${steps.length} steps done` }), el("div", { class: "progress", role: "img", "aria-label": pct + "% done" }, el("i", { style: `width:${pct}%` })),
-        next ? el("div", { class: "toolrow" }, el("button", { type: "button", class: "btn small primary", onclick: () => teach(next) }, el("span", { text: "✦" }), "Teach me: " + next.t)) : el("p", { text: "You finished the path. Ask for the next level any time." })),
-        el("div", { class: "panel-body" }, steps.map((n, i) => el("div", { class: "lesson" + (learned.has(n.id) ? " done" : "") },
-          el("button", { type: "button", class: "tick", "aria-pressed": String(learned.has(n.id)), "aria-label": (learned.has(n.id) ? "Mark not done: " : "Mark done: ") + n.t, text: learned.has(n.id) ? "✓" : "", onclick: () => toggleLearned(n.id) }),
-          el("button", { type: "button", class: "t", text: n.t, onclick: () => select(n.id) }),
-          el("button", { type: "button", class: "linkbtn", text: "Teach me", onclick: () => teach(n) })))));
+      const MODS = [["AI basics", [0, 1, 2, 3, 9, 13]], ["Using Claude well", [4, 5, 16, 17, 18, 19, 8]], ["Building apps", [6, 7, 10, 11, 20, 21, 22, 23, 24, 25, 15]], ["AI for your business", [12, 14, 26, 27, 28, 29, 30]], ["Advanced", [31, 32, 33, 34, 35]]];
+      const byStep = new Map(steps.map(n => [n.step, n]));
+      const st = n => learned.has(n.id) ? "learned" : learning.has(n.id) ? "learning" : "new";
+      const done = steps.filter(n => learned.has(n.id)).length, now = steps.filter(n => learning.has(n.id)), pct = steps.length ? Math.round(done / steps.length * 100) : 0;
+      const next = now[0] || steps.find(n => st(n) === "new");
+      const row = n => el("div", { class: "lesson" + (st(n) === "learned" ? " done" : "") },
+        el("button", { type: "button", class: "tick" + (st(n) === "learning" ? " half" : ""), "aria-pressed": String(st(n) === "learned"), title: "Tap: learning → learned → reset", "aria-label": `${n.t}: ${st(n) === "learned" ? "learned" : st(n) === "learning" ? "learning" : "not started"}. Tap to change.`, text: st(n) === "learned" ? "✓" : st(n) === "learning" ? "•" : "", onclick: () => toggleLearned(n.id) }),
+        el("button", { type: "button", class: "t", text: n.t, onclick: () => select(n.id) }),
+        el("button", { type: "button", class: "linkbtn", text: st(n) === "learned" ? "Review" : "Teach me", onclick: () => teach(n) }));
+      p.replaceChildren(el("div", { class: "panel-head" }, el("h2", { text: "Learn AI & Claude" }),
+          el("p", { text: `You know ${done} of ${steps.length} topics · learning ${now.length} now` }), el("div", { class: "progress", role: "img", "aria-label": pct + "% learned" }, el("i", { style: `width:${pct}%` })),
+          next ? el("div", { class: "toolrow" }, el("button", { type: "button", class: "btn small primary", onclick: () => teach(next) }, el("span", { text: "✦" }), (learning.has(next.id) ? "Continue: " : "Next: ") + next.t)) : el("p", { text: "You know every topic on the path. Ask Claude for the next level any time." }),
+          el("p", { style: "font-size:12px", text: "Claude marks topics as learning when it teaches you and learned when you show you've got it. Tap a circle to change it yourself." })),
+        el("div", { class: "panel-body" },
+          MODS.map(([name, nums]) => { const items = nums.map(x => byStep.get(x)).filter(Boolean); const k = items.filter(n => learned.has(n.id)).length;
+            return [el("div", { class: "sub", text: `${name} · ${k}/${items.length}` }), items.map(row)]; }),
+          (() => { const extra = steps.filter(n => !MODS.some(([, nums]) => nums.includes(n.step))); return extra.length ? [el("div", { class: "sub", text: "More" }), extra.map(row)] : null; })()));
       return;
     }
     if (panel === "notes") {
@@ -1264,7 +1294,10 @@ Rules: up to 4 lowercase tags; link only to existing ids that are clearly relate
     chat.push({ role: "user", content: question });
     const msg = { role: "assistant", content: "", pending: true, q: question }; chat.push(msg); drawChat();
     busy = true; abortCtl = new AbortController();
-    const system = `You are the assistant inside the user's "Second Brain" app. The user is a total beginner learning AI and coding: explain simply, define jargon, be warm and brief (under 180 words unless they ask for more). Use their notes below when relevant and cite them as [[Exact Title]]. Keep personal knowledge and general knowledge apart: when you use their notes, start that part with "From your notes:"; when you add your own knowledge, start that part with "General knowledge:". If their notes don't contain something they ask about personally (a decision, a date, a project detail), say "That's not in your notes yet" instead of guessing. Point out notes that contradict each other or are marked outdated. You can't browse the live web; for current events or prices, say what to search for. Reply in the language the user writes in.${opts.talk ? " This is a live spoken conversation: answer in 2 to 4 short, natural spoken sentences, no lists or markdown, and end with a short question or next step when it helps." : ""}${opts.extra ? "\n" + opts.extra : ""}
+    const open = nodes.filter(n => n.c === "learn" && !n.hub && !learned.has(n.id)).map(n => `${n.id} = ${n.t}${learning.has(n.id) ? " (learning)" : ""}`).join("; ");
+    const known = nodes.filter(n => n.c === "learn" && learned.has(n.id)).map(n => n.t).join(", ") || "nothing yet";
+    const tutor = `\n\nLEARNING TRACKER: The user is following a course. Already learned: ${known}. Open topics (id = title): ${open}. When you teach one of these topics, add at the very end of your answer, on its own line, [progress:ID:learning]. When the user clearly shows they understood a topic (explains it back, does the exercise, or says they've got it), add [progress:ID:learned]. Use only ids from the list, at most two markers, and never mention the markers. Build on what they already learned instead of re-explaining it.`;
+    const system = `You are the assistant inside the user's "Second Brain" app. The user is a total beginner learning AI and coding: explain simply, define jargon, be warm and brief (under 180 words unless they ask for more). Use their notes below when relevant and cite them as [[Exact Title]]. Keep personal knowledge and general knowledge apart: when you use their notes, start that part with "From your notes:"; when you add your own knowledge, start that part with "General knowledge:". If their notes don't contain something they ask about personally (a decision, a date, a project detail), say "That's not in your notes yet" instead of guessing. Point out notes that contradict each other or are marked outdated. You can't browse the live web; for current events or prices, say what to search for. Reply in the language the user writes in.${opts.talk ? " This is a live spoken conversation: answer in 2 to 4 short, natural spoken sentences, no lists or markdown, and end with a short question or next step when it helps." : ""}${opts.extra ? "\n" + opts.extra : ""}${tutor}
 
 THEIR NOTES (most relevant first):
 ${contextFor(question)}`;
@@ -1272,9 +1305,13 @@ ${contextFor(question)}`;
     while (turns.length && turns[0].role !== "user") turns.shift();
     const lastIdx = turns.length - 1; turns[lastIdx] = { role: "user", content: system + "\n\nQUESTION: " + turns[lastIdx].content };
     try {
-      const r = await ai(turns, { signal: abortCtl.signal, cache: false, modelTier: opts.talk ? "quick" : undefined, onText: u => { msg.content = u.text; msg.pending = false; drawChat(); opts.onText && opts.onText(u.text); } });
-      msg.content = r.text; msg.pending = false; drawChat();
-      if (opts.onDone) opts.onDone(r.text); else speak(r.text);
+      const r = await ai(turns, { signal: abortCtl.signal, cache: false, modelTier: opts.talk ? "quick" : undefined, onText: u => { msg.content = stripMarks(u.text); msg.pending = false; drawChat(); opts.onText && opts.onText(stripMarks(u.text)); } });
+      const marks = [...r.text.matchAll(/\[progress:([a-z0-9-]+):(learning|learned)\]/g)];
+      const clean = stripMarks(r.text);
+      msg.content = clean; msg.pending = false; drawChat();
+      const changes = marks.filter(([, id, status]) => byId.has(id) && byId.get(id).c === "learn" && setProgress(id, status)).map(([, id, status]) => `${status === "learned" ? "Learned" : "Learning"}: ${byId.get(id).t}`);
+      if (changes.length) toast("✓ Progress saved · " + changes.join(" · "));
+      if (opts.onDone) opts.onDone(clean); else speak(clean);
     } catch (e) {
       msg.pending = false;
       if (e && e.code === "cancelled") { msg.content = msg.content || "(stopped)"; }
@@ -1283,6 +1320,7 @@ ${contextFor(question)}`;
     }
     busy = false;
   }
+  function stripMarks(t) { return String(t || "").replace(/\s*\[progress:[a-z0-9-]+:(learning|learned)\]/g, "").replace(/\s*\[progress:[^\]]*$/, "").trimEnd(); }
   function saveAnswer(i) {
     const m = chat[i]; if (!m || m.saved) return;
     const refs = [...m.content.matchAll(/\[\[([^\]]+)\]\]/g)].map(x => nodes.find(n => !n.hub && n.t.toLowerCase() === x[1].trim().toLowerCase())).filter(Boolean).map(n => n.id);
@@ -1293,7 +1331,7 @@ ${contextFor(question)}`;
   // ----- Export / import / backup -----
   let dl = null, mcp = null, lastBackup = ls.get("sb.lastBackup", 0);
   function buildExport() {
-    return { app: "second-brain", format: 1, exportedAt: new Date().toISOString(), notes: userNodes, learned: [...learned],
+    return { app: "second-brain", format: 1, exportedAt: new Date().toISOString(), notes: userNodes, learned: [...learned], learning: [...learning],
       builtIn: BASE.map(b => ({ id: b.id, category: b.c, title: b.t, summary: stripHtml(b.s), details: (b.x || []).map(stripHtml), links: b.l, date: b.d, url: b.url || null })) };
   }
   function buildMarkdown() {
@@ -1361,14 +1399,28 @@ ${contextFor(question)}`;
   }
 
   // ----- Learn -----
-  let learned = new Set(ls.get("sb.learned", [])), metaRef = null;
+  let learned = new Set(ls.get("sb.learned", [])), learning = new Set(ls.get("sb.learning", [])), metaRef = null;
+  function setProgress(id, status) {
+    if (!byId.has(id)) return false;
+    if (status === "learned") { if (learned.has(id)) return false; learned.add(id); learning.delete(id); }
+    else if (status === "learning") { if (learned.has(id) || learning.has(id)) return false; learning.add(id); }
+    else { learned.delete(id); learning.delete(id); }
+    ls.set("sb.learned", [...learned]); ls.set("sb.learning", [...learning]); scheduleSync();
+    if (metaRef) metaRef.set({ learned: [...learned], learning: [...learning], updatedAt: Date.now() }).catch(() => {});
+    if (panel === "learn") drawPanel();
+    return true;
+  }
   function toggleLearned(id) {
+    // tap cycles: not started → learning → learned → not started
+    const next = learned.has(id) ? "none" : learning.has(id) ? "learned" : "learning";
+    setProgress(id, next); return;
     learned.has(id) ? learned.delete(id) : learned.add(id);
     ls.set("sb.learned", [...learned]); scheduleSync();
     if (metaRef) metaRef.set({ learned: [...learned], updatedAt: Date.now() }).catch(() => toast("Couldn't save your progress. Try again."));
     if (panel === "learn") drawPanel();
   }
   function teach(n) {
+    setProgress(n.id, "learning");
     setPanel("ask");
     ask(`Teach me "${n.t}" as a short mini lesson: explain it simply with an everyday example, connect it to my projects if it fits, then give me one tiny exercise to try right now.`, { extra: "LESSON NOTES: " + stripHtml(n.s) });
   }
@@ -1429,7 +1481,7 @@ ${contextFor(question)}`;
       if (!db || !id) return goLocal();
       col = db.collection(`data/users/${id}/thoughts`); mode = "cloud"; setSync("saved to your account");
       metaRef = db.doc(`data/users/${id}/meta/progress`);
-      metaRef.onSnapshot(d => { const v = d.exists ? d.data() : null; if (v && Array.isArray(v.learned)) { learned = new Set(v.learned); ls.set("sb.learned", v.learned); if (panel === "learn") drawPanel(); } }, () => {});
+      metaRef.onSnapshot(d => { const v = d.exists ? d.data() : null; if (v && Array.isArray(v.learned)) { learned = new Set(v.learned); learning = new Set((v.learning || []).filter(x => !learned.has(x))); ls.set("sb.learned", v.learned); ls.set("sb.learning", [...learning]); if (panel === "learn") drawPanel(); } }, () => {});
       col.onSnapshot(snap => { const next = {}; snap.docs.forEach(d => next[d.id] = { ...d.data() }); userNodes = next; refresh(); }, () => setSync("offline"));
     } catch { goLocal(); }
   }
@@ -1452,10 +1504,12 @@ ${contextFor(question)}`;
         if (!ln || (rn.updatedAt || 0) > (ln.updatedAt || 0)) { userNodes[id] = rn; changed = true; }
       }
       for (const id of Object.keys(userNodes)) if (tomb[id] && tomb[id] >= (userNodes[id].updatedAt || 0)) { delete userNodes[id]; changed = true; }
-      if (remote && Array.isArray(remote.learned)) remote.learned.forEach(x => { if (!learned.has(x)) { learned.add(x); changed = true; } });
+      if (remote && Array.isArray(remote.learned)) remote.learned.forEach(x => { if (!learned.has(x)) { learned.add(x); learning.delete(x); changed = true; } });
+      if (remote && Array.isArray(remote.learning)) remote.learning.forEach(x => { if (!learned.has(x) && !learning.has(x)) { learning.add(x); changed = true; } });
+      ls.set("sb.learning", [...learning]);
       const cutoff = Date.now() - 90 * 864e5; Object.keys(tomb).forEach(k => { if (tomb[k] < cutoff) delete tomb[k]; });
       ls.set("sb.deleted", tomb); ls.set("sb.learned", [...learned]); ls.set("sb.local", userNodes);
-      await window.SBWeb.cloud.push({ app: "second-brain", format: 1, updatedAt: Date.now(), notes: userNodes, deleted: tomb, learned: [...learned] });
+      await window.SBWeb.cloud.push({ app: "second-brain", format: 1, updatedAt: Date.now(), notes: userNodes, deleted: tomb, learned: [...learned], learning: [...learning] });
       lastSync = Date.now(); ls.set("sb.lastSync", lastSync); syncErr = "";
       setSync("synced across devices");
       if (changed) { refresh(); if (panel === "learn") drawPanel(); }

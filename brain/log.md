@@ -3,6 +3,7 @@
 What we built and learned, newest first. Claude adds an entry at the end of every session.
 
 ## 2026-10-17
+- **Learning tracker**: the Learn course grew from 16 to 36 topics in 5 modules (AI basics, Using Claude well, Building apps, AI for your business, Advanced). Claude now marks topics as learning when it teaches them and learned when you show you understand (saved automatically, synced between devices), and the Learn tab shows what you know. New `learning-tracker` skill + `learning/progress.md` so Claude Code knows your progress too. First Talk lesson worked on the iPhone.
 - **Web app UX fix**: typing a question in the box now gets an answer automatically (no need to switch to Ask); a "Connect Claude (free)" button stays at the top until you sign in to Puter.
 - **Web app Talk fix**: first iPhone test: the mic worked, Claude didn't answer (Puter sign-in popup was blocked). Now the sign-in opens when you tap Talk or save, Talk uses Claude Haiku 5.5 (fast) and Ask uses Claude Sonnet 5.5 via Puter, and errors show the real reason.
 - **Web app sync (free)**: notes, deletions and Learn progress sync between devices through a private file in the user's own Puter account (SecondBrain/sync.json); newest version of each note wins; syncs on save, on focus and every minute. Fixed a bug where the Notes list showed "[object HTMLButtonElement]" (web app and Claude page).
