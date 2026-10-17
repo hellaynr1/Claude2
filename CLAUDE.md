@@ -18,7 +18,7 @@ These notes load automatically at the start of every Claude Code session on this
 
 ## Tools in this repo
 - `.mcp.json` adds the Playwright MCP server, so Claude can open and test web pages in a browser.
-- `.claude/skills/` holds custom skills. Each skill is a folder with a `SKILL.md` file: `daily-plan` (plan my day), `web-data` (free APIs and scraping) and `video-notes` (read videos through their transcripts).
+- `.claude/skills/` holds custom skills. Each skill is a folder with a `SKILL.md` file: `daily-plan` (plan my day), `web-data` (free APIs and scraping), `video-notes` (read videos through their transcripts) and `systems` (save and run my repeatable workflows in `systems/`).
 
 ## My projects
 - Daybook: productivity workspace (tasks, calendar, goals, habits, focus timer, notes, alarms). https://claude.ai/artifact/YNuKimVQYiEoxTvTG2ZTUi
@@ -27,7 +27,8 @@ These notes load automatically at the start of every Claude Code session on this
   When we learn something worth keeping, offer to add it here (in CLAUDE.md or a skill) and to the Second Brain.
 
 ## Everything in sync (rule)
-Whenever you build or change something for me, update all three at the same time: the Second Brain (galaxy stars), Google Drive (the right project folder) and this repo. Brand assets live in `brand/` and in Drive under `@ Guidify LLC / <brand> / Brand kit`.
+Whenever you build or change something for me, update all three at the same time: the Second Brain (galaxy stars), Google Drive (the right project folder) and this repo. Brand assets live in `brand/` and in Drive under `@ Guidify LLC / <brand> / Brand kit`. Repeatable workflows live in `systems/` (and `Systems.md` in the vault).
+- Automation: anything that runs without me (scheduled sessions) only prepares and proposes. I approve before any action (merge a pull request, or say yes).
 
 ## Auto-save (every session)
 I want everything we build and learn kept. At the end of any session where we built, changed or learned something:

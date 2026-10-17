@@ -3,6 +3,9 @@
 What we built and learned, newest first. Claude adds an entry at the end of every session.
 
 ## 2026-10-17
+- **Systems** (new color, silver): saved recipes in `systems/` (brand-kit, build-app, sync-everything, research-to-brain) plus the `systems` skill to run and save them. Copy in the vault as `Systems.md`.
+- **Remote automation** (studying): drafted the weekly-optimizer system. It would propose improvements as a pull request and act only after approval. Not switched on yet.
+- Rule confirmed: save everything learned here to the Second Brain, Google Drive and this repo automatically.
 - **Investedia brand kit** (https://claude.ai/artifact/CZhqQatKudTSVtbeKQSKYp): 25 assets from the investedia.com logo: logos, profile pictures, icons, banners, website share image, 5 highlight covers, 4 post templates, story template, guidelines. PNG + SVG in `brand/investedia/`. Drive folder `@ Guidify LLC / Investedia / Brand kit` has the icon, app icon, favicon and profile picture; the page's button uploads the rest.
 - **Talk mic**: tapping the mic tries instant voice typing and falls back to keyboard dictation. Talk sends when you stop speaking and listens again after answering.
 - Removed the NBU and Pinterest drafts. Guidify assets wait for the owner's pictures.
