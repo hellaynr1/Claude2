@@ -17,6 +17,8 @@ Newest first. Format: decision · why · alternatives · reconsider when.
 - **2026-10-17 · Web app for the mic.** Claude pages can't use the microphone; the web app on GitHub Pages / githack can. 
 - **2026-10-16 · GitHub repo hellaynr1/Claude2 is the home for instructions, skills and app code.**
 
+- **2026-10-17 · PROPOSED (legal → needs yes): news page safety.** Keep headline + source + link; drop the description snippets or cap them at ~100 characters; drop Yahoo Finance RSS (Yahoo ToS). Small risk today, easy to undo.
+
 ## Rejected approaches (and why)
 - **Twelve Data free plan for Investedia** · rejected 2026-10-17: Basic plan is internal non-display, non-commercial only.
 - **Scraping Yahoo Finance for a public site** · rejected 2026-10-17 (pending owner): violates Yahoo's terms.

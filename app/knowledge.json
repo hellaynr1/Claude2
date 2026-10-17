@@ -192,16 +192,15 @@
   "c": "research",
   "t": "Instagram Reels: watch time, likes and sends per reach",
   "d": "2026-10-17",
-  "s": "Instagram's head Adam Mosseri reportedly named three key Reels signals: watch time (most important), likes per reach (reach among followers) and sends per reach (reach to new people). Insights now split follower vs non-follower reach.",
+  "s": "Instagram's own explanation (May 2023): Reels are ranked mainly by your activity (what you liked, saved, reshared, commented on), your history with the creator, information about the reel (audio, visuals, popularity) and about the creator. Instagram's head Adam Mosseri later reportedly stressed watch time, likes per reach and sends per reach.",
   "x": [
-   "Source check: SECONDARY (not yet verified against a primary source).",
-   "For Investedia: strong first 2 seconds (watch time), content people DM to a friend ('send this to someone who…') for new reach.",
-   "Specific multipliers (e.g. sends worth 3-5x likes) have no primary source."
+   "Source check: PRIMARY for the official list (about.instagram.com); Mosseri's 3 signals SECONDARY.",
+   "For Investedia: content people save and reshare, strong opening for watch time."
   ],
   "l": [
    "r-finfluencer-rules"
   ],
-  "url": "https://www.fanpagekarma.com/insights/?p=9293"
+  "url": "https://about.instagram.com/blog/announcements/instagram-ranking-explained"
  },
  {
   "id": "r-investedia-landscape",
@@ -652,5 +651,20 @@
    "inv-signature-tool"
   ],
   "url": "https://www.tradingview.com/widget/"
+ },
+ {
+  "id": "r-news-headlines",
+  "c": "research",
+  "t": "Republishing news: headlines + links are the safe part",
+  "d": "2026-10-17",
+  "s": "The EU press publishers' right (Directive 2019/790, art. 15) does not cover hyperlinks or 'individual words or very short extracts'. Longer snippets can need a licence; 'very short' isn't defined. Yahoo's terms forbid commercial redistribution of its content.",
+  "x": [
+   "Source check: SECONDARY for the article wording (EUR-Lex blocked automated access); PRIMARY for Yahoo terms.",
+   "Investedia: keep headline + source + link; keep descriptions very short or drop them."
+  ],
+  "l": [
+   "r-market-data-license"
+  ],
+  "url": "https://ipkitten.blogspot.com/2019/06/dsm-directive-series-6-hyperlinking-in.html"
  }
 ]

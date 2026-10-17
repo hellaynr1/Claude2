@@ -53,7 +53,7 @@ Labels: verified · inference · hypothesis · unknown. Source check per finding
 - Investopedia traffic and social stats (not found).
 - Same-month traffic comparison for all competitors (one tool).
 - EU rules for broker affiliate links (MiFID II inducements, Unfair Commercial Practices).
-- ✅ Investedia data terms checked (see table above). Remaining: TradingView commercial-use confirmation; RSS headline terms.
+- ✅ Investedia data terms checked (see table above). Remaining: TradingView commercial-use confirmation; RSS headline terms (partly answered: headline+link fine under EU art. 15; Yahoo feed reuse restricted; publisher RSS terms not found).
 - Free hosting for a personal MCP server.
 - Google Search Central's own scaled-content page (verify).
 
