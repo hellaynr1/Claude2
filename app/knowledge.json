@@ -146,5 +146,50 @@
    "r-code-para",
    "ai-os"
   ]
+ },
+ {
+  "id": "r-finfluencer-rules",
+  "c": "research",
+  "t": "Finfluencer rules (EU + Belgium): educate, don't advise",
+  "d": "2026-10-17",
+  "s": "Explaining how investing works is allowed. Telling followers what to buy/sell, especially tailored to them, can be investment advice, which in Belgium needs FSMA authorization. EU market-abuse rules: say who you are, be objective, disclose conflicts (holdings, partners). Paid posts must be labeled.",
+  "x": [
+   "Investedia guardrails: education + examples, no 'buy X' calls, disclose own positions and sponsors, add 'not financial advice / for education'.",
+   "Never promote unauthorized platforms or products: can make you complicit in fraud.",
+   "Not legal advice: check FSMA's own guidance before monetizing."
+  ],
+  "l": [
+   "r-reels-signals"
+  ],
+  "url": "https://www.wikifin.be/fr/epargner-et-investir/comment-investir-et-repartition-des-risques/comment-investir/devenir"
+ },
+ {
+  "id": "r-esma-social",
+  "c": "research",
+  "t": "ESMA: investment recommendations on social media",
+  "d": "2026-10-17",
+  "s": "ESMA and national supervisors state that anyone recommending investments on social media falls under the Market Abuse Regulation: identify yourself, present recommendations objectively, disclose interests. Breaches can mean fines or referral to prosecutors.",
+  "x": [
+   "Reported (unverified): ESMA finfluencer factsheet, Jan 2026: responsibility for content, label paid promotions, no misleading claims."
+  ],
+  "l": [
+   "r-finfluencer-rules"
+  ],
+  "url": "https://www.fsc.bg/en/esma-statement-on-investment-recommendations-through-social-media/"
+ },
+ {
+  "id": "r-reels-signals",
+  "c": "research",
+  "t": "Instagram Reels: watch time, likes and sends per reach",
+  "d": "2026-10-17",
+  "s": "Instagram's head Adam Mosseri reportedly named three key Reels signals: watch time (most important), likes per reach (reach among followers) and sends per reach (reach to new people). Insights now split follower vs non-follower reach.",
+  "x": [
+   "For Investedia: strong first 2 seconds (watch time), content people DM to a friend ('send this to someone who…') for new reach.",
+   "Specific multipliers (e.g. sends worth 3-5x likes) have no primary source."
+  ],
+  "l": [
+   "r-finfluencer-rules"
+  ],
+  "url": "https://www.fanpagekarma.com/insights/?p=9293"
  }
 ]
