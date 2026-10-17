@@ -42,3 +42,6 @@ Summarize Learned / Learning now / Next 3 topics from `learning/progress.md`, th
 - When fewer than 6 open topics are left, add 3 new ones that build on what I've learned (the app does this by itself at most once a day; in Claude Code, add them to the course list here and to the app's topics).
 - Every evening the Daily optimizer reviews my progress and proposes better lessons and new teaching material as a pull request. Nothing changes until I merge it.
 - Make every lesson and feature work on both phone and computer.
+
+## Spaced review (evidence: spaced retrieval beats rereading)
+- Learned topics get a 1–2 question quiz 1, 3 and 7 days after they're learned. Put due reviews in Today's objectives. A failed quiz moves the topic back to Learning now.

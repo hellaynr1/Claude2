@@ -170,7 +170,7 @@
   "d": "2026-10-17",
   "s": "ESMA and national supervisors state that anyone recommending investments on social media falls under the Market Abuse Regulation: identify yourself, present recommendations objectively, disclose interests. Breaches can mean fines or referral to prosecutors.",
   "x": [
-   "Reported (unverified): ESMA finfluencer factsheet, Jan 2026: responsibility for content, label paid promotions, no misleading claims."
+   "Verified: ESMA published national finfluencer factsheets in Jan 2026, including one for Belgium (see 'Belgium finfluencer factsheet')."
   ],
   "l": [
    "r-finfluencer-rules"
@@ -376,5 +376,65 @@
   "l": [
    "r-investedia-landscape"
   ]
+ },
+ {
+  "id": "r-be-factsheet",
+  "c": "research",
+  "t": "Belgium finfluencer factsheet (ESMA, Jan 2026)",
+  "d": "2026-10-17",
+  "s": "You stay responsible for what you post; misleading or reckless messages can create legal liability. Disclose any payment, gift or benefit openly (not just a hashtag). Statements must be true, fair, clear and not misleading, with facts separated from opinions.",
+  "x": [
+   "High-risk products often pushed by finfluencers: CFDs, forex, futures, some crowdfunding, volatile crypto: you can lose 100%.",
+   "Investedia: label opinions as opinions, show sources for facts, never promote these products."
+  ],
+  "l": [
+   "r-finfluencer-rules",
+   "r-esma-social",
+   "inv-guardrails"
+  ],
+  "url": "https://www.esma.europa.eu/sites/default/files/2026-01/BE_Belgium_fr_-_Finfluencers_factsheet.pdf"
+ },
+ {
+  "id": "r-be-influencer-cert",
+  "c": "research",
+  "t": "Belgian influencer certificate",
+  "d": "2026-10-17",
+  "s": "Since October 2025 Belgium has a certificate for influencers who follow advertising and transparency rules, from the Jury for Ethical Practices in Advertising and the Influencer Marketing Alliance, with a public register.",
+  "x": [
+   "Could build trust for Investedia once it does sponsored content (reported by Test-Aankoop; check the official site)."
+  ],
+  "l": [
+   "r-be-factsheet"
+  ],
+  "url": "https://www.test-aankoop.be/geld/beleggen/nieuws/red-flags-bij-finfluencers"
+ },
+ {
+  "id": "r-spaced-retrieval",
+  "c": "lessons",
+  "t": "Spaced retrieval beats rereading",
+  "d": "2026-10-17",
+  "s": "Testing yourself at growing intervals (1, 3, 7, 21 days) beats cramming or rereading. A meta-analysis of 29 studies found a large benefit (g = 0.74); effects are smaller in some subjects (math g = 0.28).",
+  "x": [
+   "For my learning: after learning a topic, quiz it again after 1, 3 and 7 days instead of moving on for good."
+  ],
+  "l": [
+   "learn-path"
+  ],
+  "url": "https://ifp.nyu.edu/?p=1511228"
+ },
+ {
+  "id": "r-referral-newsletter",
+  "c": "research",
+  "t": "Newsletter growth: referrals (Morning Brew)",
+  "d": "2026-10-17",
+  "s": "Morning Brew grew with a personal referral link in every issue and rewards at milestones. Referrals reportedly drove ~80% of growth early, ~20-30% later. It worked because readers already shared it: product first, referral second.",
+  "x": [
+   "Before the referral program: campus ambassadors took it from ~10k to ~100k.",
+   "Investedia newsletter: make issues worth forwarding first, then add a referral link (free tools exist in newsletter platforms)."
+  ],
+  "l": [
+   "inv-newsletter"
+  ],
+  "url": "https://sparkloop.app/blog/the-secrets-behind-morning-brews-growth-to-2-million-newsletter-subscribers-6"
  }
 ]
