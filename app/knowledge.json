@@ -491,7 +491,8 @@
   "s": "Euronext must offer 15-minute-delayed data free of charge (MiFID II art. 13). Its terms: use is free 'except in the event of distribution', where fees and Subscriber Terms may apply. Showing prices on a public site counts as distribution. Real-time data is always fee-liable.",
   "x": [
    "Source check: PRIMARY (Euronext delayed-data terms).",
-   "Investedia: before showing prices publicly, check your data provider's display/redistribution terms, or use charts/widgets from a provider that licenses public display."
+   "Investedia: before showing prices publicly, check your data provider's display/redistribution terms, or use charts/widgets from a provider that licenses public display.",
+   "Investedia today uses Yahoo's unofficial endpoint; Yahoo's terms forbid automated collection and redistribution. Safer: TradingView widgets (free, branded, delayed stocks)."
   ],
   "l": [
    "inv-signature-tool"
@@ -635,5 +636,21 @@
    "r-deliberate-practice"
   ],
   "url": "https://www.Gwern.net/doc/psychology/spaced-repetition/2018-bisra.pdf"
+ },
+ {
+  "id": "r-free-display-data",
+  "c": "research",
+  "t": "Free market data you may show publicly",
+  "d": "2026-10-17",
+  "s": "TradingView widgets: free with TradingView branding, embeddable on any website, stock data delayed, forex/crypto real-time. CoinGecko Demo API: 10k calls/month, attribution required. FRED: allowed with a 'not endorsed by the St. Louis Fed' notice. Twelve Data free: internal non-display only.",
+  "x": [
+   "Source check: PRIMARY (official pages, checked 2026-10-17).",
+   "Commercial use of TradingView widgets not explicitly stated: confirm before monetizing."
+  ],
+  "l": [
+   "r-market-data-license",
+   "inv-signature-tool"
+  ],
+  "url": "https://www.tradingview.com/widget/"
  }
 ]

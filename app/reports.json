@@ -1,6 +1,11 @@
 [
  {
   "d": "2026-10-17",
+  "type": "research",
+  "t": "Investedia data check: the site uses Yahoo data against Yahoo's terms; proposed switch to TradingView widgets + CoinGecko + FRED notice (awaiting your yes)."
+ },
+ {
+  "d": "2026-10-17",
   "type": "fix",
   "t": "Research verified against primary sources: corrected prompt-caching prices (0.05x on current models, 512-token minimum), beehiiv referrals need a paid plan, market data: delayed data free to use but distribution may cost (Euronext terms). Every research star now shows its source check."
  },

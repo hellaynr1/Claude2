@@ -2,6 +2,8 @@
 
 Newest first. Format: decision · why · alternatives · reconsider when.
 
+- **2026-10-17 · PROPOSED (needs owner's yes): replace Yahoo scraping in Investedia with licensed/permitted sources.** Why: Yahoo's terms ban automated collection, commercial reuse and redistribution (primary source). Proposal: TradingView widgets for live prices and charts (free, branding kept, delayed stocks), CoinGecko Demo for crypto (attribution), FRED kept with its required notice. Alternatives: paid licensed API with public-display rights (cost), or end-of-day data only. Reconsider: if TradingView terms forbid commercial sites.
+
 - **2026-10-17 · Fast model by default in the app; smart model for lessons and "in depth" questions.** · Saves usage. · Reconsider: answers feel too shallow.
 - **2026-10-17 · Confirmed: Guidify LLC is the company; Investedia is its investing-education brand.** ("Codify" in dictation = Guidify.)
 - **2026-10-17 · Build an AI operating system from what exists, not 50 skills.** Few sharp skills + memory files + verification. · Alt: install many skills. · Reconsider: a recurring workflow has no skill.
@@ -14,6 +16,8 @@ Newest first. Format: decision · why · alternatives · reconsider when.
 - **2026-10-16 · GitHub repo hellaynr1/Claude2 is the home for instructions, skills and app code.**
 
 ## Rejected approaches (and why)
+- **Twelve Data free plan for Investedia** · rejected 2026-10-17: Basic plan is internal non-display, non-commercial only.
+- **Scraping Yahoo Finance for a public site** · rejected 2026-10-17 (pending owner): violates Yahoo's terms.
 - **Paid Claude API for the app** · rejected 2026-10-17: owner wants everything free; Puter.js + Claude page subscription instead. Revisit if Puter limits block daily use.
 - **Supabase + Vercel backend now** · deferred: adds accounts and upkeep; revisit at M5 (shared memory via MCP).
 - **Mic inside the Claude page** · not possible: the page frame blocks microphone access; the web app is used for voice.

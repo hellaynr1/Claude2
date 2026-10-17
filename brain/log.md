@@ -3,6 +3,7 @@
 What we built and learned, newest first. Claude adds an entry at the end of every session.
 
 ## 2026-10-17
+- **Investedia data terms verified**: the site's scripts collect Yahoo Finance data automatically and republish it, which Yahoo's terms forbid. Checked official terms of Yahoo, FRED, TradingView widgets, CoinGecko, Twelve Data. Proposal (awaiting owner): TradingView widgets + CoinGecko (attribution) + FRED notice. Recorded in RESEARCH, DECISIONS, project file.
 - **Research system complete**: added Rejected approaches (DECISIONS.md) and Experiments (RESEARCH.md) so the brief's memory categories are all tracked.
 - **Research verified (no-fluff pass)**: checked claims against primary sources (Google Search Central, Anthropic docs, MCP docs, beehiiv pricing, Euronext terms, Psychological Science abstract). 3 corrections (prompt caching prices, beehiiv referrals, market data distribution), every research star labeled PRIMARY/SECONDARY, research-strategist now requires primary sources for numbers and rules.
 - **Big research round (12 stars)**: Investedia (SEO spam rules, beehiiv vs Substack, market data licences, affiliate disclosure, young investors, Belgian ETF tax), AI (prompt caching, build an MCP server, evals, agents in practice), learning (deliberate practice, self-explanation). Research log + 4 new open questions.

@@ -33,12 +33,26 @@ Labels: verified · inference · hypothesis · unknown. Source check per finding
 | 2026-10-17 | Deliberate practice | 26/21/18/4% variance by domain; quality matters | high (meta-analysis + critiques) | r-deliberate-practice |
 | 2026-10-17 | Self-explanation | small-moderate effect; Feynman untested directly | high (meta-analysis) | r-self-explanation |
 
-## Open questions
+## Investedia market data: provider terms (checked 2026-10-17)
+**Current state (verified in hellaynr1/Investedia):** no licensed provider. `update_market.py` / `update_prices.py` call Yahoo Finance's unofficial chart endpoint (query1.finance.yahoo.com/v8/finance/chart) every 10 min on weekdays via GitHub Actions and publish the results as quotes.js; `update_market.py` also pulls FRED CSVs; `update_news.py` pulls Google News RSS, Yahoo Finance RSS, CoinDesk and Cointelegraph RSS.
+
+| Source | What the official terms say | Verdict |
+|---|---|---|
+| Yahoo (Terms of Service, legal.yahoo.com) | Bans collecting data "using any automated means" without prior permission; no reuse "for any commercial purpose"; must not "distribute, transmit, broadcast"; must not use data "to create any database, archive, mobile application, data feed, widget" | **Not permitted** as used now (verified, primary). Regional Yahoo Finance section not fully read. |
+| FRED API terms (St. Louis Fed) | Apps must show the notice that the product "is not endorsed or certified by the Federal Reserve Bank of St. Louis" and link the terms; series marked "Copyright" are third-party owned and need the owner's permission beyond personal use; keep proprietary notices | **Usable with conditions** (verified, primary). Uses the CSV download, not the API: same caution applies. |
+| TradingView widgets (tradingview.com/widget, widget FAQ) | Free "for FREE with default TradingView branding", embeddable "onto any website"; stock data delayed per exchange requirements; forex and crypto real-time; logo removal only by contacting them; no explicit commercial-use clause found | **Best free compliant option for prices/charts** (verified, primary; commercial use not explicitly stated → confirm before monetizing). |
+| CoinGecko Demo API (pricing page) | 10,000 calls/month, 100 calls/min, "Attribution required"; commercial use not clearly stated for Demo | **OK for crypto with attribution** (verified, primary); commercial terms unclear. |
+| Twelve Data Basic (pricing page) | 8 credits/min, 800/day; "Internal non-display usage"; individual data for "personal, internal, and non-commercial purposes" | **Not for public display** on the free plan (verified, primary). |
+| Euronext delayed data (terms PDF) | Free to use; distribution may require fees and Subscriber Terms | Free for internal use; public display = check terms (verified, primary). |
+| Google News RSS | No published developer terms found (Google URL 404) | **Unknown**: treat headlines + links as low risk, full text as not allowed; to verify. |
+
+**Assumptions needing legal confirmation:** whether TradingView widgets may be used on a site that earns money (ads/affiliates); whether showing headline + link from RSS is fine under Google/Yahoo terms; FRED third-party series used.
+
 - FSMA's own page (fsma.be) still not found; the ESMA Belgium factsheet covers the basics.
 - Investopedia traffic and social stats (not found).
 - Same-month traffic comparison for all competitors (one tool).
 - EU rules for broker affiliate links (MiFID II inducements, Unfair Commercial Practices).
-- Your data provider's public-display terms for Investedia.
+- ✅ Investedia data terms checked (see table above). Remaining: TradingView commercial-use confirmation; RSS headline terms.
 - Free hosting for a personal MCP server.
 - Google Search Central's own scaled-content page (verify).
 
