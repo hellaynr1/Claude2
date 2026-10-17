@@ -1639,6 +1639,8 @@ ${contextFor(question, opts.talk ? 6 : 14)}`;
 
   // ================= boot =================
   buildGraph(); rebuildScene(); drawLegend(); drawRail(); drawPanel(); setMode("note");
+  // Knowledge feed: research Claude Code saves to knowledge.json appears as built-in stars on every device
+  fetch("knowledge.json", { cache: "no-cache" }).then(r => r.ok ? r.json() : []).then(list => { let added = 0; (Array.isArray(list) ? list : []).forEach(k => { if (k && k.id && k.t && CLUSTERS[k.c] && !BASE.some(b => b.id === k.id)) { BASE.push({ x: [], l: [], ...k }); added++; } }); if (added) refresh(); }).catch(() => {});
   { const v0 = ls.get("sb.view", 1) ? 1 : 0; morph.v = morph.t = v0; syncPositions(); setView(v0); view.target.copy(view.goal); view.dist = view.goalDist; view.theta = view.thetaGoal; view.phi = view.phiGoal; view.thetaGoal = null; }
   requestAnimationFrame(frame);
   connect();

@@ -3,6 +3,7 @@
 What we built and learned, newest first. Claude adds an entry at the end of every session.
 
 ## 2026-10-17
+- **Knowledge feed**: the web app now loads `app/knowledge.json`, so research Claude Code does appears as stars on every device. First 4 research stars (personal AI OS, Agent Skills, MCP, Claude Code memory) with sources. The `research-to-brain` system now saves there.
 - **Token savings in the app**: filing sends only the 30 most relevant stars (not all); Talk sends 6 notes + last 2 exchanges; Ask uses the fast model (Haiku) unless you say "in depth", "in detail", "step by step" or "think hard"; Teach-me lessons keep the smart model; only 12 open course topics go in each prompt. A typical Ask is now about 1,100 tokens of input. (web app + Claude page v17)
 - **GitHub Pages live**: the web app's permanent link https://hellaynr1.github.io/Claude2/app/ works. ChatGPT custom instructions now hold `memory/CONTEXT.md`.
 - **AI operating system (foundation)**: `memory/` with a map (README), DECISIONS.md, one file per project (status + next step) and CONTEXT.md to paste into ChatGPT. Three new skills: personal-intelligence (memory routine), full-stack-dev, reviewer. Deep research uses the built-in skill. Personal goals stay in the private Drive vault.
