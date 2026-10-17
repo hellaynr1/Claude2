@@ -12,6 +12,7 @@ Each system lives in its own file in this folder and appears as a star in the **
 | [compliance-check](compliance-check.md) | Checking finance content against EU/Belgian finfluencer rules |
 | [ship-feature](ship-feature.md) | Adding or changing app features, tested and undoable |
 | [bug-fix](bug-fix.md) | Fixing a bug so it can't come back |
+| [weekly-content](weekly-content.md) | Every Monday: 3 Investedia pieces drafted as a pull request (on, 07:45) |
 | [build-app](build-app.md) | Building a new app (artifact) |
 | [sync-everything](sync-everything.md) | Saving work to the Second Brain, Google Drive and GitHub at once |
 | [research-to-brain](research-to-brain.md) | Researching a question and keeping the answer |

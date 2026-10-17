@@ -3,6 +3,7 @@
 What we built and learned, newest first. Claude adds an entry at the end of every session.
 
 ## 2026-10-17
+- **Upgrades 2, 3, 7, 8**: Talk voice picker + speed (59876ac), offline capture via service worker (02660ce), reel voice-over + subtitles with Piper TTS (a2438e4), weekly content scheduled run Mondays 07:45 (systems/weekly-content.md). Smoke test now also tests offline mode.
 - **Related ideas** in the note panel: 5 most similar unlinked stars (BM25 keyword ranking, free), tap to open, + to link. Smoke test checks it.
 - **Mic fix**: Talk no longer restarts the mic after answering; the mic is released when the app is hidden/closed. Regression test with a fake microphone.
 - **Web research in Ask/Talk**: questions use Perplexity Sonar (live web search with sources) through Puter; 'my notes' questions use the notes; fallback to Claude with a notice. Smoke test checks the routing.

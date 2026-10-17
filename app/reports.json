@@ -1,6 +1,12 @@
 [
  {
   "d": "2026-10-17",
+  "at": "2026-10-17T12:02:43+00:00",
+  "type": "update",
+  "t": "Weekly content calendar on: every Monday 07:45, 3 Investedia pieces (reel with voice + carousels) drafted, compliance-checked and proposed as a pull request. First run Monday 19 October."
+ },
+ {
+  "d": "2026-10-17",
   "at": "2026-10-17T12:02:04+00:00",
   "type": "update",
   "t": "Reels now talk: free offline voice-over (Piper) plus subtitles timed to each line. Both reels re-rendered with sound."

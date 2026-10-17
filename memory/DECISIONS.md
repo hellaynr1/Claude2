@@ -2,6 +2,8 @@
 
 Newest first. Format: decision · why · alternatives · reconsider when.
 
+- **2026-10-17 · Weekly content run (Mondays 07:45, trig_01NFMcJCdqPXejKaNB3azmmm)**, pull request only; plus voice-over (Piper, free), offline capture (service worker), Talk voice picker. Reconsider weekly content if PRs aren't used or the weekly limit runs short.
+
 - **2026-10-17 · Web research by default in Ask/Talk (web app).** Model: openrouter:perplexity/sonar via Puter (listed in Puter's model catalog), falls back to Claude without search. Notes only when the question mentions them; lessons stay on Claude. Why: owner wants research on every question. Alternatives: OpenAI web_search tool via Puter (docs), Claude page can't search. Reconsider: if Sonar answers are weak or Puter limits bite.
 
 - **2026-10-17 · Shared memory via a read-only MCP server on Cloudflare Workers (approved).** Public data only, no login needed yet. Alternatives: Supabase + Vercel (more upkeep). Reconsider: when private notes should be included → add GitHub OAuth.
