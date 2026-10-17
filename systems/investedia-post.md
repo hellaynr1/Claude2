@@ -9,7 +9,7 @@
 2. **Research:** facts from primary sources, or pure math clearly labeled "illustrative". No live prices (data licence).
 3. **Script:** hook in the first 2 seconds (watch time), one idea, a reason to save or send it (saves/reshares drive reach), soft call to action ("Save this", "Send to a friend who…").
 4. **Design:** posts = 1080×1350 carousel slides (cover + 3–6 slides + end card); reels = 1080×1920, 15–25 s, big on-screen text (most people watch muted), safe margins top/bottom for Instagram UI.
-5. **Render:** HTML templates → PNG frames with Playwright → MP4 with ffmpeg (H.264, 30 fps). Free; no paid AI video unless the owner approves credits.
+5. **Render:** HTML templates → PNG frames with Playwright → MP4 with ffmpeg (H.264, 30 fps). Reels get a voice-over + subtitles: add `voice: [{at, text, say}]` to the spec (`say` = spoken wording, numbers as words); Piper TTS (free, offline; `pip install piper-tts`, the voice downloads automatically). No paid AI video unless the owner approves credits.
 6. **Caption:** hook line, 3–5 short lines, call to action, disclaimer, 3–5 relevant hashtags.
 7. **Compliance-check** → fix until READY.
 8. Save to `content/investedia/<date>-<slug>/` (assets + caption.md + sources). Never publish: the owner posts.

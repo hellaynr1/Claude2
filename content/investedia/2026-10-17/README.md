@@ -9,7 +9,7 @@ Made with the `investedia-post` system; checked with `compliance-check`. Render 
 | Post: 5 red flags in finance content | 7-slide carousel, 1080×1350 | post-red-flags/ |
 | Post: €100 a month, start at 20 or 30? | 7-slide carousel, 1080×1350 | post-start-early/ |
 
-Tip: reels have no sound: add a trending sound in Instagram when you post (watch time matters most).
+Reels now have a voice-over (Piper TTS, free and offline) and burned-in subtitles. Optional: add quiet background music in Instagram (keep it under the voice).
 
 ---
 

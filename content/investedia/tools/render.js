@@ -31,16 +31,46 @@ const page = (inner, w, h) => `<!doctype html><html><head><meta charset="utf-8">
       await p.screenshot({ path: path.join(out, `slide-${String(i + 1).padStart(2, "0")}.png`) });
     }
   } else {
-    const fps = 30, frames = Math.round(spec.seconds * fps), tmp = path.join(out, ".frames");
+    const fps = 30, tmp = path.join(out, ".frames");
     fs.mkdirSync(tmp, { recursive: true });
+    // Voice-over (free, offline: Piper TTS) + subtitles timed to each spoken line
+    const caps = [];
+    if (spec.voice && spec.voice.length) {
+      const model = process.env.PIPER_VOICE || path.join(require("os").homedir(), ".cache/piper/en_US-lessac-medium.onnx");
+      if (!fs.existsSync(model)) {
+        fs.mkdirSync(path.dirname(model), { recursive: true });
+        const base = "https://huggingface.co/rhasspy/piper-voices/resolve/main/en/en_US/lessac/medium/en_US-lessac-medium.onnx";
+        execSync(`curl -sL -o "${model}" "${base}" && curl -sL -o "${model}.json" "${base}.json"`);
+      }
+      let end = 0;
+      spec.voice.forEach((v, i) => {
+        const wav = path.join(tmp, `v${i}.wav`);
+        execSync(`python3 -m piper -m "${model}" --length-scale ${spec.voiceSpeed || 0.95} -f "${wav}"`, { input: v.say || v.text });
+        const dur = parseFloat(execSync(`ffprobe -v error -show_entries format=duration -of csv=p=0 "${wav}"`).toString());
+        const a = Math.max(v.at, end + 0.15); end = a + dur;
+        caps.push({ a, b: end, text: v.text, wav });
+      });
+      spec.seconds = Math.max(spec.seconds, end + 0.8);
+    }
+    const frames = Math.round(spec.seconds * fps);
     const p = await b.newPage({ viewport: { width: 1080, height: 1920 } });
     await p.setContent(page(spec.html.replaceAll("{{LOGO}}", logo), 1080, 1920), { waitUntil: "load" });
     await p.evaluate(() => document.fonts.ready);
+    if (caps.length) await p.evaluate(c => {
+      const d = document.createElement("div"); d.id = "cap";
+      d.style.cssText = "position:absolute;left:70px;right:70px;bottom:250px;text-align:center;font:600 40px/1.3 P,sans-serif;color:#fff;text-shadow:0 2px 12px #000;opacity:0";
+      document.body.appendChild(d); const r0 = window.render;
+      window.render = t => { r0(t); const k = c.find(x => t >= x.a && t <= x.b + .2); d.textContent = k ? k.text : ""; d.style.opacity = k ? 1 : 0; };
+    }, caps.map(({ a, b, text }) => ({ a, b, text })));
     for (let f = 0; f < frames; f++) {
       await p.evaluate(t => window.render(t), f / fps);
       await p.screenshot({ path: path.join(tmp, `f${String(f).padStart(5, "0")}.jpg`), type: "jpeg", quality: 92 });
     }
-    execSync(`ffmpeg -y -loglevel error -framerate ${fps} -i ${tmp}/f%05d.jpg -c:v libx264 -pix_fmt yuv420p -crf 20 -movflags +faststart ${path.join(out, spec.file || "reel.mp4")}`);
+    const mp4 = path.join(out, spec.file || "reel.mp4");
+    if (caps.length) {
+      const ins = caps.map(c => `-i "${c.wav}"`).join(" "), mix = caps.map((c, i) => `[${i + 1}:a]adelay=${Math.round(c.a * 1000)}|${Math.round(c.a * 1000)}[a${i}]`).join(";");
+      execSync(`ffmpeg -y -loglevel error -framerate ${fps} -i ${tmp}/f%05d.jpg ${ins} -filter_complex "${mix};${caps.map((_, i) => `[a${i}]`).join("")}amix=inputs=${caps.length}:normalize=0,apad[aout]" -map 0:v -map "[aout]" -c:v libx264 -pix_fmt yuv420p -crf 20 -c:a aac -b:a 160k -shortest -movflags +faststart "${mp4}"`);
+    } else execSync(`ffmpeg -y -loglevel error -framerate ${fps} -i ${tmp}/f%05d.jpg -c:v libx264 -pix_fmt yuv420p -crf 20 -movflags +faststart "${mp4}"`);
     fs.rmSync(tmp, { recursive: true });
     await p.evaluate(t => window.render(t), spec.posterAt || 1.5);
     await p.screenshot({ path: path.join(out, "poster.png") });

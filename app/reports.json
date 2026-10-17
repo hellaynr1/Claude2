@@ -1,6 +1,12 @@
 [
  {
   "d": "2026-10-17",
+  "at": "2026-10-17T12:02:04+00:00",
+  "type": "update",
+  "t": "Reels now talk: free offline voice-over (Piper) plus subtitles timed to each line. Both reels re-rendered with sound."
+ },
+ {
+  "d": "2026-10-17",
   "at": "2026-10-17T11:57:58+00:00",
   "type": "update",
   "t": "Offline: the web app opens without signal and saves notes on your phone; they sync when you're back online (\"Back online · syncing\")."
