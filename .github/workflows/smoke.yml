@@ -12,7 +12,8 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        browser: [chromium, webkit]
+        # every push: Chromium only (private repos get limited free CI minutes); WebKit (iPhone engine) nightly + on demand
+        browser: ${{ fromJSON(github.event_name == 'push' && '["chromium"]' || '["chromium","webkit"]') }}
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4

@@ -3,6 +3,7 @@
 **What:** 3D galaxy/brain of everything I learn: capture, Today journal, Learn course (36+ topics, daily time, streak, adaptive teaching), Ask, Talk (voice), Data export/backup, mobile bottom-sheet panels.
 **Plan:** `docs/second-brain-plan.md` (M1 done; M2–M7 later).
 **Audit fixes 2026-10-17:** WebKit CI green; Drive export done; PR #1 waiting (approval test); skills loaded via the Skill tool.
+**Going private (approved 2026-10-17):** owner follows memory/projects/private-setup.md (A Cloudflare, B move notes, C repo private), then says "done" + address.
 **Open:** cross-device sync not yet verified on real devices (tests only cover one browser).
 **Live check 2026-10-17:** Pages deployed commit 3bcf1a4; the live index.html serves the new code; smoke-test green.
 **Next step (agreed 2026-10-17):** consolidate before new features.

@@ -1,6 +1,12 @@
 [
  {
   "d": "2026-10-17",
+  "at": "2026-10-17T13:41:00+00:00",
+  "type": "update",
+  "t": "Going private: step-by-step guide ready (memory/projects/private-setup.md). CI now runs Chromium on every change and WebKit nightly, to fit private-repo free minutes."
+ },
+ {
+  "d": "2026-10-17",
   "at": "2026-10-17T12:55:47+00:00",
   "type": "fix",
   "t": "Every Ask and Talk conversation is now saved to your brain (one note per day per mode, synced privately); the Data page shows everything saved about you plus your sessions with Claude Code."
