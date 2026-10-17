@@ -207,5 +207,174 @@
    "r-finfluencer-rules"
   ],
   "url": "https://semrush.com/website/stockanalysis.com/overview"
+ },
+ {
+  "id": "inv-niche",
+  "c": "projects",
+  "t": "Investedia: own one niche",
+  "d": "2026-10-17",
+  "s": "The big sites cover everything; winners own one clear promise. Candidate: markets explained for young Europeans, one chart and one sentence.",
+  "x": [],
+  "l": [
+   "r-investedia-landscape"
+  ]
+ },
+ {
+  "id": "inv-seo-pages",
+  "c": "projects",
+  "t": "Investedia: one page per question",
+  "d": "2026-10-17",
+  "s": "A page per stock or term that answers one question in plain language. Stock Analysis gets most traffic from ticker searches.",
+  "x": [],
+  "l": [
+   "r-investedia-landscape",
+   "inv-niche"
+  ]
+ },
+ {
+  "id": "inv-newsletter",
+  "c": "projects",
+  "t": "Investedia: free newsletter",
+  "d": "2026-10-17",
+  "s": "'3 market moves explained in 60 seconds'. An email list is an audience you own; Market Bullets reportedly reached ~168k readers.",
+  "x": [],
+  "l": [
+   "r-investedia-landscape"
+  ]
+ },
+ {
+  "id": "inv-short-video",
+  "c": "projects",
+  "t": "Investedia: short educational videos",
+  "d": "2026-10-17",
+  "s": "One concept per video, strong first 2 seconds, a reason to send it to a friend. Top of funnel to the site.",
+  "x": [],
+  "l": [
+   "r-reels-signals",
+   "inv-niche"
+  ]
+ },
+ {
+  "id": "inv-signature-tool",
+  "c": "projects",
+  "t": "Investedia: one signature free tool",
+  "d": "2026-10-17",
+  "s": "Finviz is known for its heat map. Idea: a 'what moved today and why' page.",
+  "x": [],
+  "l": [
+   "r-investedia-landscape"
+  ]
+ },
+ {
+  "id": "inv-guardrails",
+  "c": "lessons",
+  "t": "Educate, don't advise",
+  "d": "2026-10-17",
+  "s": "Explain how investing works with examples; no 'buy X' calls, disclose own positions and sponsors, label ads, add 'for education, not financial advice'.",
+  "x": [],
+  "l": [
+   "r-finfluencer-rules",
+   "r-esma-social"
+  ]
+ },
+ {
+  "id": "hook-2s",
+  "c": "lessons",
+  "t": "The first 2 seconds decide a Reel",
+  "d": "2026-10-17",
+  "s": "Watch time is the strongest Reels signal, so the opening must earn the next second: a surprising number, a question, or a visible result.",
+  "x": [],
+  "l": [
+   "r-reels-signals"
+  ]
+ },
+ {
+  "id": "sends-new-reach",
+  "c": "lessons",
+  "t": "Sends bring new people, likes keep followers",
+  "d": "2026-10-17",
+  "s": "Likes per reach mostly helps reach among followers; DM sends help reach non-followers. Write content people want to forward.",
+  "x": [],
+  "l": [
+   "r-reels-signals"
+  ]
+ },
+ {
+  "id": "less-context",
+  "c": "lessons",
+  "t": "Less context, better answers",
+  "d": "2026-10-17",
+  "s": "Sending only the most relevant notes saves tokens and can improve accuracy ('context rot'). Small instructions, few clear tools.",
+  "x": [],
+  "l": [
+   "r-context-eng"
+  ]
+ },
+ {
+  "id": "consolidate-memory",
+  "c": "lessons",
+  "t": "Memory needs consolidation",
+  "d": "2026-10-17",
+  "s": "Notes and AI memory degrade without merging duplicates, pruning stale items and adding links. The weekly review does this.",
+  "x": [],
+  "l": [
+   "r-agent-memory",
+   "r-code-para"
+  ]
+ },
+ {
+  "id": "atomic-stars",
+  "c": "lessons",
+  "t": "One idea per star",
+  "d": "2026-10-17",
+  "s": "Atomic, linked notes can be reused by every topic they touch, which makes the galaxy smarter than long mixed notes.",
+  "x": [],
+  "l": [
+   "r-evergreen"
+  ]
+ },
+ {
+  "id": "tool-smoke-test",
+  "c": "tools",
+  "t": "Smoke test (free bug finder)",
+  "d": "2026-10-17",
+  "s": "tests/smoke.js opens the app at phone and desktop size with a fake AI and checks errors, panels, Ask, data integrity and edits. Runs on GitHub every push and nightly; costs no AI tokens.",
+  "x": [],
+  "l": [
+   "less-context"
+  ]
+ },
+ {
+  "id": "tool-build-page",
+  "c": "tools",
+  "t": "One source, two apps",
+  "d": "2026-10-17",
+  "s": "Edit only app/index.html; tools/build-claude-page.py builds the Claude page from it, so changes aren't made twice.",
+  "x": [],
+  "l": [
+   "tool-smoke-test"
+  ]
+ },
+ {
+  "id": "tool-knowledge-feed",
+  "c": "tools",
+  "t": "Knowledge feed",
+  "d": "2026-10-17",
+  "s": "Research saved in app/knowledge.json appears as stars on every device; Ask and Talk use it.",
+  "x": [],
+  "l": [
+   "atomic-stars"
+  ]
+ },
+ {
+  "id": "sys-competitor-watch",
+  "c": "systems",
+  "t": "Competitor watch",
+  "d": "2026-10-17",
+  "s": "Repeatable check of competitors: same-source traffic estimates, features, formats, 1-3 ranked actions. Say 'check competitors'.",
+  "x": [],
+  "l": [
+   "r-investedia-landscape"
+  ]
  }
 ]
