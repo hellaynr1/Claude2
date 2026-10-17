@@ -41,6 +41,7 @@ const MOCK = `window.puter={auth:{isSignedIn:()=>true,signIn:async()=>{}},fs:{re
     check(await p.$("#ed-body"), "search did not open the seeded note");
     const drawer = await p.textContent("#drawer").catch(() => "");
     check(drawer.includes("Seed note beta"), "connected star not shown in the detail panel");
+    check(await p.$("#related"), "Related ideas missing in the detail panel");
     await p.fill("#ed-body", "hello edited"); await p.waitForTimeout(1200);
     check((await p.textContent("#ed-saved").catch(() => "")).includes("Saved"), "no save feedback after editing");
     const stored = await p.evaluate(() => JSON.parse(localStorage.getItem("sb.local")));

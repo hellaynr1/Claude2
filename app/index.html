@@ -318,6 +318,8 @@ button { cursor: pointer; }
 .lesson.done button.t { color: var(--muted); text-decoration: line-through; }
 .tick { width: 20px; height: 20px; border-radius: 6px; border: 1.5px solid var(--learn); background: none; padding: 0; display: grid; place-items: center; color: var(--space); font-size: 12px; font-weight: 700; }
 .tick[aria-pressed="true"] { background: var(--learn); }
+#related .chip { max-width: 100%; }
+#related .chip .t { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
 .learn-clock { display: grid; gap: 6px; padding: 10px 12px; border-radius: 12px; background: rgba(255, 122, 89, .08); border: 1px solid rgba(255, 122, 89, .25); }
 .learn-clock .row { display: flex; justify-content: space-between; align-items: center; gap: 8px; font-size: 13px; flex-wrap: wrap; }
 .learn-clock b { font-family: var(--font-mono); font-size: 15px; }
@@ -891,6 +893,17 @@ button { cursor: pointer; }
   const chipFor = (m, onRemove) => el("span", { class: "chip", style: `--c:${CLUSTERS[m.c].css}` },
     el("button", { type: "button", style: "border:0;background:none;padding:0;display:inline-flex;gap:7px;align-items:center;min-width:0", onclick: () => select(m.id) }, el("span", { class: "dot" }), el("span", { class: "t", text: m.t })),
     onRemove ? el("button", { type: "button", class: "rm", "aria-label": "Remove link to " + m.t, text: "×", onclick: onRemove }) : null);
+  // Related ideas: the stars most similar to this one (keyword ranking) that aren't linked yet
+  function relatedFor(n) {
+    const linked = neighbors(n.id), q = `${n.t} ${n.t} ${stripHtml(n.s)} ${(n.tags || []).join(" ")}`;
+    return contextFor(q, 14, true).filter(m => m.id !== n.id && !m.hub && !linked.has(m.id)).slice(0, 5);
+  }
+  function relatedSection(n, canLink) {
+    const rel = relatedFor(n); if (!rel.length) return null;
+    return [el("div", { class: "sec", text: "Related ideas" }), el("div", { class: "links", id: "related" }, rel.map(m => el("span", { class: "chip", style: `--c:${CLUSTERS[m.c].css}` },
+      el("button", { type: "button", style: "border:0;background:none;padding:0;display:inline-flex;gap:7px;align-items:center;min-width:0", onclick: () => select(m.id) }, el("span", { class: "dot" }), el("span", { class: "t", text: m.t })),
+      canLink ? el("button", { type: "button", class: "rm", "aria-label": "Link to " + m.t, title: "Link these", text: "+", onclick: () => { patchThought(n.id, { links: [...(userNodes[n.id].links || []), m.id] }); toast("Linked: " + m.t); } }) : null)))];
+  }
   let saveT = null;
   function drawDrawer(force) {
     const d = $("#drawer");
@@ -968,6 +981,7 @@ button { cursor: pointer; }
           el("button", { type: "button", class: "btn small", text: "+ Link", onclick: () => openLinkPicker(n.id) })),
         own.filter(m => reasons[m.id]).map(m => el("div", { class: "why", text: `${m.t}: ${reasons[m.id]}` })),
         back.length ? [el("div", { class: "sec", text: "Linked from" }), el("div", { class: "links" }, back.map(m => chipFor(m)))] : null,
+        relatedSection(n, true),
         hist,
         del];
     } else {
@@ -978,6 +992,7 @@ button { cursor: pointer; }
         n.url ? el("a", { class: "extlink", href: n.url, target: "_blank", rel: "noopener", text: n.url.includes("artifact") ? "Open it" : n.url.replace("https://", "") }) : null,
         !n.hub ? el("div", { class: "meta" }, n.d ? el("span", { text: "Learned " + n.d }) : null, el("span", { text: `${nb.length} link${nb.length === 1 ? "" : "s"}` })) : null,
         n.hub ? el("div", { class: "links" }, members.map(m => chipFor(m))) : nb.length ? [el("div", { class: "sec", text: "Connected to" }), el("div", { class: "links" }, nb.map(m => chipFor(m)))] : null,
+        !n.hub ? relatedSection(n, false) : null,
         !n.hub ? el("button", { type: "button", class: "btn small", style: "justify-self:start", onclick: () => askAbout(n) }, el("span", { class: "spark", text: "✦" }), "Ask about this") : null];
     }
     d.replaceChildren(
