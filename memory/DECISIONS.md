@@ -2,6 +2,7 @@
 
 Newest first. Format: decision · why · alternatives · reconsider when.
 
+- **2026-10-17 · Fast model by default in the app; smart model for lessons and "in depth" questions.** · Saves usage. · Reconsider: answers feel too shallow.
 - **2026-10-17 · Confirmed: Guidify LLC is the company; Investedia is its investing-education brand.** ("Codify" in dictation = Guidify.)
 - **2026-10-17 · Build an AI operating system from what exists, not 50 skills.** Few sharp skills + memory files + verification. · Alt: install many skills. · Reconsider: a recurring workflow has no skill.
 - **2026-10-17 · Teaching level: intermediate adult, compact lessons with resources.** · Alt: beginner style. · Reconsider: lessons feel too hard or too light.

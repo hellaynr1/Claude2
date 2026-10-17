@@ -1237,7 +1237,7 @@ button { cursor: pointer; }
 
   // ================= AI (asks Claude through the page) =================
   let ai = null;
-  const catalog = (excludeId) => nodes.filter(n => !n.hub && n.id !== excludeId).map(n => `${n.id} | ${n.t} | ${CLUSTERS[n.c].name}`).join("\n");
+  const catalog = (excludeId, query) => (query ? contextFor(query, 30, true) : nodes).filter(n => !n.hub && n.id !== excludeId).map(n => `${n.id} | ${n.t} | ${CLUSTERS[n.c].name}`).join("\n");
   async function enrich(id, btn) {
     const u = userNodes[id]; if (!u || !ai) return;
     if (btn) { btn.disabled = true; btn.lastChild.textContent = "Thinking…"; }
@@ -1249,7 +1249,7 @@ ${u.note || u.title}
 CLUSTERS (pick one key): projects, skills, tools, lessons, prefs (how they like to work), research (facts or findings about the world), systems (repeatable workflows: roles + steps), ideas (personal notes, thoughts, journal, to-dos).
 
 EXISTING STARS (id | title | cluster):
-${catalog(id)}
+${catalog(id, (u.title || "") + " " + (u.note || ""))}
 
 Reply with only JSON like:
 {"title":"short clear title, max 60 chars, in the note's language","cluster":"ideas","clusterWhy":"one short reason","tags":["one-word","tags"],"links":[{"id":"existing-id","why":"one short reason they're related"}],"kind":"raw"}
@@ -1309,7 +1309,7 @@ Rules: up to 4 lowercase tags; link only to existing ids that are clearly relate
     return b;
   }
   // Retrieval: BM25 ranking over titles, summaries, details and tags (titles count double)
-  function contextFor(question) {
+  function contextFor(question, max = 14, raw = false) {
     const stem = w => w.length > 4 ? w.replace(/(ies)$/, "y").replace(/(ing|ed|es|s)$/, "") : w.length > 3 ? w.replace(/s$/, "") : w;
     const tok = t => (String(t || "").toLowerCase().match(/[a-z0-9\u00c0-\u024f]{2,}/g) || []).filter(w => !STOP.has(w)).map(stem);
     const docs = nodes.filter(n => !n.hub).map(n => { const terms = [...tok(n.t), ...tok(n.t), ...tok(stripHtml(n.s)), ...tok(stripHtml((n.x || []).join(" "))), ...(n.tags || []).map(String)]; const tf = new Map(); terms.forEach(w => tf.set(w, (tf.get(w) || 0) + 1)); return { n, tf, len: terms.length || 1 }; });
@@ -1321,9 +1321,10 @@ Rules: up to 4 lowercase tags; link only to existing ids that are clearly relate
       if (d.n.user) sc *= 1.15; if (wantsToday && d.n.d === today) sc += 6; if ((userNodes[d.n.id] || {}).status === "outdated") sc *= .6;
       return { n: d.n, sc };
     }).sort((a, b) => b.sc - a.sc);
-    const picked = scored.filter(x => x.sc > 0).slice(0, 14).map(x => x.n);
-    const fill = picked.length < 6 ? scored.slice(0, 6).map(x => x.n) : [];
-    return [...new Set([...picked, ...fill])].map(n => { const u = userNodes[n.id] || {}; return `- [[${n.t}]] (${CLUSTERS[n.c].name}${n.d ? ", " + n.d : ""}${n.user ? ", " + (u.kind || "raw") + ", " + (u.status || "unverified") : ", learned with Claude"}): ${stripHtml(n.s).slice(0, 700)}${n.x && n.x.length ? " · " + stripHtml(n.x.join("; ")).slice(0, 300) : ""}`; }).join("\n");
+    const picked = scored.filter(x => x.sc > 0).slice(0, max).map(x => x.n);
+    const fill = picked.length < Math.min(6, max) ? scored.slice(0, Math.min(6, max)).map(x => x.n) : [];
+    const list = [...new Set([...picked, ...fill])]; if (raw) return list;
+    return list.map(n => { const u = userNodes[n.id] || {}; return `- [[${n.t}]] (${CLUSTERS[n.c].name}${n.d ? ", " + n.d : ""}${n.user ? ", " + (u.kind || "raw") + ", " + (u.status || "unverified") : ", learned with Claude"}): ${stripHtml(n.s).slice(0, 700)}${n.x && n.x.length ? " · " + stripHtml(n.x.join("; ")).slice(0, 300) : ""}`; }).join("\n");
   }
   const STOP = new Set("the a an and or of to in on for is are was it i my me what how do does can with about this that be have has from at by as you your".split(" "));
   async function ask(question, opts = {}) {
@@ -1333,18 +1334,18 @@ Rules: up to 4 lowercase tags; link only to existing ids that are clearly relate
     chat.push({ role: "user", content: question });
     const msg = { role: "assistant", content: "", pending: true, q: question }; chat.push(msg); drawChat();
     busy = true; abortCtl = new AbortController();
-    const open = nodes.filter(n => n.c === "learn" && !n.hub && !learned.has(n.id)).map(n => `${n.id} = ${n.t}${learning.has(n.id) ? " (learning)" : ""}`).join("; ");
+    const open = nodes.filter(n => n.c === "learn" && !n.hub && !learned.has(n.id)).sort((a, b) => learning.has(b.id) - learning.has(a.id)).slice(0, 12).map(n => `${n.id} = ${n.t}${learning.has(n.id) ? " (learning)" : ""}`).join("; ");
     const known = nodes.filter(n => n.c === "learn" && learned.has(n.id)).map(n => n.t).join(", ") || "nothing yet";
     const tutor = `\n\nLEARNING TRACKER: The user is following a course. Already learned: ${known}. Open topics (id = title): ${open}. When you teach one of these topics, add at the very end of your answer, on its own line, [progress:ID:learning]. When the user clearly shows they understood a topic (explains it back, does the exercise, or says they've got it), add [progress:ID:learned]. Use only ids from the list, at most two markers, and never mention the markers. Build on what they already learned instead of re-explaining it. HOW THEY LEARN BEST (your earlier notes): ${learnStyle.join("; ") || "no notes yet"}. Adapt to these notes. If you notice something new about how they learn best (pace, examples they like, voice vs text, what confused them), add one line at the end: [learnstyle: max 12 words]. At most one per answer, only when it's genuinely new.`;
     const system = `You are the assistant inside the user's "Second Brain" app. The user is a 20-year-old adult, intermediate with AI (knows the basics), moving to intermediate/advanced: no childish or generic explanations, skip what they know, be compact and dense with useful detail and real practice (about 120-250 words unless they ask for more); define only genuinely new technical terms. Use their notes below when relevant and cite them as [[Exact Title]]. Keep personal knowledge and general knowledge apart: when you use their notes, start that part with "From your notes:"; when you add your own knowledge, start that part with "General knowledge:". If their notes don't contain something they ask about personally (a decision, a date, a project detail), say "That's not in your notes yet" instead of guessing. Point out notes that contradict each other or are marked outdated. You can't browse the live web; for current events or prices, say what to search for. Reply in the language the user writes in.${opts.talk ? " This is a live spoken conversation: answer in 2 to 4 short, natural spoken sentences, no lists or markdown, and end with a short question or next step when it helps." : ""}${opts.extra ? "\n" + opts.extra : ""}${tutor}
 
 THEIR NOTES (most relevant first):
-${contextFor(question)}`;
-    const turns = chat.filter(m => !m.err && (m.role === "user" || (m.content && !m.pending))).slice(-9).map(m => ({ role: m.role, content: m.content }));
+${contextFor(question, opts.talk ? 6 : 14)}`;
+    const turns = chat.filter(m => !m.err && (m.role === "user" || (m.content && !m.pending))).slice(opts.talk ? -5 : -9).map(m => ({ role: m.role, content: m.content }));
     while (turns.length && turns[0].role !== "user") turns.shift();
     const lastIdx = turns.length - 1; turns[lastIdx] = { role: "user", content: system + "\n\nQUESTION: " + turns[lastIdx].content };
     try {
-      const r = await ai(turns, { signal: abortCtl.signal, cache: false, modelTier: opts.talk ? "quick" : undefined, onText: u => { msg.content = stripMarks(u.text); msg.pending = false; drawChat(); opts.onText && opts.onText(stripMarks(u.text)); } });
+      const r = await ai(turns, { signal: abortCtl.signal, cache: false, modelTier: (opts.deep || /\b(deeper|in depth|in detail|think hard|step by step)\b/i.test(question)) ? undefined : "quick", onText: u => { msg.content = stripMarks(u.text); msg.pending = false; drawChat(); opts.onText && opts.onText(stripMarks(u.text)); } });
       const marks = [...r.text.matchAll(/\[progress:([a-z0-9-]+):(learning|learned)\]/g)];
       const clean = stripMarks(r.text);
       msg.content = clean; msg.pending = false; drawChat();
@@ -1468,7 +1469,7 @@ ${contextFor(question)}`;
     teachUntil = Date.now() + 10 * 60000;
     setProgress(n.id, "learning");
     setPanel("ask");
-    ask(`Teach me "${n.t}" as a compact lesson at intermediate level (I know the basics, skip them): the core idea, how it works, one real example from my projects, common mistakes, a practical exercise, and 1-2 reputable free resources to go deeper (official docs such as docs.claude.com or Anthropic's free courses; only links you are sure exist).`, { extra: "LESSON NOTES: " + stripHtml(n.s) });
+    ask(`Teach me "${n.t}" as a compact lesson at intermediate level (I know the basics, skip them): the core idea, how it works, one real example from my projects, common mistakes, a practical exercise, and 1-2 reputable free resources to go deeper (official docs such as docs.claude.com or Anthropic's free courses; only links you are sure exist).`, { deep: true, extra: "LESSON NOTES: " + stripHtml(n.s) });
   }
 
   // ----- Talk (live voice conversation) -----
