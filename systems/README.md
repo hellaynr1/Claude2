@@ -10,4 +10,4 @@ Each system lives in its own file in this folder and appears as a star in the **
 | [build-app](build-app.md) | Building or upgrading an app (artifact) |
 | [sync-everything](sync-everything.md) | Saving work to the Second Brain, Google Drive and GitHub at once |
 | [research-to-brain](research-to-brain.md) | Researching a question and keeping the answer |
-| [weekly-optimizer](weekly-optimizer.md) | Weekly self-improvement proposals (draft, needs approval) |
+| [weekly-optimizer](weekly-optimizer.md) | Daily self-improvement proposals as a pull request (on, 20:45) |
