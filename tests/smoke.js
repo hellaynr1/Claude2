@@ -11,7 +11,10 @@ const MOCK = `window.puter={auth:{isSignedIn:()=>true,signIn:async()=>{}},fs:{re
 (async () => {
   for (const f of ["knowledge.json", "reports.json"]) { try { JSON.parse(fs.readFileSync(path.join(root, f), "utf8")); } catch (e) { check(false, f + " is not valid JSON: " + e.message); } }
   const url = `http://localhost:${server.address().port}/`;
-  const b = await pw.chromium.launch({ args: ["--use-gl=swiftshader", "--enable-webgl", "--ignore-gpu-blocklist"] });
+  // BROWSER=webkit runs the same checks on Safari's engine (what iPhones use); CI runs both.
+  const engine = process.env.BROWSER || "chromium";
+  const b = engine === "chromium" ? await pw.chromium.launch({ args: ["--use-gl=swiftshader", "--enable-webgl", "--ignore-gpu-blocklist"] }) : await pw[engine].launch();
+  console.log("engine:", engine);
   for (const [name, vp, mobile] of [["phone", { width: 390, height: 844 }, true], ["desktop", { width: 1300, height: 860 }, false]]) {
     const p = await b.newPage({ viewport: vp, isMobile: mobile, hasTouch: mobile }), errs = [];
     p.on("pageerror", e => errs.push(e.message));
