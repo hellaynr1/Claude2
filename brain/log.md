@@ -3,6 +3,7 @@
 What we built and learned, newest first. Claude adds an entry at the end of every session.
 
 ## 2026-10-17
+- **Shared memory MCP server** (`mcp/`, approved): Cloudflare's official mcp-worker pattern, tools search_brain / get_star / get_memory over the public brain files; tested locally with wrangler dev (initialize, tools/list, tool calls). Deploy + connect steps in mcp/README.md.
 - **Investedia fixes (approved)**: news without Yahoo RSS and with ≤100-char snippets (4c4b35b); FRED notice live after rebuild (2503c50, verified on investedia.com); TradingView permission message + migration plan drafted.
 - **Daily research run on** (07:15 Brussels, scheduled task, pull request only): `systems/daily-research.md`.
 - **Work session (option B)**: research on affiliate rules (still unclear) and free MCP hosting (Cloudflare Workers free plan, OAuth needed); M5 shared memory now feasible for free.

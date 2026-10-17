@@ -1,6 +1,12 @@
 [
  {
   "d": "2026-10-17",
+  "at": "2026-10-17T10:36:34+00:00",
+  "type": "update",
+  "t": "Shared memory: MCP server built (mcp/), tested locally: search_brain, get_star, get_memory. Deploy once on Cloudflare's free plan (steps in mcp/README.md), then any AI tool can read your brain."
+ },
+ {
+  "d": "2026-10-17",
   "at": "2026-10-17T10:33:21+00:00",
   "type": "update",
   "t": "Investedia data switch: message to TradingView drafted and migration plan ready (memory/projects/investedia-data-migration.md); Yahoo stays until TradingView replies, so the site never shows sample prices."
