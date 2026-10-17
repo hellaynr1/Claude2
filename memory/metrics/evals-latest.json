@@ -1,8 +1,8 @@
 {
- "at": "2026-10-17T12:54:59.586Z",
+ "at": "2026-10-17T12:57:29.900Z",
  "summary": {
   "build": "6/6",
-  "research": "6/6",
+  "research": "7/7",
   "content": "6/6",
   "learn": "5/5",
   "close-out": "8/8"
@@ -63,6 +63,11 @@
    },
    {
     "name": "research log rows have confidence and source",
+    "ok": true,
+    "why": ""
+   },
+   {
+    "name": "research log keeps its Open questions section",
     "ok": true,
     "why": ""
    },

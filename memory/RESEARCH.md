@@ -49,13 +49,23 @@ Labels: verified · inference · hypothesis · unknown. Source check per finding
 **Conclusion:** no free source found that clearly allows public display on a commercial site. Options: (1) keep Investedia non-commercial and use TradingView widgets with attribution, after confirming with TradingView via their contact form that an educational site qualifies; (2) for a monetized site, buy a licence that explicitly includes public display (quote needed); (3) show only own content + FRED (with notice) + links out.
 **Assumptions needing legal confirmation:** whether TradingView widgets may be used on a site that earns money (ads/affiliates); whether showing headline + link from RSS is fine under Google/Yahoo terms; FRED third-party series used.
 
-- FSMA's own page (fsma.be) still not found; the ESMA Belgium factsheet covers the basics.
+## Findings added later (restored 2026-10-17; they were lost by a faulty edit)
+| Date | Question | Finding | Confidence | Sources |
+|---|---|---|---|---|
+| 2026-10-17 | Can Investedia republish news headlines? | EU press publishers' right (Dir. 2019/790 art. 15) excludes hyperlinks and "individual words or very short extracts"; Investedia now shows headline + source + link + ≤100-char snippets, no Yahoo RSS | medium (art. 15 wording via legal commentary) | r-news-headlines |
+| 2026-10-17 | What does Instagram itself say ranks Reels? | Official (May 2023): your activity, history with the creator, info about the reel, info about the creator; "sends per reach" only via secondary reports | high for the official list | r-reels-signals |
+| 2026-10-17 | Broker affiliate links (EU/BE) | No investment-specific rule found; FSMA treats referral exemptions narrowly (insurance guidance) → ask FSMA or a lawyer first | low | r-affiliate-disclosure |
+| 2026-10-17 | Free hosting for a personal MCP server | Cloudflare Workers remote MCP template; free plan 100,000 requests/day; private data needs OAuth or Cloudflare Access | high (Cloudflare docs) | r-build-mcp |
+| 2026-10-17 | How to make the app private for free | GitHub Pages can be private only on GitHub Enterprise Cloud (organizations); Cloudflare Access lets only listed emails open an app (deny by default); Zero Trust free plan covered up to 50 users (official blog 2020; current limit unverified) | high for GitHub/Access, medium for the 50-user limit | docs.github.com (Pages visibility), developers.cloudflare.com (Access policies), blog.cloudflare.com/teams-plans |
+
+## Open questions
+- FSMA's own finfluencer page (fsma.be) still not found; the ESMA Belgium factsheet covers the basics.
 - Investopedia traffic and social stats (not found).
 - Same-month traffic comparison for all competitors (one tool).
-- EU/BE rules for broker affiliate links: still unclear (low evidence) → ask FSMA or a lawyer before using broker affiliate links.
-- ✅ Investedia data terms checked (see table above). Remaining: TradingView commercial-use confirmation; RSS headline terms (partly answered: headline+link fine under EU art. 15; Yahoo feed reuse restricted; publisher RSS terms not found).
-- ✅ Free MCP hosting: Cloudflare Workers (see table).
-- Google Search Central's own scaled-content page (verify).
+- EU/BE rules for broker affiliate links → ask FSMA or a lawyer before using them.
+- TradingView written OK for an educational company site (owner sends the message in memory/projects/investedia-data-migration.md).
+- Cloudflare Zero Trust free plan: current user limit.
+- Answered: Investedia data terms (table above); free MCP hosting (Cloudflare Workers); Google's scaled-content policy (verified 2026-08-28 version).
 
 ## Experiments (what we tried, result)
 | Date | Experiment | Result | Next |

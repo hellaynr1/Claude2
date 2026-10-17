@@ -23,6 +23,7 @@ add("research", "research stars state their source check", stars.filter(s => s.c
 add("research", "research stars link a source", stars.filter(s => s.c === "research" && s.id.startsWith("r-") && !["r-my-os-map", "r-ai-os"].includes(s.id)).every(s => /^https:\/\//.test(s.url || "")), "a research star has no https source url");
 const rrows = read("memory/RESEARCH.md").split("## Experiments")[0].split("\n").filter(l => /^\| 2026-/.test(l) && l.split("|").length >= 6);
 add("research", "research log rows have confidence and source", rrows.every(l => { const c = l.split("|").map(x => x.trim()); return c[4] && c[5]; }), "a RESEARCH.md row misses confidence/source");
+add("research", "research log keeps its Open questions section", /\n## Open questions\n/.test(read("memory/RESEARCH.md")), "## Open questions header missing (edits that insert before it would silently fail)");
 add("research", "no forbidden strings in stars", !FORBID.test(JSON.stringify(stars)), "forbidden string in knowledge.json");
 
 // content
