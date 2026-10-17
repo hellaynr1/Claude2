@@ -1,6 +1,14 @@
 [
  {
   "d": "2026-10-17",
+  "at": "2026-10-17T14:46:41+00:00",
+  "type": "fix",
+  "t": "Skills check: all 8 custom skills load, but before today only close-out had been used for real. Added a hook that reminds Claude to load the matching skill on every message.",
+  "c": "6ba84d2",
+  "repo": "Claude2"
+ },
+ {
+  "d": "2026-10-17",
   "at": "2026-10-17T14:03:00+00:00",
   "type": "update",
   "t": "MCP server ready for the private repo: reads through GitHub with a read-only token (steps in mcp/README.md); still works on the public repo."

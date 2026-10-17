@@ -71,3 +71,7 @@ What we built and learned, newest first. Claude adds an entry at the end of ever
 ## 2026-10-15
 - **Daybook** (https://claude.ai/artifact/YNuKimVQYiEoxTvTG2ZTUi): Notion-style workspace with tasks (list and board), calendar, goals with target dates, habits, focus timer, notes pages and alarms.
 - Added the Playwright MCP server.
+
+## 2026-10-17 · Skills check
+- Tested all 8 custom skills: all load. Transcripts showed only close-out had been used in a real task; I skipped `build` on several later builds.
+- Fix: `.claude/settings.json` UserPromptSubmit hook adds a "load the matching skill" reminder to every prompt (6ba84d2).
