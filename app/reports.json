@@ -1,6 +1,12 @@
 [
  {
   "d": "2026-10-17",
+  "at": "2026-10-17T11:48:19+00:00",
+  "type": "update",
+  "t": "Talk voice: picks your device's most natural voice automatically; choose another voice and speed (0.9-1.5x) under the Talk header. Source lists and links aren't read aloud."
+ },
+ {
+  "d": "2026-10-17",
   "at": "2026-10-17T11:45:40+00:00",
   "type": "update",
   "t": "Related ideas: every star now shows its 5 most related stars that aren't linked yet; tap one to open it, or + to link it (your notes)."

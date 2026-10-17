@@ -320,6 +320,8 @@ button { cursor: pointer; }
 .tick[aria-pressed="true"] { background: var(--learn); }
 #related .chip { max-width: 100%; }
 #related .chip .t { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.talk-vrow { display: flex; gap: 8px; justify-content: center; padding: 0 16px; }
+.talk-vrow select { width: auto; max-width: 62%; padding: 5px 8px; font-size: 13px; }
 .learn-clock { display: grid; gap: 6px; padding: 10px 12px; border-radius: 12px; background: rgba(255, 122, 89, .08); border: 1px solid rgba(255, 122, 89, .25); }
 .learn-clock .row { display: flex; justify-content: space-between; align-items: center; gap: 8px; font-size: 13px; flex-wrap: wrap; }
 .learn-clock b { font-family: var(--font-mono); font-size: 15px; }
@@ -423,6 +425,7 @@ button { cursor: pointer; }
 <aside class="drawer glass" id="drawer" hidden aria-live="polite"></aside>
 <section class="talk" id="talk" hidden role="dialog" aria-modal="true" aria-label="Talk with Claude">
   <div class="talk-top"><h2>Talk with Claude</h2><div class="toolrow"><button type="button" class="btn small" id="talk-voice" aria-pressed="true">Voice on</button><button type="button" class="btn small" id="talk-end">End</button></div></div>
+  <div class="toolrow talk-vrow"><select id="talk-vsel" class="input" aria-label="Voice"></select><select id="talk-rate" class="input" aria-label="Speaking speed"><option value="0.9">0.9×</option><option value="1">1×</option><option value="1.1">1.1×</option><option value="1.25">1.25×</option><option value="1.5">1.5×</option></select></div>
   <div class="talk-mid"><div class="orb" id="orb" data-state="idle" aria-hidden="true"></div><div class="talk-said" id="talk-said" aria-live="polite"></div></div>
   <div class="talk-bottom">
     <form id="talk-form" autocomplete="off"><button class="send mic" type="button" id="talk-mic" aria-label="Start talking"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" aria-hidden="true"><rect x="5.5" y="1.5" width="5" height="8" rx="2.5"/><path d="M3 7.5a5 5 0 0010 0M8 12.5v2"/></svg></button><textarea id="talk-text" rows="1" maxlength="2000" placeholder="Tap the mic and speak…" aria-label="Say something to Claude"></textarea><button class="send" type="submit" aria-label="Send"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 13V3M3.5 7.5L8 3l4.5 4.5"/></svg></button></form>
@@ -1223,9 +1226,27 @@ button { cursor: pointer; }
   if (!canSpeak) speakBtn.hidden = true;
   speakBtn.setAttribute("aria-pressed", String(speakOn));
   speakBtn.addEventListener("click", () => { speakOn = !speakOn; ls.set("sb.speak", speakOn); speakBtn.setAttribute("aria-pressed", String(speakOn)); if (!speakOn) try { speechSynthesis.cancel(); } catch {} toast(speakOn ? "Answers will be read out loud" : "Read aloud is off"); });
+  // Voice: pick the most natural voice the device has (or the one you chose) and your speed
+  let voiceName = ls.get("sb.voice", ""), voiceRate = ls.get("sb.rate", 1.05);
+  function voicesFor() { try { const lang = (navigator.language || "en").slice(0, 2); return speechSynthesis.getVoices().filter(v => v.lang && v.lang.slice(0, 2) === lang); } catch { return []; } }
+  function bestVoice() {
+    const vs = voicesFor(), chosen = vs.find(v => v.name === voiceName); if (chosen) return chosen;
+    const score = v => (/premium|enhanced|natural|neural|siri/i.test(v.name) ? 4 : 0) + (/google/i.test(v.name) ? 2 : 0) + (/samantha|daniel|karen|serena|ava|zoe|aaron|evan/i.test(v.name) ? 1 : 0) + (v.localService ? .5 : 0);
+    return vs.sort((a, b) => score(b) - score(a))[0] || null;
+  }
+  function fillVoices() {
+    const sel = $("#talk-vsel"), rate = $("#talk-rate"); if (!sel || !rate) return;
+    const vs = voicesFor(), best = bestVoice();
+    sel.replaceChildren(...(vs.length ? vs : [{ name: "" }]).map(v => el("option", { value: v.name, text: v.name ? v.name.replace(/\s*\(.*\)$/, "") : "Default voice" })));
+    sel.value = best ? best.name : ""; rate.value = String([0.9, 1, 1.1, 1.25, 1.5].reduce((a, b) => Math.abs(b - voiceRate) < Math.abs(a - voiceRate) ? b : a));
+  }
+  try { speechSynthesis.onvoiceschanged = fillVoices; } catch {}
+  setTimeout(fillVoices, 300);
+  document.addEventListener("change", e => { if (e.target.id === "talk-vsel") { voiceName = e.target.value; ls.set("sb.voice", voiceName); speak("This is how I sound.", true); } if (e.target.id === "talk-rate") { voiceRate = +e.target.value; ls.set("sb.rate", voiceRate); speak("This is my speed.", true); } });
+  const spoken = t => t.split(/\n\s*Sources?:/i)[0].replace(/\[\d+\]/g, "").replace(/https?:\/\/\S+/g, "").replace(/\[\[([^\]]+)\]\]/g, "$1").replace(/[*_#`]/g, "");
   function speak(text, force, onstart, onend) {
     if ((!speakOn && !force) || !canSpeak) { onend && onend(); return; }
-    try { speechSynthesis.cancel(); const u = new SpeechSynthesisUtterance(text.replace(/\[\[([^\]]+)\]\]/g, "$1").replace(/[*_#`]/g, "").slice(0, 2500)); u.rate = 1.03; u.onstart = () => onstart && onstart(); u.onend = u.onerror = () => onend && onend(); speechSynthesis.speak(u); } catch { onend && onend(); }
+    try { speechSynthesis.cancel(); const u = new SpeechSynthesisUtterance(spoken(text).slice(0, 2500)); const v = bestVoice(); if (v) { u.voice = v; u.lang = v.lang; } u.rate = voiceRate; u.onstart = () => onstart && onstart(); u.onend = u.onerror = () => onend && onend(); speechSynthesis.speak(u); } catch { onend && onend(); }
   }
 
   // ================= capture =================
