@@ -1081,7 +1081,11 @@ button { cursor: pointer; }
       fileIn.addEventListener("change", () => { const f = fileIn.files && fileIn.files[0]; if (f) importFile(f); fileIn.value = ""; });
       p.replaceChildren(el("div", { class: "panel-head" }, el("h2", { text: "Your data" }), el("p", { text: mode === "cloud" ? "Saved privately to your Claude account." : mode === "local" ? "Saved in this browser only. Export regularly." : "Connecting…" })),
         el("div", { class: "panel-body" },
-          el("div", { class: "set-block" }, el("b", { text: `${mine} notes · ${versions} saved versions · ${learned.size} Learn steps done` }), el("p", { text: "Built-in stars (what you learned with Claude) are included in exports for reference." })),
+          (() => { const convs = Object.values(userNodes).filter(u => (u.tags || []).includes("conversation")), exchanges = convs.reduce((a, u) => a + (String(u.note).match(/\*\*\d\d?:\d\d[^*]*· You:\*\*/g) || []).length, 0), mins = Math.round(Object.values(learnTime).reduce((a, b) => a + b, 0) / 60);
+            return el("div", { class: "set-block" }, el("b", { text: "Everything saved about you" }),
+              el("p", { text: `${mine - convs.length} notes · ${exchanges} conversations (${convs.length} days) · ${learned.size} topics learned · ${mins} learning minutes · ${Object.keys(reviews).length} reviews scheduled · ${versions} saved versions` }),
+              el("p", { class: "muted", style: "font-size:12px", text: "Private to you: stored in this browser and, when signed in, in your own Puter account. Nobody else can see it, including visitors of this site." })); })(),
+          sessions.length ? el("div", { class: "set-block" }, el("b", { text: `Sessions with Claude Code · ${sessions.length} things built or learned` }), sessions.slice(0, 8).map(x => el("p", { style: "font-size:12.5px", text: `${x.d} · ${x.t}` }))) : null,
           window.SBWeb ? el("div", { class: "set-block" }, el("b", { text: "Account: AI + sync (free, through Puter)" }), el("p", { text: "Sign in with the same free Puter account on your iPhone and MacBook. Claude then works without an API key, and your notes sync between devices through a private file in your Puter account." }),
             el("div", { class: "toolrow" }, cloudOn() ? el("button", { type: "button", class: "btn small", text: "Sync now", onclick: () => syncNow() }) : el("button", { type: "button", class: "btn small primary", text: "Sign in", onclick: async () => { try { await window.SBWeb.signIn(); toast("Signed in. Syncing your notes…"); drawPanel(); syncNow(); } catch { toast("Sign-in was closed. Try again."); } } }),
               el("span", { class: "muted", style: "font-size:12px", text: cloudOn() ? (syncErr ? "Sync paused: " + syncErr : lastSync ? "Last synced " + ago(lastSync) : "Not synced yet") : "Not signed in: notes stay on this device" }))) : null,
@@ -1333,7 +1337,9 @@ button { cursor: pointer; }
     w.json = async (inp, o) => { const r = await a.json(inp, o); rec(inp, r, o); return r; };
     return w;
   }
-  let reports = [], targets = null, evals = null;
+  let reports = [], targets = null, evals = null, sessions = [];
+  // Sessions with Claude Code (brain/log.md): what we built together shows up in your brain too
+  fetch("../brain/log.md", { cache: "no-cache" }).then(r => r.ok ? r.text() : "").then(t => { let day = ""; sessions = t.split("\n").reduce((a, l) => { const d = l.match(/^## (\d{4}-\d\d-\d\d)/); if (d) day = d[1]; else if (/^- /.test(l) && day) a.push({ d: day, t: l.slice(2).replace(/\*\*/g, "").slice(0, 220) }); return a; }, []); if (panel === "settings") drawPanel(); }).catch(() => {});
   fetch("../memory/metrics/targets.json", { cache: "no-cache" }).then(r => r.ok ? r.json() : null).then(x => { targets = x; if (panel === "reports") drawPanel(); }).catch(() => {});
   fetch("../memory/metrics/evals-latest.json", { cache: "no-cache" }).then(r => r.ok ? r.json() : null).then(x => { evals = x; if (panel === "reports") drawPanel(); }).catch(() => {});
   fetch("reports.json", { cache: "no-cache" }).then(r => r.ok ? r.json() : []).then(x => { reports = Array.isArray(x) ? x : []; if (panel === "reports") drawPanel(); }).catch(() => {});
@@ -1452,6 +1458,7 @@ ${contextFor(question, web ? 4 : opts.talk ? 6 : 14)}${webRules}`;
       const marks = [...r.text.matchAll(/\[progress:([a-z0-9-]+):(learning|learned)\]/g)];
       const clean = stripMarks(r.text);
       msg.content = clean; msg.pending = false; drawChat();
+      if (clean && !opts.noLog) logConversation(question, clean, opts.talk ? "talk" : "ask", web);
       const changes = marks.filter(([, id, status]) => byId.has(id) && byId.get(id).c === "learn" && setProgress(id, status)).map(([, id, status]) => `${status === "learned" ? "Learned" : "Learning"}: ${byId.get(id).t}`);
       if (changes.length) { toast("✓ Progress saved · " + changes.join(" · ")); teachUntil = Date.now() + 10 * 60000; }
       const sty = [...r.text.matchAll(/\[learnstyle:\s*([^\]]{3,120})\]/g)].map(x => x[1].trim());
@@ -1754,6 +1761,14 @@ ${contextFor(question, web ? 4 : opts.talk ? 6 : 14)}${webRules}`;
   function saveThought(id, data) {
     userNodes[id] = cleanNote(id, data); refresh();
     if (col) col.doc(id).set(data).catch(() => toast("Couldn't save that note. Check your connection and try again.")); else persistLocal();
+  }
+  // Every Ask/Talk exchange is kept: one conversation note per day per mode, saved and synced like any note
+  function logConversation(q, a, mode, web) {
+    const day = dayKey(), id = `chat-${day}-${mode}`, cur = userNodes[id], now = Date.now();
+    const time = new Date().toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" });
+    const entry = `**${time} · You:** ${q}\n**Claude${web ? " (web)" : ""}:** ${a}\n\n`;
+    const label = new Date().toLocaleDateString([], { day: "numeric", month: "short", year: "numeric" });
+    saveThought(id, { ...(cur || { title: `${mode === "talk" ? "Talk" : "Ask"} · ${label}`, cluster: "ideas", kind: "raw", status: "unverified", importance: 2, links: [], tags: ["conversation", mode], createdAt: now, source: mode }), note: ((cur && cur.note) || "") + entry, updatedAt: now });
   }
   const TRACKED = ["title", "note", "cluster", "tags", "links", "kind", "status"];
   function patchThought(id, patch, by = "you") {

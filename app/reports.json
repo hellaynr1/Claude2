@@ -1,6 +1,12 @@
 [
  {
   "d": "2026-10-17",
+  "at": "2026-10-17T12:55:47+00:00",
+  "type": "fix",
+  "t": "Every Ask and Talk conversation is now saved to your brain (one note per day per mode, synced privately); the Data page shows everything saved about you plus your sessions with Claude Code."
+ },
+ {
+  "d": "2026-10-17",
   "at": "2026-10-17T12:49:01+00:00",
   "type": "fix",
   "t": "Audit fixes: WebKit (iPhone engine) now tested on every change and passes; Google Drive caught up (Systems, Second Brain, AI Learning Progress); first approval pull request opened (#1, usage cost rules); the close-out skill was loaded for real (first custom skill use)."
