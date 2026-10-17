@@ -17,8 +17,12 @@
 // Web adapter: replaces the Claude-page features with free web equivalents.
 // AI: Claude through Puter.js (free account, no API key). Storage: this browser. Files: normal downloads.
 (function () {
-  const MODELS = ["claude-sonnet-4-5", "anthropic/claude-sonnet-4-5", "claude-sonnet-4", "claude-3-7-sonnet"];
-  let working = null; try { working = localStorage.getItem("sb.webModel"); } catch {}
+  // Current Claude models on Puter (from developer.puter.com/ai/anthropic). Fast model for Talk and filing.
+  const SMART = ["anthropic/claude-sonnet-5-5", "anthropic/claude-sonnet-4-5", "claude-sonnet-4-5"];
+  const FAST = ["anthropic/claude-haiku-5-5", "anthropic/claude-haiku-4-5", "anthropic/claude-sonnet-5-5"];
+  const working = { smart: null, fast: null };
+  try { localStorage.removeItem("sb.webModel"); } catch {}
+  const signedIn = () => { try { return !!(window.puter && puter.auth.isSignedIn()); } catch { return false; } };
   const textOf = r => {
     if (r == null) return "";
     if (typeof r === "string") return r;
@@ -30,13 +34,17 @@
   };
   async function call(messages, opts = {}) {
     if (!window.puter || !puter.ai) throw { code: "upstream_error", message: "AI script didn't load. Check your connection." };
-    const list = working ? [working, ...MODELS.filter(m => m !== working)] : MODELS;
+    if (!signedIn()) throw { code: "not_signed_in", message: "Sign in to Puter first (Data → Sign in)." };
+    const kind = opts.modelTier === "quick" ? "fast" : "smart";
+    const base = kind === "fast" ? FAST : SMART;
+    const list = [...new Set([working[kind], ...base].filter(Boolean)), null];  // null = Puter's default model
     let lastErr;
     for (const model of list) {
       if (opts.signal && opts.signal.aborted) throw { code: "cancelled" };
       try {
+        const o = model ? { model } : {};
         if (opts.onText) {
-          const stream = await puter.ai.chat(messages, { model, stream: true });
+          const stream = await puter.ai.chat(messages, { ...o, stream: true });
           let text = "";
           for await (const part of stream) {
             if (opts.signal && opts.signal.aborted) throw { code: "cancelled", text };
@@ -44,11 +52,11 @@
             if (d) { text += d; opts.onText({ text, delta: d }); }
           }
           if (!text) throw new Error("empty");
-          remember(model); return { text, truncated: false };
+          remember(kind, model); return { text, truncated: false };
         }
-        const r = await puter.ai.chat(messages, { model });
+        const r = await puter.ai.chat(messages, o);
         const text = textOf(r); if (!text) throw new Error("empty");
-        remember(model); return { text, truncated: false };
+        remember(kind, model); return { text, truncated: false };
       } catch (e) {
         if (e && e.code === "cancelled") throw e;
         lastErr = e;
@@ -57,7 +65,7 @@
     const msg = (lastErr && (lastErr.message || (lastErr.error && lastErr.error.message))) || "";
     throw { code: /limit|quota|credit|insufficient|funds/i.test(msg) ? "rate_limited" : "upstream_error", message: msg };
   }
-  function remember(m) { if (working !== m) { working = m; try { localStorage.setItem("sb.webModel", m); } catch {} } }
+  function remember(kind, m) { working[kind] = m; }
   const toMessages = input => typeof input === "string" ? [{ role: "user", content: input }] : input.map(m => ({ role: m.role, content: m.content }));
   const ai = (input, opts) => call(toMessages(input), opts || {});
   ai.json = async (input, opts) => {
@@ -90,7 +98,8 @@
   window.SBWeb = {
     ai, downloads, cloud,
     signIn: async () => { if (!window.puter) throw new Error("no puter"); if (!puter.auth.isSignedIn()) await puter.auth.signIn(); },
-    status: () => { try { return window.puter && puter.auth.isSignedIn() ? "Connected" + (working ? " · " + working : "") : "Not connected yet (it also asks the first time you use AI)"; } catch { return "Not connected yet"; } }
+    signedIn,
+    status: () => signedIn() ? "Connected" + (working.smart ? " · " + working.smart.replace("anthropic/", "") : "") : "Not connected yet"
   };
 })();
 </script>
@@ -1112,6 +1121,7 @@ button { cursor: pointer; }
   cap.addEventListener("keydown", e => { if (e.key === "Enter" && !e.shiftKey && !e.isComposing) { e.preventDefault(); capForm.requestSubmit(); } });
   capForm.addEventListener("submit", e => {
     e.preventDefault(); const text = cap.value.trim(); if (!text) return;
+    if (window.SBWeb && !window.SBWeb.signedIn()) window.SBWeb.signIn().catch(() => {});
     cap.value = ""; autosize();
     if (capMode === "ask") { if (panel !== "ask") setPanel("ask"); ask(text); }
     else captureNote(text);
@@ -1185,7 +1195,8 @@ Rules: up to 4 lowercase tags; link only to existing ids that are clearly relate
     const code = e && e.code;
     if (code === "not_granted" || code === "sampling_disabled") { ai = null; setMode(capMode); drawDrawer(true); toast("Claude isn't allowed for this page, so notes are saved without AI."); }
     else if (code === "rate_limited") toast("Claude is busy right now. Try again in a minute.");
-    else if (code !== "cancelled") toast("Claude couldn't answer that time. Try again.");
+    else if (code === "not_signed_in") toast("Sign in to Puter first: tap Data → Sign in.");
+    else if (code !== "cancelled") toast("Claude couldn't answer" + (e && e.message ? ": " + String(e.message).slice(0, 90) : ". Try again."));
   }
 
   // ----- Ask -----
@@ -1251,13 +1262,13 @@ ${contextFor(question)}`;
     while (turns.length && turns[0].role !== "user") turns.shift();
     const lastIdx = turns.length - 1; turns[lastIdx] = { role: "user", content: system + "\n\nQUESTION: " + turns[lastIdx].content };
     try {
-      const r = await ai(turns, { signal: abortCtl.signal, cache: false, onText: u => { msg.content = u.text; msg.pending = false; drawChat(); opts.onText && opts.onText(u.text); } });
+      const r = await ai(turns, { signal: abortCtl.signal, cache: false, modelTier: opts.talk ? "quick" : undefined, onText: u => { msg.content = u.text; msg.pending = false; drawChat(); opts.onText && opts.onText(u.text); } });
       msg.content = r.text; msg.pending = false; drawChat();
       if (opts.onDone) opts.onDone(r.text); else speak(r.text);
     } catch (e) {
       msg.pending = false;
       if (e && e.code === "cancelled") { msg.content = msg.content || "(stopped)"; }
-      else { msg.err = true; msg.content = e && e.text ? e.text : (e && e.code === "rate_limited" ? "Claude is busy right now. Try again in a minute." : "Claude couldn't answer that time. Try asking again."); aiError(e); }
+      else { msg.err = true; msg.content = e && e.text ? e.text : (e && e.code === "rate_limited" ? "Claude is busy right now (or the free allowance is used up). Try again later." : e && e.code === "not_signed_in" ? "Sign in to Puter first: tap Data, then Sign in. Then ask again." : "Claude couldn't answer that time" + (e && e.message ? " (" + String(e.message).slice(0, 120) + ")" : "") + ". Try asking again."); aiError(e); }
       drawChat(); opts.onDone && opts.onDone(msg.err ? null : msg.content, msg.content);
     }
     busy = false;
@@ -1359,6 +1370,7 @@ ${contextFor(question)}`;
     said.replaceChildren(you ? el("div", { class: "you", text: "You: " + you }) : null, el("div", { class: "claude" }, ...String(claude || "").split(/(\[\[[^\]]+\]\])/g).map(part => { const mm = part.match(/^\[\[([^\]]+)\]\]$/); return mm ? mm[1] : part; })));
   }
   function openTalk() {
+    if (window.SBWeb && !window.SBWeb.signedIn()) { window.SBWeb.signIn().then(() => toast("Signed in. Tap the mic and talk."), () => toast("Sign in to Puter to talk with Claude (Data → Sign in).")); }
     talkEl.hidden = false; orb.dataset.state = "idle";
     renderSaid("", ai ? "Hi! I'm listening. What's on your mind?" : "Talking needs permission to use Claude. Open this page's menu → Permissions to allow it, then reload.");
     // start listening right away (from the same tap); greet in text only so the mic doesn't hear the speaker
