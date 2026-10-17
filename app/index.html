@@ -1121,6 +1121,7 @@ button { cursor: pointer; }
     const resurf = [...pool].sort(() => rnd() - .5).slice(0, 3);
     p.replaceChildren(el("div", { class: "panel-head" }, el("h2", { text: "Today" }), el("span", { class: "today-date", text: new Date().toLocaleDateString(undefined, { weekday: "long", month: "long", day: "numeric" }) })),
       el("div", { class: "panel-body" },
+        reviewSection(),
         el("div", { class: "sub", text: "Learning today" }),
         el("div", { class: "wrap-pad" }, el("button", { type: "button", class: "btn small", style: "justify-self:start", onclick: () => setPanel("learn") }, `🎓 ${Math.floor(secToday() / 60)} / ${learnGoal} min${streakDays() ? " · 🔥 " + streakDays() + " days" : ""} · open Learn`)),
         el("div", { class: "sub", text: "Today's notes" }),
@@ -1489,6 +1490,43 @@ ${contextFor(question, opts.talk ? 6 : 14)}`;
     const lm = $("#learn-min"), lb = $("#learn-bar"); if (lm) lm.textContent = `${Math.floor(learnTime[k] / 60)} / ${learnGoal} min`; if (lb) lb.style.width = Math.min(100, Math.round(learnTime[k] / (learnGoal * 60) * 100)) + "%";
   }, 15000);
   // ----- New lessons: when few open topics are left, Claude adds 3 new ones (at most once a day) -----
+  // ----- Weekly review: Claude distills, consolidates and turns notes into Investedia content (you approve each item) -----
+  let review = ls.get("sb.review", { at: 0, items: [] }), reviewBusy = false;
+  const RV = { distill: "Distill", merge: "Merge duplicate", stale: "Outdated?", link: "Link", content: "Investedia post idea" };
+  function reviewSection() {
+    const items = review.items || [];
+    const run = el("button", { type: "button", class: "linkbtn", style: "justify-self:start", text: reviewBusy ? "Reviewing…" : "Run review now", onclick: () => runReview(true) });
+    if (!items.length) return [el("div", { class: "sub", text: "Weekly review" }), el("div", { class: "wrap-pad" }, el("span", { class: "muted", style: "font-size:12.5px", text: review.at ? "All done. Next review in a week." : "Runs automatically once a week when you have 5+ notes." }), run)];
+    const name = id => (byId.get(id) || {}).t || "a note";
+    return [el("div", { class: "sub", text: `Weekly review · ${items.length} to check` }), items.map((it, i) => el("div", { class: "suggest-card", style: "margin:0 12px" },
+      el("div", { class: "hd" }, el("span", { text: "✦ " + (RV[it.type] || it.type) })),
+      el("div", { style: "font-size:13px" }, it.type === "merge" ? `"${name(it.drop)}" repeats "${name(it.keep)}". ${it.reason || ""}` : it.type === "stale" ? `"${name(it.id)}": ${it.reason || "looks outdated"}` : it.type === "link" ? `Link "${name(it.a)}" ↔ "${name(it.b)}": ${it.reason || ""}` : el("span", {}, el("b", { text: it.title || "" }), " " + (it.note || ""))),
+      el("div", { class: "toolrow" }, el("button", { type: "button", class: "btn small primary", text: "Apply", onclick: () => applyReview(i) }), el("button", { type: "button", class: "btn small", text: "Skip", onclick: () => dropReview(i) })))), el("div", { class: "wrap-pad" }, run)];
+  }
+  function dropReview(i) { review.items.splice(i, 1); ls.set("sb.review", review); drawPanel(); }
+  function applyReview(i) {
+    const it = review.items[i], now = Date.now(), has = id => !!userNodes[id];
+    if (it.type === "distill" || it.type === "content") saveThought(uid(), { title: String(it.title || "").slice(0, 80), note: String(it.note || "").slice(0, 1200), cluster: it.type === "content" ? "projects" : "lessons", kind: "distilled", status: "unverified", importance: 3, links: (it.from || []).filter(id => byId.has(id)), tags: it.type === "content" ? ["investedia", "content"] : ["distilled"], createdAt: now, updatedAt: now, source: "weekly-review" });
+    if (it.type === "merge" && has(it.drop)) patchThought(it.drop, { status: "outdated", links: [...new Set([...(userNodes[it.drop].links || []), it.keep])] }, "ai");
+    if (it.type === "stale" && has(it.id)) patchThought(it.id, { status: "outdated" }, "ai");
+    if (it.type === "link" && has(it.a) && byId.has(it.b)) patchThought(it.a, { links: [...new Set([...(userNodes[it.a].links || []), it.b])] }, "ai");
+    toast("Applied. Undo any time in the note's History."); dropReview(i);
+  }
+  async function runReview(force) {
+    const mine = Object.entries(userNodes).filter(([, u]) => u.status !== "outdated").sort((a, b) => (b[1].updatedAt || 0) - (a[1].updatedAt || 0)).slice(0, 60);
+    if (!ai || reviewBusy || mine.length < (force ? 1 : 5) || (!force && Date.now() - review.at < 7 * 864e5)) return;
+    reviewBusy = true; if (panel === "today") drawPanel();
+    try {
+      const list = mine.map(([id, u]) => `${id} | ${u.title || ""} | ${u.cluster} | ${new Date(u.updatedAt || u.createdAt || 0).toISOString().slice(0, 10)} | ${String(u.note || "").replace(/\s+/g, " ").slice(0, 140)}`).join("\n");
+      const r = await ai.json(`Weekly review of a personal second brain (CODE method: distill, consolidate, express). Notes (id | title | cluster | date | text):\n${list}\n\nPropose at most 8 high-value items as JSON array. Types: {"type":"distill","from":[ids],"title":"one idea, stated as a claim","note":"2-3 sentences"} (merge related notes into one atomic idea); {"type":"merge","keep":id,"drop":id,"reason":""} (near-duplicates only); {"type":"stale","id":id,"reason":""} (clearly outdated); {"type":"link","a":id,"b":id,"reason":""}; {"type":"content","from":[ids],"title":"Investedia post: hook","note":"hook + 3-point outline + call to action for an investing-education Instagram brand"} (1-2 of these, only if notes support it). Use only ids from the list. Reply with only the JSON array.`, { modelTier: "quick" });
+      const ok = id => !!userNodes[id];
+      review = { at: Date.now(), items: (Array.isArray(r) ? r : []).filter(x => x && RV[x.type] && (x.type === "merge" ? ok(x.keep) && ok(x.drop) && x.keep !== x.drop : x.type === "stale" ? ok(x.id) : x.type === "link" ? ok(x.a) && ok(x.b) : x.title)).slice(0, 8) };
+      ls.set("sb.review", review);
+      if (review.items.length) toast(`✦ Weekly review: ${review.items.length} suggestions in Today`);
+    } catch (e) { if (force) toast("Review failed: " + (e.message || e)); }
+    reviewBusy = false; if (panel === "today") drawPanel();
+  }
+  setTimeout(() => runReview(false), 8000);
   let genBusy = false;
   async function maybeNewTopics() {
     if (!ai || genBusy) return;
