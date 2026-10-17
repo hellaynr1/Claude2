@@ -20,7 +20,9 @@
   // Current Claude models on Puter (from developer.puter.com/ai/anthropic). Fast model for Talk and filing.
   const SMART = ["anthropic/claude-sonnet-5-5", "anthropic/claude-sonnet-4-5", "claude-sonnet-4-5"];
   const FAST = ["anthropic/claude-haiku-5-5", "anthropic/claude-haiku-4-5", "anthropic/claude-sonnet-5-5"];
-  const working = { smart: null, fast: null };
+  // Live web research: Perplexity Sonar searches the web and cites sources (free via the user's Puter account)
+  const WEB = ["openrouter:perplexity/sonar", "openrouter:perplexity/sonar-pro"];
+  const working = { smart: null, fast: null, web: null };
   try { localStorage.removeItem("sb.webModel"); } catch {}
   const signedIn = () => { try { return !!(window.puter && puter.auth.isSignedIn()); } catch { return false; } };
   const textOf = r => {
@@ -35,8 +37,8 @@
   async function call(messages, opts = {}) {
     if (!window.puter || !puter.ai) throw { code: "upstream_error", message: "AI script didn't load. Check your connection." };
     if (!signedIn()) throw { code: "not_signed_in", message: "Sign in to Puter first (Data → Sign in)." };
-    const kind = opts.modelTier === "quick" ? "fast" : "smart";
-    const base = kind === "fast" ? FAST : SMART;
+    const kind = opts.modelTier === "web" ? "web" : opts.modelTier === "quick" ? "fast" : "smart";
+    const base = kind === "web" ? [...WEB, ...SMART] : kind === "fast" ? FAST : SMART;  // web falls back to Claude without search
     const list = [...new Set([working[kind], ...base].filter(Boolean)), null];  // null = Puter's default model
     let lastErr;
     for (const model of list) {
@@ -52,11 +54,11 @@
             if (d) { text += d; opts.onText({ text, delta: d }); }
           }
           if (!text) throw new Error("empty");
-          remember(kind, model); return { text, truncated: false };
+          remember(kind, model); return { text, truncated: false, model };
         }
         const r = await puter.ai.chat(messages, o);
         const text = textOf(r); if (!text) throw new Error("empty");
-        remember(kind, model); return { text, truncated: false };
+        remember(kind, model); return { text, truncated: false, model };
       } catch (e) {
         if (e && e.code === "cancelled") throw e;
         lastErr = e;
@@ -1385,15 +1387,19 @@ Rules: up to 4 lowercase tags; link only to existing ids that are clearly relate
     const open = nodes.filter(n => n.c === "learn" && !n.hub && !learned.has(n.id)).sort((a, b) => learning.has(b.id) - learning.has(a.id)).slice(0, 12).map(n => `${n.id} = ${n.t}${learning.has(n.id) ? " (learning)" : ""}`).join("; ");
     const known = nodes.filter(n => n.c === "learn" && learned.has(n.id)).map(n => n.t).join(", ") || "nothing yet";
     const tutor = `\n\nLEARNING TRACKER: The user is following a course. Already learned: ${known}. Open topics (id = title): ${open}. When you teach one of these topics, add at the very end of your answer, on its own line, [progress:ID:learning]. When the user clearly shows they understood a topic (explains it back, does the exercise, or says they've got it), add [progress:ID:learned]. Use only ids from the list, at most two markers, and never mention the markers. Build on what they already learned instead of re-explaining it. HOW THEY LEARN BEST (your earlier notes): ${learnStyle.join("; ") || "no notes yet"}. Adapt to these notes. If you notice something new about how they learn best (pace, examples they like, voice vs text, what confused them), add one line at the end: [learnstyle: max 12 words]. At most one per answer, only when it's genuinely new.`;
+    const notesMode = opts.notes || /\b(my notes?|notes|my brain|second brain|my stars?|mijn notities|mes notes)\b/i.test(question);
+    const web = !!window.SBWeb && !notesMode && !opts.deep;  // lessons (deep) stay on Claude so progress tracking works
+    const webRules = web ? `\n\nRESEARCH MODE: Search the web now and answer from current, reliable sources (official docs, regulators, papers first). Start with "From the web:". Cite sources inline as [1], [2] and end with "Sources:" listing title and URL.${opts.talk ? " This answer is read aloud: keep URLs out of the main text and keep the Sources list short (names only)." : ""} Say when evidence is weak or conflicting. Only mention the user's notes below if they clearly add something.` : "";
     const system = `You are the assistant inside the user's "Second Brain" app. The user is a 20-year-old adult, intermediate with AI (knows the basics), moving to intermediate/advanced: no childish or generic explanations, skip what they know, be compact and dense with useful detail and real practice (about 120-250 words unless they ask for more); define only genuinely new technical terms. Use their notes below when relevant and cite them as [[Exact Title]]. Keep personal knowledge and general knowledge apart: when you use their notes, start that part with "From your notes:"; when you add your own knowledge, start that part with "General knowledge:". If their notes don't contain something they ask about personally (a decision, a date, a project detail), say "That's not in your notes yet" instead of guessing. Point out notes that contradict each other or are marked outdated. You can't browse the live web; for current events or prices, say what to search for. Reply in the language the user writes in.${opts.talk ? " This is a live spoken conversation: answer in 2 to 4 short, natural spoken sentences, no lists or markdown, and end with a short question or next step when it helps." : ""}${opts.extra ? "\n" + opts.extra : ""}${tutor}
 
 THEIR NOTES (most relevant first):
-${contextFor(question, opts.talk ? 6 : 14)}`;
+${contextFor(question, web ? 4 : opts.talk ? 6 : 14)}${webRules}`;
     const turns = chat.filter(m => !m.err && (m.role === "user" || (m.content && !m.pending))).slice(opts.talk ? -5 : -9).map(m => ({ role: m.role, content: m.content }));
     while (turns.length && turns[0].role !== "user") turns.shift();
     const lastIdx = turns.length - 1; turns[lastIdx] = { role: "user", content: system + "\n\nQUESTION: " + turns[lastIdx].content };
     try {
-      const r = await ai(turns, { signal: abortCtl.signal, cache: false, modelTier: (opts.deep || /\b(deeper|in depth|in detail|think hard|step by step)\b/i.test(question)) ? undefined : "quick", onText: u => { msg.content = stripMarks(u.text); msg.pending = false; drawChat(); opts.onText && opts.onText(stripMarks(u.text)); } });
+      const r = await ai(turns, { signal: abortCtl.signal, cache: false, modelTier: web ? "web" : (opts.deep || /\b(deeper|in depth|in detail|think hard|step by step)\b/i.test(question)) ? undefined : "quick", onText: u => { msg.content = stripMarks(u.text); msg.pending = false; drawChat(); opts.onText && opts.onText(stripMarks(u.text)); } });
+      if (web && r.model && !/perplexity/.test(r.model)) toast("Web search unavailable right now: answered without live sources");
       const marks = [...r.text.matchAll(/\[progress:([a-z0-9-]+):(learning|learned)\]/g)];
       const clean = stripMarks(r.text);
       msg.content = clean; msg.pending = false; drawChat();

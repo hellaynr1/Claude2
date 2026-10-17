@@ -2,6 +2,8 @@
 
 Newest first. Format: decision · why · alternatives · reconsider when.
 
+- **2026-10-17 · Web research by default in Ask/Talk (web app).** Model: openrouter:perplexity/sonar via Puter (listed in Puter's model catalog), falls back to Claude without search. Notes only when the question mentions them; lessons stay on Claude. Why: owner wants research on every question. Alternatives: OpenAI web_search tool via Puter (docs), Claude page can't search. Reconsider: if Sonar answers are weak or Puter limits bite.
+
 - **2026-10-17 · Shared memory via a read-only MCP server on Cloudflare Workers (approved).** Public data only, no login needed yet. Alternatives: Supabase + Vercel (more upkeep). Reconsider: when private notes should be included → add GitHub OAuth.
 
 - **2026-10-17 · Daily research run at 07:15 Brussels** (scheduled task trig_01WuM4sHVVZUSsd3Ti1i9doF): 3 open questions/day, primary sources, one pull request. Why: owner wants much more research. Cost: daily usage. Reconsider: if weekly limit runs out or PRs are low value.

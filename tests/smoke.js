@@ -6,7 +6,7 @@ const root = path.join(__dirname, "..", "app"), fails = [];
 const check = (ok, msg) => { if (!ok) fails.push(msg); };
 const server = http.createServer((q, r) => { const f = path.join(root, decodeURIComponent(q.url.split("?")[0]).replace(/\/$/, "/index.html")); fs.readFile(f, (e, b) => { if (e) { r.writeHead(404); return r.end(); } r.writeHead(200, { "Content-Type": f.endsWith(".json") ? "application/json" : "text/html" }); r.end(b); }); }).listen(0);
 const MOCK = `window.puter={auth:{isSignedIn:()=>true,signIn:async()=>{}},fs:{read:async()=>{throw{code:'subject_does_not_exist'}},write:async()=>({})},
- ai:{chat:async(m,o)=>{const t='Answer.\\n[progress:tokens:learning]\\n[learnstyle: likes examples]';
+ ai:{chat:async(m,o)=>{(window.__models=window.__models||[]).push(o&&o.model);const t='Answer.\\n[progress:tokens:learning]\\n[learnstyle: likes examples]';
  if(o&&o.stream)return(async function*(){yield{text:t}})();return{message:{content:[{text:'[]'}]}};}}};`;
 (async () => {
   for (const f of ["knowledge.json", "reports.json"]) { try { JSON.parse(fs.readFileSync(path.join(root, f), "utf8")); } catch (e) { check(false, f + " is not valid JSON: " + e.message); } }
@@ -20,8 +20,11 @@ const MOCK = `window.puter={auth:{isSignedIn:()=>true,signIn:async()=>{}},fs:{re
     const tab = t => p.evaluate(t => [...document.querySelectorAll("button")].find(x => x.textContent.trim().startsWith(t)).click(), t);
     await tab("Ask"); await p.fill("#cap-text", "what is a token?"); await p.keyboard.press("Enter"); await p.waitForTimeout(1200);
     const chat = await p.textContent("#chat").catch(() => "");
+    check((await p.evaluate(() => (window.__models || []).slice(-1)[0] || "")).includes("perplexity"), `${name}: a question didn't use web research`);
     check(chat.includes("Answer."), `${name}: Ask got no answer`);
     check(!/\[(progress|learnstyle)/.test(chat), `${name}: hidden markers visible in chat`);
+    await p.fill("#cap-text", "what do my notes say about tokens?"); await p.keyboard.press("Enter"); await p.waitForTimeout(800);
+    check(!(await p.evaluate(() => (window.__models || []).slice(-1)[0] || "")).includes("perplexity"), `${name}: a notes question used web research`);
     for (const t of ["Notes", "Today", "Learn", "Key", "Data", "Reports"]) { await tab(t); await p.waitForTimeout(250); const txt = await p.textContent("#panel").catch(() => ""); check(!/\[object |undefined|NaN/.test(txt), `${name}: ${t} panel shows broken text: ${(txt.match(/.{0,40}(\[object |undefined|NaN).{0,20}/) || [""])[0]}`); }
     check(await p.evaluate(() => document.documentElement.scrollWidth <= innerWidth), `${name}: horizontal scroll`);
     check(errs.length === 0, `${name}: page errors: ${errs.join(" | ")}`);
