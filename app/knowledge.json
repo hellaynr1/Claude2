@@ -1,6 +1,150 @@
 [
-  { "id": "r-ai-os", "c": "research", "t": "Personal AI OS: what actually makes AI smarter", "d": "2026-10-17", "s": "Not more skills: good memory (organized Markdown), a few sharp skills, real tools (search, code, files) and verification. Skills teach how; MCP connects tools; memory gives context.", "x": ["Order: memory → 3 skills → shared workspace → tools → automation + review.", "Skills load only when relevant, so a few precise ones beat many overlapping ones."], "l": ["ai-os"] },
-  { "id": "r-skills", "c": "research", "t": "Agent Skills (official docs)", "d": "2026-10-17", "s": "A skill is a folder with SKILL.md: a name, a description that says when to use it, and instructions. Claude loads it only when the task matches the description.", "x": ["Write the description as triggers: 'Use when I…'.", "Keep one skill per recurring workflow."], "l": ["r-ai-os"], "url": "https://docs.claude.com/en/docs/agents-and-tools/agent-skills/overview" },
-  { "id": "r-mcp", "c": "research", "t": "MCP: connecting AI to tools", "d": "2026-10-17", "s": "Model Context Protocol: an open standard that lets AI apps use external tools and data (Drive, GitHub, browsers) through 'servers'. Add one only for a real workflow and check its permissions.", "x": [], "l": ["r-ai-os"], "url": "https://modelcontextprotocol.io" },
-  { "id": "r-claude-memory", "c": "research", "t": "Claude Code memory (CLAUDE.md)", "d": "2026-10-17", "s": "CLAUDE.md files load automatically at session start: project rules, preferences, key facts. Keep them short and point to other files for detail.", "x": [], "l": ["r-ai-os"], "url": "https://docs.claude.com/en/docs/claude-code/memory" }
+ {
+  "id": "r-ai-os",
+  "c": "research",
+  "t": "Personal AI OS: what actually makes AI smarter",
+  "d": "2026-10-17",
+  "s": "Not more skills: good memory (organized Markdown), a few sharp skills, real tools (search, code, files) and verification. Skills teach how; MCP connects tools; memory gives context.",
+  "x": [
+   "Order: memory → 3 skills → shared workspace → tools → automation + review.",
+   "Skills load only when relevant, so a few precise ones beat many overlapping ones."
+  ],
+  "l": [
+   "ai-os"
+  ]
+ },
+ {
+  "id": "r-skills",
+  "c": "research",
+  "t": "Agent Skills (official docs)",
+  "d": "2026-10-17",
+  "s": "A skill is a folder with SKILL.md: a name, a description that says when to use it, and instructions. Claude loads it only when the task matches the description.",
+  "x": [
+   "Write the description as triggers: 'Use when I…'.",
+   "Keep one skill per recurring workflow."
+  ],
+  "l": [
+   "r-ai-os"
+  ],
+  "url": "https://docs.claude.com/en/docs/agents-and-tools/agent-skills/overview"
+ },
+ {
+  "id": "r-mcp",
+  "c": "research",
+  "t": "MCP: connecting AI to tools",
+  "d": "2026-10-17",
+  "s": "Model Context Protocol: an open standard that lets AI apps use external tools and data (Drive, GitHub, browsers) through 'servers'. Add one only for a real workflow and check its permissions.",
+  "x": [],
+  "l": [
+   "r-ai-os"
+  ],
+  "url": "https://modelcontextprotocol.io"
+ },
+ {
+  "id": "r-claude-memory",
+  "c": "research",
+  "t": "Claude Code memory (CLAUDE.md)",
+  "d": "2026-10-17",
+  "s": "CLAUDE.md files load automatically at session start: project rules, preferences, key facts. Keep them short and point to other files for detail.",
+  "x": [],
+  "l": [
+   "r-ai-os"
+  ],
+  "url": "https://docs.claude.com/en/docs/claude-code/memory"
+ },
+ {
+  "id": "r-code-para",
+  "c": "research",
+  "t": "Second brain method: CODE + PARA (Tiago Forte)",
+  "d": "2026-10-17",
+  "s": "CODE = Capture (save what resonates, don't over-filter), Organize, Distill (pull out the key points over time), Express (turn notes into output). PARA files by actionability: Projects, Areas, Resources, Archives.",
+  "x": [
+   "The goal is output (projects, content), not a pretty archive.",
+   "Organize by project, not by topic: 'where will I use this?'"
+  ],
+  "l": [
+   "r-ai-os",
+   "r-evergreen"
+  ],
+  "url": "https://www.charterworks.com/building-second-brain-tiago-forte/"
+ },
+ {
+  "id": "r-evergreen",
+  "c": "research",
+  "t": "Evergreen / atomic notes (Matuschak, Zettelkasten)",
+  "d": "2026-10-17",
+  "s": "One idea per note, titled as a claim, densely linked to other notes, rewritten over time. Links beat folders: an atomic note can be reused by every topic it touches.",
+  "x": [
+   "Built on Niklas Luhmann's Zettelkasten.",
+   "Write notes for yourself; refine them each time you revisit."
+  ],
+  "l": [
+   "r-code-para"
+  ],
+  "url": "https://notes.andymatuschak.org/Evergreen_notes_should_be_atomic"
+ },
+ {
+  "id": "r-workflows-agents",
+  "c": "research",
+  "t": "Workflows vs agents (Anthropic)",
+  "d": "2026-10-17",
+  "s": "Workflows: AI + tools follow fixed code paths. Agents: the model decides its own steps and tool use. Start with the simplest solution; agents trade cost and speed for flexibility.",
+  "x": [
+   "Successful teams use simple, composable patterns, not heavy frameworks.",
+   "Predictable steps → workflow (like my systems/). Open-ended tasks → agent."
+  ],
+  "l": [
+   "r-ai-os",
+   "r-context-eng"
+  ],
+  "url": "https://www.anthropic.com/research/building-effective-agents"
+ },
+ {
+  "id": "r-context-eng",
+  "c": "research",
+  "t": "Context engineering (Anthropic)",
+  "d": "2026-10-17",
+  "s": "What the AI sees matters more than clever prompts. Context is a limited attention budget: more text can lower accuracy ('context rot'). Keep instructions small, tools few and clear, and load details just in time.",
+  "x": [
+   "Claude Code pattern: CLAUDE.md up front, files searched on demand (grep/glob).",
+   "Long tasks: compaction, structured notes, sub-agents."
+  ],
+  "l": [
+   "r-claude-memory",
+   "r-workflows-agents",
+   "r-agent-memory"
+  ],
+  "url": "https://www.anthropic.com/engineering/effective-context-engineering-for-ai-agents"
+ },
+ {
+  "id": "r-agent-memory",
+  "c": "research",
+  "t": "Agent memory tiers (MemGPT / Letta)",
+  "d": "2026-10-17",
+  "s": "'LLM as an operating system': core memory always in context, recall memory (past conversations, searchable), archival memory (long-term, searchable). The agent edits its own memory and consolidates it while idle.",
+  "x": [
+   "Paper: 'MemGPT: Towards LLMs as Operating Systems' (UC Berkeley, 2023); now Letta, open source.",
+   "Memory degrades without pruning and consolidation."
+  ],
+  "l": [
+   "r-context-eng",
+   "r-my-os-map"
+  ],
+  "url": "https://docs-v1.letta.com/guides/agents/architectures/memgpt"
+ },
+ {
+  "id": "r-my-os-map",
+  "c": "research",
+  "t": "How my AI OS maps to the research",
+  "d": "2026-10-17",
+  "s": "Core memory = CLAUDE.md + memory/CONTEXT.md. Recall = brain/log.md. Archival = Second Brain stars + Drive vault. Workflows = systems/. Consolidation = Daily optimizer. Gap: app notes don't reach Claude's memory yet.",
+  "x": [
+   "Next upgrades: weekly consolidation (merge, prune, link), app → Drive bridge, distill notes into atomic stars."
+  ],
+  "l": [
+   "r-agent-memory",
+   "r-code-para",
+   "ai-os"
+  ]
+ }
 ]
