@@ -41,3 +41,10 @@ Labels: verified · inference · hypothesis · unknown. Source check per finding
 - Your data provider's public-display terms for Investedia.
 - Free hosting for a personal MCP server.
 - Google Search Central's own scaled-content page (verify).
+
+## Experiments (what we tried, result)
+| Date | Experiment | Result | Next |
+|---|---|---|---|
+| 2026-10-17 | Fast model (Haiku) by default for Ask | Typical Ask ~1,100 input tokens; quality not yet judged by owner | Owner feedback after a week |
+| 2026-10-17 | Weekly review in the app | Works in tests; no real-use data yet | Check suggestions quality after first real run |
+| 2026-10-17 | Milky Way galaxy (design C) | Looks right at 390px + desktop in tests | Owner check on iPhone (smoothness) |

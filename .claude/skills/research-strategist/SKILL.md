@@ -34,7 +34,7 @@ If the current plan is already best, say so — don't invent improvements.
 ## 6. Save (only what the tools confirm)
 - `memory/RESEARCH.md`: question, finding, sources, confidence, date; open questions.
 - Durable public knowledge → one-idea stars in `app/knowledge.json` (research-to-brain system); private business detail → Drive vault.
-- Decisions → `memory/DECISIONS.md`; Reports line in `app/reports.json`.
+- Decisions and rejected approaches (with the reason) → `memory/DECISIONS.md`; experiments and results → Experiments table in `memory/RESEARCH.md`; Reports line in `app/reports.json`.
 
 ## Autonomy
 Research, analysis and recommendations: do them without asking. Publishing, spending money, production changes or anything irreversible: ask first. Don't claim background work the environment can't do.
