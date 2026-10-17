@@ -640,12 +640,12 @@
  {
   "id": "r-free-display-data",
   "c": "research",
-  "t": "Free market data you may show publicly",
+  "t": "Free market data for a public site: the real rules",
   "d": "2026-10-17",
-  "s": "TradingView widgets: free with TradingView branding, embeddable on any website, stock data delayed, forex/crypto real-time. CoinGecko Demo API: 10k calls/month, attribution required. FRED: allowed with a 'not endorsed by the St. Louis Fed' notice. Twelve Data free: internal non-display only.",
+  "s": "TradingView widgets: free with branding, but its Terms of Use forbid commercial use without a separate agreement. CoinGecko Demo: 10k calls/month, attribution required, commercial terms unclear. FRED: allowed with a 'not endorsed by the St. Louis Fed' notice. Twelve Data free: internal non-display only. No free source clearly allows public display on a commercial site.",
   "x": [
-   "Source check: PRIMARY (official pages, checked 2026-10-17).",
-   "Commercial use of TradingView widgets not explicitly stated: confirm before monetizing."
+   "Source check: PRIMARY (official terms and pricing, checked 2026-10-17).",
+   "Monetized site → budget for a licence that includes public display."
   ],
   "l": [
    "r-market-data-license",

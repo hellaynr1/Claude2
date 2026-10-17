@@ -2,7 +2,7 @@
 
 Newest first. Format: decision · why · alternatives · reconsider when.
 
-- **2026-10-17 · PROPOSED (needs owner's yes): replace Yahoo scraping in Investedia with licensed/permitted sources.** Why: Yahoo's terms ban automated collection, commercial reuse and redistribution (primary source). Proposal: TradingView widgets for live prices and charts (free, branding kept, delayed stocks), CoinGecko Demo for crypto (attribution), FRED kept with its required notice. Alternatives: paid licensed API with public-display rights (cost), or end-of-day data only. Reconsider: if TradingView terms forbid commercial sites.
+- **2026-10-17 · PROPOSED (needs owner's yes): replace Yahoo scraping in Investedia with licensed/permitted sources.** Why: Yahoo's terms ban automated collection, commercial reuse and redistribution (primary source). Proposal (corrected after TradingView ToS check): while Investedia earns nothing, TradingView widgets with attribution after written OK from TradingView; once monetized, a paid licence that includes public display; CoinGecko only after confirming Demo-plan commercial terms; FRED kept with its required notice. Alternatives: paid licensed API with public-display rights (cost), or end-of-day data only. Reconsider: if TradingView terms forbid commercial sites.
 
 - **2026-10-17 · Fast model by default in the app; smart model for lessons and "in depth" questions.** · Saves usage. · Reconsider: answers feel too shallow.
 - **2026-10-17 · Confirmed: Guidify LLC is the company; Investedia is its investing-education brand.** ("Codify" in dictation = Guidify.)
