@@ -1,6 +1,28 @@
 [
  {
   "d": "2026-10-17",
+  "at": "2026-10-17T10:33:21+00:00",
+  "type": "update",
+  "t": "Investedia data switch: message to TradingView drafted and migration plan ready (memory/projects/investedia-data-migration.md); Yahoo stays until TradingView replies, so the site never shows sample prices."
+ },
+ {
+  "d": "2026-10-17",
+  "at": "2026-10-17T10:33:00+00:00",
+  "type": "fix",
+  "t": "Investedia news: Yahoo Finance RSS removed, descriptions capped at 100 characters (headlines, sources and links unchanged).",
+  "c": "4c4b35b2860530937b0ae07c76a9e21214a92d1a",
+  "repo": "hellaynr1/Investedia"
+ },
+ {
+  "d": "2026-10-17",
+  "at": "2026-10-17T10:45:00+00:00",
+  "type": "fix",
+  "t": "Investedia: FRED notice now live (copied into the published docs/ folder; was only in assets/).",
+  "c": "2503c50a7c892143bac0fae2589568f5e363ff79",
+  "repo": "hellaynr1/Investedia"
+ },
+ {
+  "d": "2026-10-17",
   "at": "2026-10-17T10:12:08+00:00",
   "type": "update",
   "t": "Daily research run switched on: every morning at 07:15 it researches 3 open questions with primary sources and proposes them as a pull request (merge = approve)."

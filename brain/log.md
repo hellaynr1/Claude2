@@ -3,6 +3,7 @@
 What we built and learned, newest first. Claude adds an entry at the end of every session.
 
 ## 2026-10-17
+- **Investedia fixes (approved)**: news without Yahoo RSS and with ≤100-char snippets (4c4b35b); FRED notice live after rebuild (2503c50, verified on investedia.com); TradingView permission message + migration plan drafted.
 - **Daily research run on** (07:15 Brussels, scheduled task, pull request only): `systems/daily-research.md`.
 - **Work session (option B)**: research on affiliate rules (still unclear) and free MCP hosting (Cloudflare Workers free plan, OAuth needed); M5 shared memory now feasible for free.
 - **Spaced review in Learn**: learned topics return for a quiz after 1/3/7/21 days ('Quiz me', ✓, ✗). Smoke test extended; it caught a name clash before release. Research: news headline rules (EU art. 15), official Reels ranking.
