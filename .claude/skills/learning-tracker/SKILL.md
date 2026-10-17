@@ -29,6 +29,10 @@ The app keeps its own progress in my browser and Puter account. If I share a scr
 ## When I ask "what do I know?" or "what's next?"
 Summarize Learned / Learning now / Next 3 topics from `learning/progress.md`, then offer to teach the first one.
 
+## Daily objectives
+- Every day, update **Today's objectives** in `learning/progress.md`: 3 small, concrete goals one step above what I've learned (fast progress), tied to my projects. Mark finished ones, carry over unfinished ones.
+- When I learn something, add it everywhere it's relevant (progress, objectives, the app's topics, skills) so I can advance.
+
 ## Daily learning time
 - My daily goal is in **Daily learning time** in `learning/progress.md` (default 20 minutes). The app counts minutes in Learn, Talk and lessons, shows a streak and the last 7 days.
 - When I share app numbers (screenshot or export), log them there.

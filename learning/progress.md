@@ -6,11 +6,19 @@ Same topics and ids as the Learn tab in the Second Brain app. Updated by Claude 
 - Goal: **20 minutes a day** (change it in the app: Learn → the "min a day" menu).
 - The app counts time while you're in Learn, Talk or a lesson and active, shows today's minutes, a 🔥 streak and the last 7 days, and syncs between phone and computer.
 
+## Today's objectives
+_Updated daily (Claude in sessions, the Daily optimizer as a proposal). 3 small, concrete goals at a fast-progress level, built on what I've learned._
+- 2026-10-17:
+  1. Explain back in your own words: model, prompt, token, hallucination (→ marks 4 AI basics topics learned).
+  2. Write one prompt with role + goal + format for a Guidify Instagram caption.
+  3. Do 20 minutes in Learn or Talk.
+
 ## How I learn best
 _Claude's notes on how to teach me. The app adds these automatically; Claude Code adds them after lessons._
 - Total beginner: plain words, explain every new term the first time.
 - Short answers, one idea at a time, with an everyday example.
 - Likes learning by voice (Talk on the iPhone, often on the way to work).
+- Wants fast progress: objectives slightly above current level, not easy repeats.
 - Learns by building real things (Second Brain, brand kits) more than by theory.
 
 ## Learned

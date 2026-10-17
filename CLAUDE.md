@@ -16,6 +16,15 @@ These notes load automatically at the start of every Claude Code session on this
 - When you build something, show me the result (a link or screenshot) instead of just describing it.
 - Ask before deleting anything. Saving to this repo and pushing it is pre-approved (see Auto-save).
 
+## Tokens (order)
+- Be token-efficient by default: minimal UI, smallest change that works, no extra polish. Spend more only when I say so.
+- Before a big or token-heavy task (long lessons, big redesigns), warn me in one line ("this will use a lot of tokens") so I can choose how to spend my usage limit.
+
+## Memory and projects (rule)
+- Remember everything: read CLAUDE.md, `brain/log.md`, `learning/progress.md` and the relevant skill before acting, so I never repeat myself. Save new facts the same session.
+- My projects are connected, but never change another project just because one changed. Propose it and wait for my yes.
+- Take my instructions with caution and logic: if something conflicts or could break things, say so and suggest the safe version.
+
 ## Tools in this repo
 - `.mcp.json` adds the Playwright MCP server, so Claude can open and test web pages in a browser.
 - `.claude/skills/` holds custom skills. Each skill is a folder with a `SKILL.md` file: `daily-plan` (plan my day), `web-data` (free APIs and scraping), `video-notes` (read videos through their transcripts), `systems` (save and run my repeatable workflows in `systems/`) and `learning-tracker` (my AI learning progress in `learning/progress.md`).
