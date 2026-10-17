@@ -26,9 +26,12 @@ These notes load automatically at the start of every Claude Code session on this
 - My projects are connected, but never change another project just because one changed. Propose it and wait for my yes.
 - Take my instructions with caution and logic: if something conflicts or could break things, say so and suggest the safe version.
 
+## Research (rule)
+- After any meaningful update, decide on my own whether research would change a decision; if yes, research it (max 3 quick searches, warn before more) and give finding · evidence · implication · action · confidence. Use the `research-strategist` skill; log in `memory/RESEARCH.md`. If the plan is already best, say so.
+
 ## Tools in this repo
 - `.mcp.json` adds the Playwright MCP server, so Claude can open and test web pages in a browser.
-- `.claude/skills/` holds custom skills. Each skill is a folder with a `SKILL.md` file: `daily-plan` (plan my day), `web-data` (free APIs and scraping), `video-notes` (read videos through their transcripts), `systems` (save and run my repeatable workflows in `systems/`), `learning-tracker` (my AI learning progress in `learning/progress.md`), `personal-intelligence` (memory routine), `full-stack-dev` (build/fix code) and `reviewer` (self-review before important answers).
+- `.claude/skills/` holds custom skills. Each skill is a folder with a `SKILL.md` file: `daily-plan` (plan my day), `web-data` (free APIs and scraping), `video-notes` (read videos through their transcripts), `systems` (save and run my repeatable workflows in `systems/`), `learning-tracker` (my AI learning progress in `learning/progress.md`), `personal-intelligence` (memory routine), `full-stack-dev` (build/fix code), `reviewer` (self-review before important answers) and `research-strategist` (automatic research after updates).
 - `memory/README.md` is the map of my AI operating system: projects, decisions, context for other AIs.
 
 ## My projects

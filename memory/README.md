@@ -8,6 +8,7 @@ One place that says where everything lives, so Claude (and any AI tool) can pick
 | Goals, life areas, journal, business plans | Obsidian vault in Google Drive | private |
 | Projects: status, links, next step | `memory/projects/*.md` | public repo |
 | Competitors (Investedia) | `memory/projects/investedia-competitors.md`; repeat with `systems/competitor-watch.md` | public repo |
+| Research log (findings, confidence, open questions) | `memory/RESEARCH.md` | public repo |
 | Decisions: what, why, when to reconsider | `memory/DECISIONS.md` | public repo |
 | Session log: what changed, next step | `brain/log.md` (newest first) | public repo |
 | Learning progress | `learning/progress.md` (+ copy in the vault) | public repo |
