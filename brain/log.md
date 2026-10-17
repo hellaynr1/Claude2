@@ -3,6 +3,7 @@
 What we built and learned, newest first. Claude adds an entry at the end of every session.
 
 ## 2026-10-17
+- **Workflows + first Investedia content**: systems start-of-day, investedia-post, compliance-check, ship-feature, bug-fix. Made 2 reels (MP4, 9:16) and 2 carousels in brand style with a free renderer (HTML → Playwright → ffmpeg), captions, sources, compliance READY. Fixed during the run: logo/font not loading (embedded as data), end-card logo missing (replaceAll).
 - **Shared memory MCP server** (`mcp/`, approved): Cloudflare's official mcp-worker pattern, tools search_brain / get_star / get_memory over the public brain files; tested locally with wrangler dev (initialize, tools/list, tool calls). Deploy + connect steps in mcp/README.md.
 - **Investedia fixes (approved)**: news without Yahoo RSS and with ≤100-char snippets (4c4b35b); FRED notice live after rebuild (2503c50, verified on investedia.com); TradingView permission message + migration plan drafted.
 - **Daily research run on** (07:15 Brussels, scheduled task, pull request only): `systems/daily-research.md`.

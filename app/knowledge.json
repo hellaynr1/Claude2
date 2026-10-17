@@ -667,5 +667,19 @@
    "r-market-data-license"
   ],
   "url": "https://ipkitten.blogspot.com/2019/06/dsm-directive-series-6-hyperlinking-in.html"
+ },
+ {
+  "id": "tool-content-renderer",
+  "c": "tools",
+  "t": "Free content renderer (reels + carousels)",
+  "d": "2026-10-17",
+  "s": "content/investedia/tools/render.js turns HTML scenes into 1080x1920 MP4 reels and 1080x1350 carousel slides in the Investedia brand, using Playwright and ffmpeg. No paid AI video needed.",
+  "x": [
+   "Workflow: systems/investedia-post.md; check with systems/compliance-check.md."
+  ],
+  "l": [
+   "inv-short-video",
+   "sys-competitor-watch"
+  ]
  }
 ]

@@ -1,6 +1,18 @@
 [
  {
   "d": "2026-10-17",
+  "at": "2026-10-17T11:30:37+00:00",
+  "type": "update",
+  "t": "5 new workflows: start-of-day, investedia-post, compliance-check, ship-feature, bug-fix (in systems/)."
+ },
+ {
+  "d": "2026-10-17",
+  "at": "2026-10-17T11:30:37+00:00",
+  "type": "update",
+  "t": "Investedia content: 2 reels (Start at 20 or 30?, 3 red flags) and 2 carousels (5 red flags, €100 a month) with captions, compliance READY. Drafts in content/investedia/2026-10-17; you post them."
+ },
+ {
+  "d": "2026-10-17",
   "at": "2026-10-17T10:36:34+00:00",
   "type": "update",
   "t": "Shared memory: MCP server built (mcp/), tested locally: search_brain, get_star, get_memory. Deploy once on Cloudflare's free plan (steps in mcp/README.md), then any AI tool can read your brain."

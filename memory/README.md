@@ -19,6 +19,7 @@ One place that says where everything lives, so Claude (and any AI tool) can pick
 | Reports (tokens, savings, fixes, updates) | app Reports tab: usage measured on the device + `app/reports.json` | public repo |
 | Daily research (07:15) | `systems/daily-research.md`; proposes a pull request each morning | public repo |
 | Shared memory server (MCP) | `mcp/`: search_brain, get_star, get_memory over the public files; deploy on Cloudflare free plan | public repo |
+| Investedia content drafts | `content/investedia/<date>/` (+ renderer in `content/investedia/tools`) | public repo |
 | Short context for ChatGPT / other AIs | `memory/CONTEXT.md` | public repo |
 
 ## Session routine (the `personal-intelligence` skill)
