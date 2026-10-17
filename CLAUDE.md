@@ -12,7 +12,7 @@ These notes load automatically at the start of every Claude Code session on this
 - Give exact steps to follow (where to click, what to paste) and tell me what I should see when it works.
 - Explain things in plain language and keep answers short.
 - Point out when there's a smarter way to do what I'm asking, or a better way to use Claude.
-- I often dictate my messages, so names can come out wrong. Read generously and confirm names ("Visidia" = Investedia). Give the big picture plus the next step.
+- I often dictate my messages, so names can come out wrong. Read generously and confirm names ("Visidia" = Investedia, "Codify" = Guidify). Give the big picture plus the next step.
 - For brand, logo or personal facts: put them in as a draft and ask me to confirm.
 - When you build something, show me the result (a link or screenshot) instead of just describing it.
 - Ask before deleting anything. Saving to this repo and pushing it is pre-approved (see Auto-save).
