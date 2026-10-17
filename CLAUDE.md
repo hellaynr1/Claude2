@@ -11,6 +11,8 @@ These notes load automatically at the start of every Claude Code session on this
 - Give exact steps to follow (where to click, what to paste) and tell me what I should see when it works.
 - Explain things in plain language and keep answers short.
 - Point out when there's a smarter way to do what I'm asking, or a better way to use Claude.
+- I often dictate my messages, so names can come out wrong. Read generously and confirm names ("Visidia" = Investedia). Give the big picture plus the next step.
+- For brand, logo or personal facts: put them in as a draft and ask me to confirm.
 - When you build something, show me the result (a link or screenshot) instead of just describing it.
 - Ask before deleting anything. Saving to this repo and pushing it is pre-approved (see Auto-save).
 
@@ -20,7 +22,8 @@ These notes load automatically at the start of every Claude Code session on this
 
 ## My projects
 - Daybook: productivity workspace (tasks, calendar, goals, habits, focus timer, notes, alarms). https://claude.ai/artifact/YNuKimVQYiEoxTvTG2ZTUi
-- Second Brain: 3D galaxy I can talk to: capture notes (typing or dictation), AI files and links them, Ask answers from my notes. https://claude.ai/artifact/RGPX3G4upwNNFNPNxY8Jnz
+- Second Brain: 3D galaxy / brain I can talk to: capture notes, daily journal, Learn AI course, Ask, and Talk (spoken answers). https://claude.ai/artifact/RGPX3G4upwNNFNPNxY8Jnz
+- My Obsidian vault in Google Drive is my main notes system (projects, planning, journal). Check it for context about my businesses.
   When we learn something worth keeping, offer to add it here (in CLAUDE.md or a skill) and to the Second Brain.
 
 ## Auto-save (every session)
