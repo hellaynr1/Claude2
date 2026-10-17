@@ -1,6 +1,6 @@
 # Bugs: found, fixed, never again
 
-Each fixed bug gets one line here and, if possible, a check in `tests/smoke.js`, so it can't come back. Also add one line at the top of `app/reports.json` (`{"d":date,"type":"fix"|"update"|"saving"|"research","t":"plain text"}`) so it shows in the app's Reports tab. Avoid the literal strings "undefined", "NaN" and "[object" there (the smoke test flags them).
+Each fixed bug gets one line here and, if possible, a check in `tests/smoke.js`, so it can't come back. Also add one line at the top of `app/reports.json` (`{"d":date,"at":ISO date-time,"type":"fix"|"update"|"saving"|"research","t":"plain text","c":commit,"repo":"owner/repo"}`) so it shows in the app's Reports tab. Avoid the literal strings "undefined", "NaN" and "[object" there (the smoke test flags them).
 
 | Date | Bug | Cause | Fix | Test |
 |---|---|---|---|---|

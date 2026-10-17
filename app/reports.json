@@ -1,109 +1,156 @@
 [
  {
   "d": "2026-10-17",
+  "at": "2026-10-17T10:00:06+00:00",
   "type": "update",
-  "t": "New rule: Claude makes small reversible changes without asking; every change appears here with a link, and you can say \"undo\" to revert it. Big changes still need your yes."
+  "t": "Reports now show date and time for every change."
+ },
+ {
+  "d": "2026-10-17",
+  "type": "update",
+  "t": "New rule: Claude makes small reversible changes without asking; every change appears here with a link, and you can say \"undo\" to revert it. Big changes still need your yes.",
+  "at": "2026-10-17T09:55:34+00:00",
+  "c": "e7f4aa73a813889ef6e4ae6c1b7b171f270ed92d"
  },
  {
   "d": "2026-10-17",
   "type": "fix",
   "t": "Investedia: added the FRED notice that FRED's terms require to the site footer.",
   "c": "b944767538a1b3f20cdca09d1e399dc7e2f97b61",
-  "repo": "hellaynr1/Investedia"
+  "repo": "hellaynr1/Investedia",
+  "at": "2026-10-17T09:54:46+00:00"
  },
  {
   "d": "2026-10-17",
   "type": "research",
-  "t": "Investedia data check: Yahoo data is used against Yahoo's terms; TradingView widgets also need an agreement for commercial use. Options recorded, awaiting your decision."
+  "t": "Investedia data check: Yahoo data is used against Yahoo's terms; TradingView widgets also need an agreement for commercial use. Options recorded, awaiting your decision.",
+  "at": "2026-10-17T09:53:24+00:00",
+  "c": "9ff3f9e9d6e944f5f73ca1478b5585207d11e5a3"
  },
  {
   "d": "2026-10-17",
   "type": "fix",
-  "t": "Research verified against primary sources: corrected prompt-caching prices (0.05x on current models, 512-token minimum), beehiiv referrals need a paid plan, market data: delayed data free to use but distribution may cost (Euronext terms). Every research star now shows its source check."
+  "t": "Research verified against primary sources: corrected prompt-caching prices (0.05x on current models, 512-token minimum), beehiiv referrals need a paid plan, market data: delayed data free to use but distribution may cost (Euronext terms). Every research star now shows its source check.",
+  "at": "2026-10-17T09:42:28+00:00",
+  "c": "ace7658398b2a750aedb9dd65333684dac71373b"
  },
  {
   "d": "2026-10-17",
   "type": "research",
-  "t": "12 research stars: SEO spam rules, newsletter platforms, market data licences, affiliate disclosure, young investors, Belgian ETF tax, prompt caching, MCP servers, evals, agents, deliberate practice, self-explanation."
+  "t": "12 research stars: SEO spam rules, newsletter platforms, market data licences, affiliate disclosure, young investors, Belgian ETF tax, prompt caching, MCP servers, evals, agents, deliberate practice, self-explanation.",
+  "at": "2026-10-17T09:39:41+00:00",
+  "c": "9e10b0bb5a35e8c7724ec926825797cce1430768"
  },
  {
   "d": "2026-10-17",
   "type": "research",
-  "t": "4 research stars: Belgium finfluencer factsheet (official), Belgian influencer certificate, spaced retrieval for learning, newsletter referrals."
+  "t": "4 research stars: Belgium finfluencer factsheet (official), Belgian influencer certificate, spaced retrieval for learning, newsletter referrals.",
+  "at": "2026-10-17T09:20:40+00:00",
+  "c": "d38eb6b5b53d9ee266568b314e55349e8062fa3e"
  },
  {
   "d": "2026-10-17",
   "type": "update",
-  "t": "Galaxy now looks like the Milky Way: 4 spiral arms, golden core, pink star-forming knots, a soft colored cloud around each cluster, quieter link lines."
+  "t": "Galaxy now looks like the Milky Way: 4 spiral arms, golden core, pink star-forming knots, a soft colored cloud around each cluster, quieter link lines.",
+  "at": "2026-10-17T08:57:32+00:00",
+  "c": "c34579ea075ae8d5b021da3783f08b352070616d"
  },
  {
   "d": "2026-10-17",
   "type": "research",
-  "t": "15 new one-idea stars: Investedia actions, content lessons, AI-memory lessons, tools and the competitor system."
+  "t": "15 new one-idea stars: Investedia actions, content lessons, AI-memory lessons, tools and the competitor system.",
+  "at": "2026-10-17T08:49:34+00:00",
+  "c": "38c2c7049d26b959360281a4827c5d2601314752"
  },
  {
   "d": "2026-10-17",
   "type": "research",
-  "t": "Competitor scan for Investedia: TradingView, Finviz, Stock Analysis, Investopedia, plus 5 ranked actions."
+  "t": "Competitor scan for Investedia: TradingView, Finviz, Stock Analysis, Investopedia, plus 5 ranked actions.",
+  "at": "2026-10-17T08:48:22+00:00",
+  "c": "28896fc6aead836085d294fb2ae748c2288ca328"
  },
  {
   "d": "2026-10-17",
   "type": "research",
-  "t": "3 research stars for Investedia: finfluencer rules (EU + Belgium), ESMA social media statement, Reels ranking signals."
+  "t": "3 research stars for Investedia: finfluencer rules (EU + Belgium), ESMA social media statement, Reels ranking signals.",
+  "at": "2026-10-17T08:46:47+00:00",
+  "c": "21ef7ee50a10343321a60fa1e912a104137e4273"
  },
  {
   "d": "2026-10-17",
   "type": "update",
-  "t": "Notes show 'Saved' while typing; new types Idea to explore and Next action; Today lists your next actions."
+  "t": "Notes show 'Saved' while typing; new types Idea to explore and Next action; Today lists your next actions.",
+  "at": "2026-10-17T08:35:29+00:00",
+  "c": "3bcf1a4aa5688a627157a80a0cee781d04edc409"
  },
  {
   "d": "2026-10-17",
   "type": "fix",
-  "t": "Reliability: save failures now warn you, broken records and bad links are cleaned, research text shown safely."
+  "t": "Reliability: save failures now warn you, broken records and bad links are cleaned, research text shown safely.",
+  "at": "2026-10-17T08:35:29+00:00",
+  "c": "3bcf1a4aa5688a627157a80a0cee781d04edc409"
  },
  {
   "d": "2026-10-17",
   "type": "update",
-  "t": "Reports tab: token use, savings, bug fixes and updates in one place."
+  "t": "Reports tab: token use, savings, bug fixes and updates in one place.",
+  "at": "2026-10-17T08:25:34+00:00",
+  "c": "859ed3b340e02c73118d48c4b8349a6b654587f0"
  },
  {
   "d": "2026-10-17",
   "type": "update",
-  "t": "Weekly review: distill notes, merge duplicates, mark outdated, add links, Investedia post ideas."
+  "t": "Weekly review: distill notes, merge duplicates, mark outdated, add links, Investedia post ideas.",
+  "at": "2026-10-17T08:25:34+00:00",
+  "c": "859ed3b340e02c73118d48c4b8349a6b654587f0"
  },
  {
   "d": "2026-10-17",
   "type": "update",
-  "t": "Bug agents: free automatic test on every change + nightly; fixes proposed as pull requests."
+  "t": "Bug agents: free automatic test on every change + nightly; fixes proposed as pull requests.",
+  "at": "2026-10-17T08:25:34+00:00",
+  "c": "859ed3b340e02c73118d48c4b8349a6b654587f0"
  },
  {
   "d": "2026-10-17",
   "type": "saving",
-  "t": "Filing sends only the 30 most relevant stars; Talk sends 6 notes + 2 exchanges; Ask uses the fast model unless you ask 'in depth'."
+  "t": "Filing sends only the 30 most relevant stars; Talk sends 6 notes + 2 exchanges; Ask uses the fast model unless you ask 'in depth'.",
+  "at": "2026-10-17T08:25:34+00:00",
+  "c": "859ed3b340e02c73118d48c4b8349a6b654587f0"
  },
  {
   "d": "2026-10-17",
   "type": "research",
-  "t": "6 research stars: second brains, context engineering, agent memory, workflows vs agents."
+  "t": "6 research stars: second brains, context engineering, agent memory, workflows vs agents.",
+  "at": "2026-10-17T08:25:34+00:00",
+  "c": "859ed3b340e02c73118d48c4b8349a6b654587f0"
  },
  {
   "d": "2026-10-17",
   "type": "update",
-  "t": "Mobile panels can be dragged up/down to see the brain."
+  "t": "Mobile panels can be dragged up/down to see the brain.",
+  "at": "2026-10-17T08:25:34+00:00",
+  "c": "859ed3b340e02c73118d48c4b8349a6b654587f0"
  },
  {
   "d": "2026-10-17",
   "type": "fix",
-  "t": "Notes list showed button code instead of note titles; fixed."
+  "t": "Notes list showed button code instead of note titles; fixed.",
+  "at": "2026-10-17T08:25:34+00:00",
+  "c": "859ed3b340e02c73118d48c4b8349a6b654587f0"
  },
  {
   "d": "2026-10-17",
   "type": "fix",
-  "t": "Talk on iPhone couldn't answer (sign-in popup blocked); fixed."
+  "t": "Talk on iPhone couldn't answer (sign-in popup blocked); fixed.",
+  "at": "2026-10-17T08:25:34+00:00",
+  "c": "859ed3b340e02c73118d48c4b8349a6b654587f0"
  },
  {
   "d": "2026-10-17",
   "type": "fix",
-  "t": "Typed questions got no answer in Save mode; now auto-detected."
+  "t": "Typed questions got no answer in Save mode; now auto-detected.",
+  "at": "2026-10-17T08:25:34+00:00",
+  "c": "859ed3b340e02c73118d48c4b8349a6b654587f0"
  }
 ]
