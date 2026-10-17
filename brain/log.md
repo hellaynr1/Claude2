@@ -3,6 +3,7 @@
 What we built and learned, newest first. Claude adds an entry at the end of every session.
 
 ## 2026-10-17
+- **AI operating system (foundation)**: `memory/` with a map (README), DECISIONS.md, one file per project (status + next step) and CONTEXT.md to paste into ChatGPT. Three new skills: personal-intelligence (memory routine), full-stack-dev, reviewer. Deep research uses the built-in skill. Personal goals stay in the private Drive vault.
 - **Mobile bottom sheet**: on the phone, panels (Learn, Notes, Today…) have a drag handle: drag down to see more of the brain, up for more panel, flick down to close. Snaps to 3 heights and remembers yours. (web app + Claude page v15)
 - **Teaching level raised**: intermediate adult learner, basic → intermediate, compact but complete lessons with 1–2 free online resources each. Updated CLAUDE.md, learner profile, `learning-tracker` skill, and the app's Teach/Ask/lesson prompts (web app + Claude page v14).
 - **New rules**: daily learning objectives (3 per day, fast-progress level) in `learning/progress.md`; be token-efficient by default and warn before token-heavy work; remember everything and never change a connected project without asking; read instructions with caution and logic.
