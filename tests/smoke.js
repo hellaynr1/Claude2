@@ -4,7 +4,7 @@ const http = require("http"), fs = require("fs"), path = require("path");
 let pw; try { pw = require("playwright"); } catch { pw = require(require("child_process").execSync("npm root -g").toString().trim() + "/playwright"); }
 const root = path.join(__dirname, "..", "app"), fails = [];
 const check = (ok, msg) => { if (!ok) fails.push(msg); };
-const server = http.createServer((q, r) => { const f = path.join(root, decodeURIComponent(q.url.split("?")[0]).replace(/\/$/, "/index.html")); fs.readFile(f, (e, b) => { if (e) { r.writeHead(404); return r.end(); } r.writeHead(200, { "Content-Type": f.endsWith(".json") ? "application/json" : "text/html" }); r.end(b); }); }).listen(0);
+const server = http.createServer((q, r) => { const f = path.join(root, decodeURIComponent(q.url.split("?")[0]).replace(/\/$/, "/index.html")); fs.readFile(f, (e, b) => { if (e) { r.writeHead(404); return r.end(); } r.writeHead(200, { "Content-Type": f.endsWith(".json") ? "application/json" : f.endsWith(".js") ? "application/javascript" : f.endsWith(".png") ? "image/png" : "text/html" }); r.end(b); }); }).listen(0);
 const MOCK = `window.puter={auth:{isSignedIn:()=>true,signIn:async()=>{}},fs:{read:async()=>{throw{code:'subject_does_not_exist'}},write:async()=>({})},
  ai:{chat:async(m,o)=>{(window.__models=window.__models||[]).push(o&&o.model);const t='Answer.\\n[progress:tokens:learning]\\n[learnstyle: likes examples]';
  if(o&&o.stream)return(async function*(){yield{text:t}})();return{message:{content:[{text:'[]'}]}};}}};`;
@@ -90,6 +90,20 @@ const MOCK = `window.puter={auth:{isSignedIn:()=>true,signIn:async()=>{}},fs:{re
     check((await p.evaluate(() => __sr.aborts)) >= 1 && !(await p.evaluate(() => __sr.active)), "mic not released when the app was hidden");
     check(errs.length === 0, "mic test page errors: " + errs.join(" | "));
     await p.close();
+  }
+  // Offline: the app opens without network and a note can be captured
+  {
+    const ctx = await b.newContext({ viewport: { width: 390, height: 844 }, isMobile: true, hasTouch: true }), p = await ctx.newPage(), errs = [];
+    p.on("pageerror", e => errs.push(e.message));
+    await ctx.route("https://js.puter.com/**", r => r.fulfill({ contentType: "application/javascript", body: MOCK }));
+    await p.goto(url + "?sw=1"); await p.waitForTimeout(2500);
+    await p.evaluate(() => Promise.race([navigator.serviceWorker.ready, new Promise(r => setTimeout(r, 8000))]));
+    await ctx.setOffline(true); await p.reload({ waitUntil: "domcontentloaded", timeout: 20000 }).catch(() => {}); await p.waitForTimeout(2500);
+    check(await p.$("#cap-text"), "app didn't open offline");
+    await p.fill("#cap-text", "Offline idea about ETFs").catch(() => {}); await p.click(".modes button[data-mode=note]").catch(() => {}); await p.keyboard.press("Enter"); await p.waitForTimeout(800);
+    const saved = await p.evaluate(() => JSON.stringify(JSON.parse(localStorage.getItem("sb.local") || "{}")).includes("Offline idea")).catch(() => false);
+    check(saved, "note not saved while offline");
+    await ctx.close();
   }
   await b.close(); server.close();
   console.log(fails.length ? "FAIL\n- " + fails.join("\n- ") : "PASS"); process.exit(fails.length ? 1 : 0);

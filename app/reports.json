@@ -1,6 +1,12 @@
 [
  {
   "d": "2026-10-17",
+  "at": "2026-10-17T11:57:58+00:00",
+  "type": "update",
+  "t": "Offline: the web app opens without signal and saves notes on your phone; they sync when you're back online (\"Back online · syncing\")."
+ },
+ {
+  "d": "2026-10-17",
   "at": "2026-10-17T11:48:19+00:00",
   "type": "update",
   "t": "Talk voice: picks your device's most natural voice automatically; choose another voice and speed (0.9-1.5x) under the Talk header. Source lists and links aren't read aloud."

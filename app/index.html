@@ -1300,6 +1300,9 @@ button { cursor: pointer; }
   }
   $("#mic-tip").addEventListener("click", e => dictate(cap, e.currentTarget, () => { if (cap.value.trim()) capForm.requestSubmit(); }));
 
+  // Offline: keep a copy of the app on the device (web app only; https or ?sw=1 for testing)
+  if (window.SBWeb && "serviceWorker" in navigator && (location.protocol === "https:" || /[?&]sw=1/.test(location.search))) navigator.serviceWorker.register("sw.js").catch(() => {});
+  addEventListener("online", () => { toast("Back online · syncing your notes"); try { syncNow(); } catch {} });
   let lastCap = { t: "", at: 0 };
   function captureNote(text) {
     if (text === lastCap.t && Date.now() - lastCap.at < 5000) { toast("Already saved"); return; } lastCap = { t: text, at: Date.now() };
@@ -1307,9 +1310,10 @@ button { cursor: pointer; }
     if (title.length > 70) title = title.slice(0, 67).replace(/\s+\S*$/, "") + "…";
     const id = uid();
     saveThought(id, { title, note: text, cluster: "ideas", links: [], tags: [], kind: "raw", status: "unverified", importance: 2, createdAt: Date.now(), updatedAt: Date.now(), source: "capture" });
-    toast(ai ? "Saved · asking Claude how to file it…" : "Saved to your brain");
+    const offline = navigator.onLine === false;
+    toast(offline ? "Saved offline · it syncs when you're back online" : ai ? "Saved · asking Claude how to file it…" : "Saved to your brain");
     setTimeout(() => select(id), 80);
-    if (ai) enrich(id);
+    if (ai && !offline) enrich(id);
   }
 
   // ================= AI (asks Claude through the page) =================
