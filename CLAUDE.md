@@ -23,7 +23,8 @@ These notes load automatically at the start of every Claude Code session on this
 
 ## Memory and projects (rule)
 - Remember everything: read CLAUDE.md, `brain/log.md`, `learning/progress.md` and the relevant skill before acting, so I never repeat myself. Save new facts the same session.
-- My projects are connected, but never change another project just because one changed. Propose it and wait for my yes.
+- Autonomy (2026-10-17): make small, reversible improvements in any of my projects without asking. Ask first only for BIG changes: deleting anything, spending money, legal/licensing or data-source changes on a live site, redesigns, changing how my data is stored, publishing somewhere new, or anything hard to undo.
+- Every change must be visible and undoable: one change per commit with a clear message, a line in the app's Reports tab (`app/reports.json`, with the commit), and I can say "undo <change>" to revert it (git revert, never deleting history).
 - Take my instructions with caution and logic: if something conflicts or could break things, say so and suggest the safe version.
 
 ## Research (rule)

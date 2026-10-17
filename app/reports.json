@@ -1,6 +1,18 @@
 [
  {
   "d": "2026-10-17",
+  "type": "update",
+  "t": "New rule: Claude makes small reversible changes without asking; every change appears here with a link, and you can say \"undo\" to revert it. Big changes still need your yes."
+ },
+ {
+  "d": "2026-10-17",
+  "type": "fix",
+  "t": "Investedia: added the FRED notice that FRED's terms require to the site footer.",
+  "c": "b944767538a1b3f20cdca09d1e399dc7e2f97b61",
+  "repo": "hellaynr1/Investedia"
+ },
+ {
+  "d": "2026-10-17",
   "type": "research",
   "t": "Investedia data check: Yahoo data is used against Yahoo's terms; TradingView widgets also need an agreement for commercial use. Options recorded, awaiting your decision."
  },
