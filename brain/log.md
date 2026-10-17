@@ -3,6 +3,7 @@
 What we built and learned, newest first. Claude adds an entry at the end of every session.
 
 ## 2026-10-17
+- **Big research round (12 stars)**: Investedia (SEO spam rules, beehiiv vs Substack, market data licences, affiliate disclosure, young investors, Belgian ETF tax), AI (prompt caching, build an MCP server, evals, agents in practice), learning (deliberate practice, self-explanation). Research log + 4 new open questions.
 - **Research cycle**: Belgium finfluencer factsheet (ESMA, Jan 2026, official), Belgian influencer certificate, spaced retrieval (learning-tracker now schedules quizzes at 1/3/7 days), Morning Brew referral growth. 4 stars, research log updated.
 - **Autonomous research rule**: new `research-strategist` skill (gate → prioritize → max 3 quick searches → finding/evidence/implication/action/confidence → save), `memory/RESEARCH.md` research log with open questions, rule in CLAUDE.md. Balanced with the token rule: research only when it would change a decision.
 - **Milky Way galaxy (design C, chosen from 3 mockups)**: 4 logarithmic spiral arms (blue-white), golden bulge, halo, pink star-forming knots, a soft colored gas cloud per cluster; clusters now sit on the arms; more top-down camera, zoomed out on phones; quieter link lines; dust no longer rotates (so clusters stay on the arms). Particle count lower on phones. Brain view unchanged. Tested: smoke test + screenshots at 390px and desktop.

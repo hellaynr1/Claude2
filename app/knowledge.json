@@ -436,5 +436,181 @@
    "inv-newsletter"
   ],
   "url": "https://sparkloop.app/blog/the-secrets-behind-morning-brews-growth-to-2-million-newsletter-subscribers-6"
+ },
+ {
+  "id": "r-pseo",
+  "c": "research",
+  "t": "Programmatic SEO vs Google's scaled content abuse",
+  "d": "2026-10-17",
+  "s": "Template pages are fine only if each one adds real value. Google's spam policy targets many pages made mainly to rank, whether AI, people or a spreadsheet made them; manual actions started June 2025. No published page-count threshold.",
+  "x": [
+   "Investedia: each stock page needs something unique (plain-language 'why it moved', own chart notes), not just a filled template.",
+   "Recovering lost trust takes a long time (Mueller, reported)."
+  ],
+  "l": [
+   "inv-seo-pages"
+  ],
+  "url": "https://ppc.land/scaled-content-abuse/"
+ },
+ {
+  "id": "r-newsletter-platforms",
+  "c": "research",
+  "t": "beehiiv vs Substack",
+  "d": "2026-10-17",
+  "s": "Substack: free, takes 10% of paid subscriptions, strong discovery network. beehiiv: free up to ~2,500 subscribers, 0% of paid revenue, built-in referral program and ad network.",
+  "x": [
+   "For Investedia (referrals matter): beehiiv fits better; check current pricing on their sites."
+  ],
+  "l": [
+   "inv-newsletter",
+   "r-referral-newsletter"
+  ],
+  "url": "https://techradar.com/pro/software-services/beehiiv-review"
+ },
+ {
+  "id": "r-market-data-license",
+  "c": "research",
+  "t": "Market data licences: showing prices isn't automatically free",
+  "d": "2026-10-17",
+  "s": "A site that displays exchange data can count as a distributor and need an exchange agreement and fees. Real-time data is fee-liable; delayed (15 min) and end-of-day are cheaper but sometimes still licensed. Third-party APIs don't remove exchange fees.",
+  "x": [
+   "Investedia: read your data provider's terms on public display before scaling; prefer delayed or end-of-day data.",
+   "Not legal advice; rules differ per exchange."
+  ],
+  "l": [
+   "inv-signature-tool"
+  ],
+  "url": "https://www.xignite.com/exchange-agreements"
+ },
+ {
+  "id": "r-affiliate-disclosure",
+  "c": "research",
+  "t": "Affiliate links on a finance site",
+  "d": "2026-10-17",
+  "s": "Common model: clear disclosure ('I may earn a commission, at no cost to you') and marking which partners you actually reviewed. Broker affiliates can fall under the broker's regulator rules.",
+  "x": [
+   "EU specifics (MiFID II inducements, Unfair Commercial Practices) not yet researched: check before using broker affiliates.",
+   "Belgian factsheet: disclose any benefit openly."
+  ],
+  "l": [
+   "r-be-factsheet",
+   "inv-guardrails"
+  ],
+  "url": "https://financialexpertclass.com/affiliate-disclosure/"
+ },
+ {
+  "id": "r-genz-investors",
+  "c": "research",
+  "t": "What young investors want",
+  "d": "2026-10-17",
+  "s": "N26: Gen Z (18-29) assets grew 45% in H1 2026; 89% call themselves beginners; popular buys include NVIDIA, Rheinmetall, SpaceX. US survey: ~46% of Gen Z ETF investors hold crypto-themed ETFs. 84% see crypto as risky, yet ~65% plan to buy.",
+  "x": [
+   "Content pillars for Investedia: beginner basics, ETFs, big-name stocks explained, crypto risk in plain words."
+  ],
+  "l": [
+   "inv-niche"
+  ],
+  "url": "https://fintech.global/2026/08/26/n26-data-gen-z-leads-europes-investing-shift/"
+ },
+ {
+  "id": "r-be-etf-tax",
+  "c": "research",
+  "t": "Investing in ETFs from Belgium: taxes",
+  "d": "2026-10-17",
+  "s": "Stock-exchange tax (TOB) per buy and sell: 0.12% for most EEA-registered (Irish/Luxembourg) ETFs not registered in Belgium, 1.32% for Belgian-registered, 0.35% non-EEA. Distributing ETFs: 30% withholding on dividends (first ~833 euro exempt for 2026). That's why accumulating ETFs are popular.",
+  "x": [
+   "Check the fund's registration and your broker's applied rate; one source conflicts.",
+   "Bond funds: separate Reynders tax."
+  ],
+  "l": [
+   "r-genz-investors"
+  ],
+  "url": "https://curvo.eu/article/invest-etf-belgium"
+ },
+ {
+  "id": "r-prompt-caching",
+  "c": "research",
+  "t": "Prompt caching: reuse = ~90% cheaper",
+  "d": "2026-10-17",
+  "s": "Cached input reads cost ~0.1x the normal price; writing to the cache costs 1.25x (5 min) or 2x (1 hour). The 5-minute cache pays off after one reuse. Put stable parts (instructions, documents) first in the prompt.",
+  "x": [
+   "Figures from third-party docs; check Anthropic's pricing page.",
+   "Minimum cacheable length ~1024 tokens for most models."
+  ],
+  "l": [
+   "less-context"
+  ],
+  "url": "https://www.eesel.ai/blog/anthropic-api-pricing"
+ },
+ {
+  "id": "r-build-mcp",
+  "c": "research",
+  "t": "Build your own MCP server",
+  "d": "2026-10-17",
+  "s": "An MCP server exposes tools (e.g. search_brain, add_note) any MCP-capable AI can call. Official TypeScript SDK (Node 18+); local servers use stdio, remote ones HTTP (Streamable HTTP). Can run locally, in a container or as a serverless function.",
+  "x": [
+   "Next step for shared memory: a small server over knowledge.json + exported notes; free hosting options still to verify."
+  ],
+  "l": [
+   "r-mcp",
+   "tool-knowledge-feed"
+  ],
+  "url": "https://learn.microsoft.com/is-is/azure/developer/ai/build-mcp-server-ts"
+ },
+ {
+  "id": "r-evals",
+  "c": "research",
+  "t": "Evals: measure before you 'improve'",
+  "d": "2026-10-17",
+  "s": "Define specific, measurable success criteria, then test with many realistic cases and automated grading (code, model or human graders). More slightly-noisier automated tests beat a few hand-graded ones.",
+  "x": [
+   "Apply to my skills: 5-10 test prompts per skill, check outputs before and after a change."
+  ],
+  "l": [
+   "tool-smoke-test"
+  ],
+  "url": "https://docs.anthropic.com/en/docs/test-and-evaluate"
+ },
+ {
+  "id": "r-agents-practice",
+  "c": "lessons",
+  "t": "Agents in practice: start with a workflow",
+  "d": "2026-10-17",
+  "s": "Use a fixed workflow when steps are predictable; use an agent only when the task is open-ended and the tools are trusted. Agents cost more and are slower; add them when a workflow clearly fails.",
+  "x": [
+   "My setup follows this: systems/ = workflows, Claude Code sessions = agent."
+  ],
+  "l": [
+   "r-workflows-agents"
+  ]
+ },
+ {
+  "id": "r-deliberate-practice",
+  "c": "lessons",
+  "t": "Deliberate practice matters, but quality matters most",
+  "d": "2026-10-17",
+  "s": "Macnamara 2014 (88 studies): practice explained 26% of performance in games, 21% music, 18% sports, 4% education. Reanalyses find much more when practice is individualized and high-quality.",
+  "x": [
+   "For me: focused practice on weak spots with fast feedback (small builds, quizzes), not just hours."
+  ],
+  "l": [
+   "r-spaced-retrieval"
+  ],
+  "url": "https://www.sciencedaily.com/releases/2014/07/140716123835.htm"
+ },
+ {
+  "id": "r-self-explanation",
+  "c": "lessons",
+  "t": "Explain it to learn it",
+  "d": "2026-10-17",
+  "s": "Prompting learners to explain material in their own words gives a small-to-moderate learning boost (Bisra 2018 meta-analysis); preparing to teach also helps (protégé effect). The Feynman technique builds on this, though it has no direct studies.",
+  "x": [
+   "Use Talk: explain a topic back to Claude in plain words; gaps show what to relearn."
+  ],
+  "l": [
+   "r-spaced-retrieval",
+   "r-deliberate-practice"
+  ],
+  "url": "https://www.Gwern.net/doc/psychology/spaced-repetition/2018-bisra.pdf"
  }
 ]
