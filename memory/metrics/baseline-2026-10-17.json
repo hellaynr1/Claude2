@@ -1,0 +1,91 @@
+{
+ "generated": "2026-10-17T12:10:54+00:00",
+ "git_Claude2": {
+  "commits": 65,
+  "claude_commits": 65,
+  "fix_commits": 7
+ },
+ "git_Investedia": {
+  "commits": 83,
+  "claude_commits": 3,
+  "fix_commits": 0
+ },
+ "github_Claude2": {
+  "prs_total": 0,
+  "prs_merged": 0,
+  "ci": {
+   "smoke-test:None": 1,
+   "pages build and deployment:success": 39,
+   "smoke-test:success": 29,
+   "pages build and deployment:cancelled": 1
+  }
+ },
+ "github_Investedia": {
+  "prs_total": 0,
+  "prs_merged": 0,
+  "ci": {
+   "pages build and deployment:success": 70,
+   "Update market data and news:success": 20,
+   "Update calculator prices:success": 1,
+   "pages build and deployment:cancelled": 6,
+   "Update market data:success": 2,
+   "pages build and deployment:failure": 1
+  }
+ },
+ "transcript": {
+  "requests": 75,
+  "requests_with_commit": 44,
+  "lead_time_min_median": 1.0,
+  "lead_time_min_p90": 5.2,
+  "commit_tool_calls": 55,
+  "skill_invocations": {
+   "artifact-capabilities": 2,
+   "claude-api": 1
+  },
+  "system_files_touched": {
+   "brand-kit": 2,
+   "build-app": 2,
+   "sync-everything": 2,
+   "research-to-brain": 4,
+   "weekly-optimizer": 8,
+   "competitor-watch": 4,
+   "daily-research": 3
+  },
+  "owner_reported_problems": 8,
+  "problem_examples": [
+   [
+    "2026-10-17T06:33:06.802Z",
+    "i typed something and nothing came oyt"
+   ],
+   [
+    "2026-10-17T06:45:45.341Z",
+    "This session is being continued from a previous conversation that ran out of context. The "
+   ],
+   [
+    "2026-10-17T06:48:16.575Z",
+    "And then every day add it in everywhere where it's relevant that I have to, that I've lear"
+   ],
+   [
+    "2026-10-17T06:49:05.659Z",
+    "Don't make the learning process generic and easy for noobs. I'm intermediate, 20 years old"
+   ],
+   [
+    "2026-10-17T08:32:22.972Z",
+    "SECOND BRAIN — 19-MINUTE PRODUCT & ENGINEERING OPTIMIZATION\n\nROLE\n\nAct as a senior product"
+   ],
+   [
+    "2026-10-17T08:44:04.939Z",
+    "9-MINUTE SPRINT (stop when the window ends; partial but working beats complete but broken)"
+   ],
+   [
+    "2026-10-17T09:40:03.208Z",
+    "make it serious research on everything not no bs"
+   ],
+   [
+    "2026-10-17T09:53:46.871Z",
+    "it doesnt need my yes anymore unless it makes big changes make sure i can see every change"
+   ]
+  ],
+  "span_days": 1.69
+ }
+}

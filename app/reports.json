@@ -1,6 +1,12 @@
 [
  {
   "d": "2026-10-17",
+  "at": "2026-10-17T12:12:11+00:00",
+  "type": "update",
+  "t": "Workflow audit baseline from raw data (memory/metrics/AUDIT-2026-10-17.md) + metrics script (tools/metrics.py). Proposed: 5 workflows + 1 nightly run, waiting for your yes."
+ },
+ {
+  "d": "2026-10-17",
   "at": "2026-10-17T12:09:47+00:00",
   "type": "saving",
   "t": "Claude usage logged (memory/metrics/claude-usage.csv): weekly 67% used on Saturday, resets Wednesday 15:00."
