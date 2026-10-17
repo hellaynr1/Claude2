@@ -3,6 +3,7 @@
 What we built and learned, newest first. Claude adds an entry at the end of every session.
 
 ## 2026-10-17
+- **Web app UX fix**: typing a question in the box now gets an answer automatically (no need to switch to Ask); a "Connect Claude (free)" button stays at the top until you sign in to Puter.
 - **Web app Talk fix**: first iPhone test: the mic worked, Claude didn't answer (Puter sign-in popup was blocked). Now the sign-in opens when you tap Talk or save, Talk uses Claude Haiku 5.5 (fast) and Ask uses Claude Sonnet 5.5 via Puter, and errors show the real reason.
 - **Web app sync (free)**: notes, deletions and Learn progress sync between devices through a private file in the user's own Puter account (SecondBrain/sync.json); newest version of each note wins; syncs on save, on focus and every minute. Fixed a bug where the Notes list showed "[object HTMLButtonElement]" (web app and Claude page).
 - **Second Brain web app (free)** in `app/`: same app as the Claude page, but as a normal website so the microphone works. Claude through Puter.js (free account, no API key), notes stored in the browser, Export/Import, installable on iPhone (Add to Home Screen). Personal stars removed from this public build. Test link: https://raw.githack.com/hellaynr1/Claude2/main/app/index.html · permanent link once GitHub Pages is on: https://hellaynr1.github.io/Claude2/app/
