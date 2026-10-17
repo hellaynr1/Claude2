@@ -1,0 +1,177 @@
+{
+ "at": "2026-10-17T12:21:07.380Z",
+ "summary": {
+  "build": "6/6",
+  "research": "6/6",
+  "content": "6/6",
+  "learn": "5/5",
+  "close-out": "8/8"
+ },
+ "results": {
+  "build": [
+   {
+    "name": "single source builds the Claude page",
+    "ok": true,
+    "why": ""
+   },
+   {
+    "name": "every bug-log row names a test or 'manual'",
+    "ok": true,
+    "why": ""
+   },
+   {
+    "name": "Reports entries are valid",
+    "ok": true,
+    "why": ""
+   },
+   {
+    "name": "offline service worker is registered",
+    "ok": true,
+    "why": ""
+   },
+   {
+    "name": "no personal details in the public app",
+    "ok": true,
+    "why": ""
+   },
+   {
+    "name": "mic is released on hide and after answers",
+    "ok": true,
+    "why": ""
+   }
+  ],
+  "research": [
+   {
+    "name": "star ids are unique",
+    "ok": true,
+    "why": ""
+   },
+   {
+    "name": "stars have id/c/t/s",
+    "ok": true,
+    "why": ""
+   },
+   {
+    "name": "research stars state their source check",
+    "ok": true,
+    "why": ""
+   },
+   {
+    "name": "research stars link a source",
+    "ok": true,
+    "why": ""
+   },
+   {
+    "name": "research log rows have confidence and source",
+    "ok": true,
+    "why": ""
+   },
+   {
+    "name": "no forbidden strings in stars",
+    "ok": true,
+    "why": ""
+   }
+  ],
+  "content": [
+   {
+    "name": "2026-10-17: disclaimer present",
+    "ok": true,
+    "why": ""
+   },
+   {
+    "name": "2026-10-17: sources section",
+    "ok": true,
+    "why": ""
+   },
+   {
+    "name": "2026-10-17: compliance table all READY/PASS",
+    "ok": true,
+    "why": ""
+   },
+   {
+    "name": "2026-10-17: no advice phrasing in captions",
+    "ok": true,
+    "why": ""
+   },
+   {
+    "name": "2026-10-17/post-red-flags: 1080x1350 slides",
+    "ok": true,
+    "why": ""
+   },
+   {
+    "name": "2026-10-17/post-start-early: 1080x1350 slides",
+    "ok": true,
+    "why": ""
+   }
+  ],
+  "learn": [
+   {
+    "name": "progress has \"Today's objectives\"",
+    "ok": true,
+    "why": ""
+   },
+   {
+    "name": "progress has \"How I learn best\"",
+    "ok": true,
+    "why": ""
+   },
+   {
+    "name": "progress has \"Learned\"",
+    "ok": true,
+    "why": ""
+   },
+   {
+    "name": "progress has \"Learning now\"",
+    "ok": true,
+    "why": ""
+   },
+   {
+    "name": "spaced reviews wired in the app",
+    "ok": true,
+    "why": ""
+   }
+  ],
+  "close-out": [
+   {
+    "name": "contract complete: build.md",
+    "ok": true,
+    "why": ""
+   },
+   {
+    "name": "contract complete: close-out.md",
+    "ok": true,
+    "why": ""
+   },
+   {
+    "name": "contract complete: content.md",
+    "ok": true,
+    "why": ""
+   },
+   {
+    "name": "contract complete: learn.md",
+    "ok": true,
+    "why": ""
+   },
+   {
+    "name": "contract complete: nightly.md",
+    "ok": true,
+    "why": ""
+   },
+   {
+    "name": "contract complete: research.md",
+    "ok": true,
+    "why": ""
+   },
+   {
+    "name": "skills named in CLAUDE.md exist",
+    "ok": true,
+    "why": ""
+   },
+   {
+    "name": "log has today's or a recent entry",
+    "ok": true,
+    "why": ""
+   }
+  ]
+ }
+}

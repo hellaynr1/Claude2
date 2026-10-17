@@ -1,6 +1,6 @@
 # My AI learning progress
 
-Same topics and ids as the Learn tab in the Second Brain app. Updated by Claude after each lesson (see the `learning-tracker` skill).
+Same topics and ids as the Learn tab in the Second Brain app. Updated by Claude after each lesson (see the `learn` skill).
 
 ## Daily learning time
 - Goal: **20 minutes a day** (change it in the app: Learn → the "min a day" menu).

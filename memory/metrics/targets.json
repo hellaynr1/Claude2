@@ -1,0 +1,15 @@
+{
+ "baseline_date": "2026-10-17", "check_date": "2026-11-14",
+ "metrics": [
+  {"workflow": "nightly", "metric": "Nightly PRs reviewed within 48 h", "baseline": "no PRs yet", "now": "no PRs yet", "target": "≥80%", "source": "GitHub API"},
+  {"workflow": "content", "metric": "Content PRs merged", "baseline": "no PRs yet", "now": "no PRs yet", "target": "≥70%", "source": "GitHub API"},
+  {"workflow": "content", "metric": "Posts published per week", "baseline": "0", "now": "0", "target": "≥3", "source": "Instagram Insights export"},
+  {"workflow": "build", "metric": "Defects you found, per week", "baseline": "4 in 1.7 days", "now": "4 in 1.7 days", "target": "≤1", "source": "memory/BUGS.md"},
+  {"workflow": "build", "metric": "Fix commits share", "baseline": "11%", "now": "11%", "target": "≤8%", "source": "git history"},
+  {"workflow": "build", "metric": "Smoke + evals on main", "baseline": "29/29", "now": "pass", "target": "100%", "source": "GitHub Actions"},
+  {"workflow": "learn", "metric": "Topics learned", "baseline": "0", "now": "0", "target": "≥8", "source": "app export / progress.md"},
+  {"workflow": "learn", "metric": "Review pass rate", "baseline": "no data", "now": "no data", "target": "≥80%", "source": "app export"},
+  {"workflow": "research", "metric": "Findings with a primary source", "baseline": "see RESEARCH.md", "now": "see RESEARCH.md", "target": "≥70%", "source": "app/knowledge.json labels"},
+  {"workflow": "usage", "metric": "Weekly Claude usage", "baseline": "67% on Saturday", "now": "67%", "target": "≤85% at reset", "source": "usage screenshots"}
+ ]
+}

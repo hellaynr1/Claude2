@@ -492,7 +492,7 @@ button { cursor: pointer; }
     { id: "priorities", c: "lessons", t: "Must / Should / Could", d: "2026-10-15", s: "Sort tasks by how much they matter today; keep Must-dos to three.", x: [], l: [] },
     { id: "pomodoro", c: "lessons", t: "Focus sessions", d: "2026-10-15", s: "Work in 25-minute blocks with 5-minute breaks, and a long break after every fourth.", x: [], l: [] },
     { id: "goal-tracking", c: "lessons", t: "Goals need dates & steps", d: "2026-10-15", s: "A goal becomes trackable with a target date and milestones, so progress can be compared to time passed.", x: [], l: ["priorities"] },
-    { id: "claude-md", c: "lessons", t: "CLAUDE.md", d: "2026-10-16", s: "A file of standing instructions that loads at the start of every Claude Code session in that repo. Keep it short; put know-how in skills.", x: [], l: ["mcp-scopes"] }, { id: "ai-os", c: "systems", t: "My AI operating system", d: "2026-10-17", s: "Memory map (memory/README.md), decisions log, one file per project with the next step, context file for ChatGPT, and 3 sharp skills: personal-intelligence, full-stack-dev, reviewer. Few skills, good memory, verification.", x: [], l: ["claude-md"] },
+    { id: "claude-md", c: "lessons", t: "CLAUDE.md", d: "2026-10-16", s: "A file of standing instructions that loads at the start of every Claude Code session in that repo. Keep it short; put know-how in skills.", x: [], l: ["mcp-scopes"] }, { id: "ai-os", c: "systems", t: "My AI operating system", d: "2026-10-17", s: "Memory map (memory/README.md), decisions log, one file per project with the next step, context file for ChatGPT, and 5 workflow skills (build, research, content, learn, close-out) with contracts, one nightly run, evals and metrics. Few skills, good memory, verification.", x: [], l: ["claude-md"] },
     { id: "claude-memory", c: "lessons", t: "How Claude remembers", d: "2026-10-16", s: "Claude starts every chat with a blank memory. It only \"learns\" what we save into CLAUDE.md and skills, so saving is how I train it.", x: ["Better, not just bigger: short rules in CLAUDE.md, know-how in skills"], l: ["claude-md"] },
     { id: "auto-save", c: "lessons", t: "Save every session", d: "2026-10-16", s: "At the end of each session Claude saves what we built and learned to the setup repo and pushes it, so nothing is lost.", x: [], l: ["claude-memory"] },
     { id: "second-brain-apps", c: "research", t: "Second-brain apps", d: "2026-10-16", s: "Obsidian (graph view, backlinks), Logseq (free, daily journals), Reflect (daily notes, encryption), Mem (AI files notes for you), Notion (all-in-one for teams).", x: ["The big split: apps you organize by hand vs apps that organize themselves"], l: [] },
@@ -1067,7 +1067,10 @@ button { cursor: pointer; }
           el("div", { class: "row" }, el("div", { class: "week7", style: "width:140px", "aria-label": "Tokens, last 7 days" }, days.map(d => el("i", { class: "met", style: `height:${Math.max(3, (d.inTok + d.outTok) / max * 26)}px` }))), el("span", { class: "muted", text: `7 days: ~${num(sum("inTok") + sum("outTok"))}` })),
           el("div", { class: "row" }, el("span", { text: `⚡ Saved by smart context: ~${num(sum("saved"))} tokens (7 days)` })),
           el("span", { class: "muted", style: "font-size:11.5px", text: `Fast model on ${sum("calls") ? Math.round(sum("fast") / sum("calls") * 100) : 0}% of calls. Estimates on this device (~4 characters = 1 token).` }))),
-        el("div", { class: "panel-body" }, el("div", { class: "sub", text: "Updates, bug fixes & savings" }),
+        el("div", { class: "panel-body" },
+          targets ? [el("div", { class: "sub", text: `Targets · check ${targets.check_date}` }), targets.metrics.map(m => el("div", { class: "style-note", style: "padding:4px 16px;display:flex;justify-content:space-between;gap:10px" }, el("span", { text: m.metric }), el("b", { style: "white-space:nowrap", text: `${m.now} → ${m.target}` })))] : null,
+          evals ? el("div", { class: "style-note", style: "padding:4px 16px 8px", text: "Workflow evals: " + Object.entries(evals.summary).map(([k, v]) => `${k} ${v}`).join(" · ") }) : null,
+          el("div", { class: "sub", text: "Updates, bug fixes & savings" }),
           reports.length ? [el("div", { class: "style-note", style: "padding:2px 16px 6px", text: "Every change is one commit. Don't like one? Tell Claude \"undo\" + the change and it gets reverted." }), reports.slice(0, 60).map(r => el("div", { class: "style-note", style: "padding:5px 16px" }, `${ICON[r.type] || "•"} `, el("b", { text: (r.at ? new Date(r.at).toLocaleString([], { day: "2-digit", month: "short", year: "numeric", hour: "2-digit", minute: "2-digit" }) : r.d) + " " }), r.t, r.c ? [" · ", el("a", { href: `https://github.com/${r.repo || "hellaynr1/Claude2"}/commit/${r.c}`, target: "_blank", rel: "noopener", style: "color:var(--research)", text: "view change " + String(r.c).slice(0, 7) })] : null))] : el("div", { class: "style-note", style: "padding:5px 16px", text: "Reports appear here when Claude fixes or improves something." })));
       return;
     }
@@ -1330,7 +1333,9 @@ button { cursor: pointer; }
     w.json = async (inp, o) => { const r = await a.json(inp, o); rec(inp, r, o); return r; };
     return w;
   }
-  let reports = [];
+  let reports = [], targets = null, evals = null;
+  fetch("../memory/metrics/targets.json", { cache: "no-cache" }).then(r => r.ok ? r.json() : null).then(x => { targets = x; if (panel === "reports") drawPanel(); }).catch(() => {});
+  fetch("../memory/metrics/evals-latest.json", { cache: "no-cache" }).then(r => r.ok ? r.json() : null).then(x => { evals = x; if (panel === "reports") drawPanel(); }).catch(() => {});
   fetch("reports.json", { cache: "no-cache" }).then(r => r.ok ? r.json() : []).then(x => { reports = Array.isArray(x) ? x : []; if (panel === "reports") drawPanel(); }).catch(() => {});
   async function enrich(id, btn) {
     const u = userNodes[id]; if (!u || !ai) return;

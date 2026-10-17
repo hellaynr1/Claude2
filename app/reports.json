@@ -1,6 +1,12 @@
 [
  {
   "d": "2026-10-17",
+  "at": "2026-10-17T12:20:10+00:00",
+  "type": "update",
+  "t": "Workflow redesign: 5 workflows (build, research, content, learn, close-out) with contracts + 1 Nightly run (max 1 PR, skips while one is open); 2 extra runs paused; evals for every workflow run on each change; Targets now shown in Reports."
+ },
+ {
+  "d": "2026-10-17",
   "at": "2026-10-17T12:12:11+00:00",
   "type": "update",
   "t": "Workflow audit baseline from raw data (memory/metrics/AUDIT-2026-10-17.md) + metrics script (tools/metrics.py). Proposed: 5 workflows + 1 nightly run, waiting for your yes."

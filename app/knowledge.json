@@ -164,6 +164,7 @@
   "d": "2026-10-17",
   "s": "Explaining how investing works is allowed. Telling followers what to buy/sell, especially tailored to them, can be investment advice, which in Belgium needs FSMA authorization. EU market-abuse rules: say who you are, be objective, disclose conflicts (holdings, partners). Paid posts must be labeled.",
   "x": [
+   "Source check: PRIMARY (Wikifin, the FSMA's financial-education site).",
    "Investedia guardrails: education + examples, no 'buy X' calls, disclose own positions and sponsors, add 'not financial advice / for education'.",
    "Never promote unauthorized platforms or products: can make you complicit in fraud.",
    "Not legal advice: check FSMA's own guidance before monetizing."
@@ -180,6 +181,7 @@
   "d": "2026-10-17",
   "s": "ESMA and national supervisors state that anyone recommending investments on social media falls under the Market Abuse Regulation: identify yourself, present recommendations objectively, disclose interests. Breaches can mean fines or referral to prosecutors.",
   "x": [
+   "Source check: SECONDARY (ESMA statement as republished by a national regulator; see the Belgium factsheet for the primary source).",
    "Verified: ESMA published national finfluencer factsheets in Jan 2026, including one for Belgium (see 'Belgium finfluencer factsheet')."
   ],
   "l": [
@@ -413,6 +415,7 @@
   "d": "2026-10-17",
   "s": "Since October 2025 Belgium has a certificate for influencers who follow advertising and transparency rules, from the Jury for Ethical Practices in Advertising and the Influencer Marketing Alliance, with a public register.",
   "x": [
+   "Source check: SECONDARY (consumer-group article; check the official register).",
    "Could build trust for Investedia once it does sponsored content (reported by Test-Aankoop; check the official site)."
   ],
   "l": [
@@ -473,7 +476,7 @@
   "d": "2026-10-17",
   "s": "beehiiv (official pricing): free up to 2,500 subscribers, 0% of paid subscription revenue (Stripe fees apply), but the referral program needs a paid plan (Lite, from $49/mo billed annually). Substack: free to start; takes 10% of paid subscriptions (widely reported; its help page blocked our check).",
   "x": [
-   "Source check: beehiiv PRIMARY; Substack 10% secondary.",
+   "Source check: PRIMARY for beehiiv (pricing page); SECONDARY for Substack's 10%.",
    "Start free on either; referrals cost money on beehiiv."
   ],
   "l": [

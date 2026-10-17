@@ -19,5 +19,5 @@ Stats are third-party estimates (Semrush/others), not official, and dated differ
 5. **One signature free tool** (like Finviz's heat map), e.g. a "what moved today and why" page.
 Compliance: educate, don't advise (see research star "Finfluencer rules").
 
-## Watch list (repeat monthly with systems/competitor-watch.md)
+## Watch list (repeat monthly with systems/research.md)
 Track: traffic estimate, new features, top content formats, newsletter size, social follower counts.

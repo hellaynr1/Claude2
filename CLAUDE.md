@@ -28,11 +28,11 @@ These notes load automatically at the start of every Claude Code session on this
 - Take my instructions with caution and logic: if something conflicts or could break things, say so and suggest the safe version.
 
 ## Research (rule)
-- After any meaningful update, decide on my own whether research would change a decision; if yes, research it (max 3 quick searches, warn before more) and give finding · evidence · implication · action · confidence. Use the `research-strategist` skill; log in `memory/RESEARCH.md`. If the plan is already best, say so.
+- After any meaningful update, decide on my own whether research would change a decision; if yes, research it (max 3 quick searches, warn before more) and give finding · evidence · implication · action · confidence. Use the `research` skill; log in `memory/RESEARCH.md`. If the plan is already best, say so.
 
 ## Tools in this repo
 - `.mcp.json` adds the Playwright MCP server, so Claude can open and test web pages in a browser.
-- `.claude/skills/` holds custom skills. Each skill is a folder with a `SKILL.md` file: `daily-plan` (plan my day), `web-data` (free APIs and scraping), `video-notes` (read videos through their transcripts), `systems` (save and run my repeatable workflows in `systems/`), `learning-tracker` (my AI learning progress in `learning/progress.md`), `personal-intelligence` (memory routine), `full-stack-dev` (build/fix code), `reviewer` (self-review before important answers) and `research-strategist` (automatic research after updates).
+- `.claude/skills/` holds custom skills: `build`, `research`, `content`, `learn`, `close-out` (one per workflow in `systems/`) plus tools `daily-plan`, `web-data`, `video-notes`. **At the start of a matching task, load the skill with the Skill tool** (the audit found they were never loaded). Old skills: `.claude/skills-archive/`.
 - `memory/README.md` is the map of my AI operating system: projects, decisions, context for other AIs.
 
 ## My projects
@@ -44,8 +44,8 @@ These notes load automatically at the start of every Claude Code session on this
   When we learn something worth keeping, offer to add it here (in CLAUDE.md or a skill) and to the Second Brain.
 
 ## Everything in sync (rule)
-Whenever you build or change something for me, update all three at the same time: the Second Brain (galaxy stars), Google Drive (the right project folder) and this repo. Brand assets live in `brand/` and in Drive under `@ Guidify LLC / <brand> / Brand kit`. Repeatable workflows live in `systems/` (and `Systems.md` in the vault).
-- Always keep improving my teaching: track my daily learning time, adapt to how I learn (`learning/progress.md`), add new lessons as I progress (`learning-tracker` skill). The Daily optimizer proposes teaching upgrades every evening.
+Whenever you build or change something for me, update the repo and the Second Brain (stars/Reports) in the same session; Google Drive gets one weekly export on Sundays (changed 2026-10-17 after the audit: the every-change Drive rule wasn't followed). Brand assets live in `brand/` and in Drive under `@ Guidify LLC / <brand> / Brand kit`. Workflows live in `systems/` (5 workflows + 1 nightly run, each with a contract; see systems/README.md).
+- Always keep improving my teaching: track my daily learning time, adapt to how I learn (`learning/progress.md`), add new lessons as I progress (`learn` skill). The Daily optimizer proposes teaching upgrades every evening.
 - Everything must work well on phone and computer: run `node tests/smoke.js` after every app change.
 - Bugs: fix them immediately in sessions, log them in `memory/BUGS.md` and add a test so they never return. Unattended agents propose fixes as pull requests.
 - Automation: anything that runs without me (scheduled sessions) only prepares and proposes. I approve before any action (merge a pull request, or say yes).
@@ -54,7 +54,7 @@ Whenever you build or change something for me, update all three at the same time
 I want everything we build and learn kept. At the end of any session where we built, changed or learned something:
 1. Add a dated entry to `brain/log.md`: what we did, what I learned, links to anything published.
 2. Put new lessons and preferences in this file (short) and new how-tos in a skill under `.claude/skills/`.
-3. Save the latest source of any app you built for me in `projects/` (for example `projects/second-brain.html`, `projects/daybook.html`).
-4. Add new lessons, skills and tools to the Second Brain's built-in stars (the `BASE` list in `projects/second-brain.html`) and republish it to the same link.
+3. Second Brain source of truth is `app/index.html` (build the Claude page with `tools/build-claude-page.py`); other apps keep their latest source in `projects/`.
+4. New lessons, research and tools become stars in `app/knowledge.json` (no more edits to the old `projects/second-brain.html`).
 5. Commit and push to GitHub without asking. Tell me in one line what was saved.
 Keep this file lean: rules about me here, know-how in skills, history in `brain/log.md`.

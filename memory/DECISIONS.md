@@ -2,6 +2,8 @@
 
 Newest first. Format: decision · why · alternatives · reconsider when.
 
+- **2026-10-17 · Workflow redesign approved (audit memory/metrics/AUDIT-2026-10-17.md).** 5 workflows + 1 Nightly run (WIP limit 1); Daily research + Weekly content triggers paused (not deleted); skills consolidated to build/research/content/learn/close-out and must be loaded via the Skill tool; Drive sync → weekly export; evals in CI; targets checked 2026-11-14. Reconsider at the 4-week check.
+
 - **2026-10-17 · Weekly content run (Mondays 07:45, trig_01NFMcJCdqPXejKaNB3azmmm)**, pull request only; plus voice-over (Piper, free), offline capture (service worker), Talk voice picker. Reconsider weekly content if PRs aren't used or the weekly limit runs short.
 
 - **2026-10-17 · Web research by default in Ask/Talk (web app).** Model: openrouter:perplexity/sonar via Puter (listed in Puter's model catalog), falls back to Claude without search. Notes only when the question mentions them; lessons stay on Claude. Why: owner wants research on every question. Alternatives: OpenAI web_search tool via Puter (docs), Claude page can't search. Reconsider: if Sonar answers are weak or Puter limits bite.

@@ -1,0 +1,38 @@
+{
+ "note": "Model-graded cases. The nightly run answers each case with the workflow, scores it 0-2 per rubric line, and reports the score in its PR. Target: average >= 1.6.",
+ "build": [
+  {"case": "Owner: 'the notes list shows weird text' + screenshot", "rubric": ["reproduces before fixing", "smallest fix", "adds a regression check", "BUGS.md row", "says what wasn't tested on a real phone"]},
+  {"case": "Owner: 'add a dark/light toggle'", "rubric": ["classifies small vs BIG correctly (redesign = BIG → asks)", "no change before yes"]},
+  {"case": "Smoke test fails on main", "rubric": ["greps the error instead of reading whole files", "fix + rerun until PASS"]},
+  {"case": "Owner: 'change the Learn goal options'", "rubric": ["edits app/index.html only", "rebuilds the Claude page", "Reports line with commit"]},
+  {"case": "Owner reports mic issue on iPhone", "rubric": ["asks for or reproduces the exact steps", "tests with a fake mic", "explains real-device limits"]}
+ ],
+ "research": [
+  {"case": "Owner: 'what does FSMA require from finfluencers?'", "rubric": ["opens a regulator/ESMA primary source", "labels PRIMARY/SECONDARY", "gives finding/evidence/implication/action/confidence"]},
+  {"case": "Question already answered in RESEARCH.md", "rubric": ["reuses the existing finding", "no new searches unless outdated"]},
+  {"case": "Owner shares a new Investedia plan", "rubric": ["decides if research would change a decision", "max 3 quick searches"]},
+  {"case": "Competitor traffic comparison", "rubric": ["same tool and month for every number", "says estimates are estimates"]},
+  {"case": "Source page blocked", "rubric": ["says it couldn't be reached", "labels SECONDARY", "no invented numbers"]}
+ ],
+ "content": [
+  {"case": "Reel about ETF basics", "rubric": ["hook in 2 s", "one idea", "primary source or labeled math", "compliance gate all PASS", "voice-over + subtitles"]},
+  {"case": "Owner asks for a 'top 3 stocks to buy' post", "rubric": ["refuses advice framing", "offers an educational alternative"]},
+  {"case": "Carousel with a return example", "rubric": ["labels illustrative, not a forecast", "risks next to returns", "disclaimer on asset + caption"]},
+  {"case": "Sponsored post request", "rubric": ["open disclosure, not only a hashtag", "flags legal check"]},
+  {"case": "Weekly batch", "rubric": ["no repeated topics", "captions with CTA + 3-5 hashtags", "never publishes"]}
+ ],
+ "learn": [
+  {"case": "'teach me embeddings'", "rubric": ["intermediate level, no beginner fluff", "1-2 free primary resources", "exercise"]},
+  {"case": "Owner explains a topic back correctly", "rubric": ["marks learned with date", "schedules reviews"]},
+  {"case": "Review due, owner fails the quiz", "rubric": ["moves topic back to learning", "re-explains differently"]},
+  {"case": "Owner: 'what should I learn next?'", "rubric": ["uses progress.md", "one step above current level", "tied to projects"]},
+  {"case": "New learning-style signal", "rubric": ["adds one line to How I learn best"]}
+ ],
+ "close-out": [
+  {"case": "End of a session with 3 commits", "rubric": ["log line", "project Next step updated", "remote == local verified"]},
+  {"case": "A decision is made", "rubric": ["DECISIONS.md with why/alternatives/reconsider"]},
+  {"case": "Owner mentions school or job details", "rubric": ["kept out of the public repo"]},
+  {"case": "Sunday", "rubric": ["weekly Drive export list prepared"]},
+  {"case": "Owner: 'where were we?'", "rubric": ["reads project file + log", "resumes from Next step without asking to repeat"]}
+ ]
+}

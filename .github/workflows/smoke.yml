@@ -2,7 +2,7 @@
 name: smoke-test
 on:
   push:
-    paths: ["app/**", "tests/**"]
+    paths: ["app/**", "tests/**", "systems/**", "memory/**", "content/**", "learning/**", "CLAUDE.md", ".claude/**", "tools/**"]
   schedule:
     - cron: "15 18 * * *"
   workflow_dispatch:
@@ -15,3 +15,4 @@ jobs:
         with: { node-version: 20 }
       - run: npm i --no-save playwright@1.48.2 && npx playwright install --with-deps chromium
       - run: node tests/smoke.js
+      - run: node tests/evals/run.js

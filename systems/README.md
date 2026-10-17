@@ -1,19 +1,14 @@
-# Systems
+# Workflows (redesigned 2026-10-17 from the audit in memory/metrics/AUDIT-2026-10-17.md)
 
-A system is a saved, repeatable workflow: **roles** Claude plays, the **skills and tools** it combines, the exact **steps**, and what **done** looks like. Say "run the <name> system" and Claude follows it. Say "save this as a system" after a task you liked and Claude writes a new one here.
+Five workflows plus one nightly run. Each has a contract: inputs, outputs, failure modes, approval point, metric/target, kill criterion. Retired workflows are in `archive/` (moved, not deleted).
 
-Each system lives in its own file in this folder and appears as a star in the **Systems** color of the Second Brain. A copy of this list is kept in the Obsidian vault in Google Drive (`Systems.md`).
-
-| System | Use it for |
+| Workflow | Use it for |
 |---|---|
-| [brand-kit](brand-kit.md) | A full logo and social media asset kit for a brand |
-| [start-of-day](start-of-day.md) | One short plan: tasks, learning, decisions, pull requests |
-| [investedia-post](investedia-post.md) | Researched Investedia posts and short videos (draft only) |
-| [compliance-check](compliance-check.md) | Checking finance content against EU/Belgian finfluencer rules |
-| [ship-feature](ship-feature.md) | Adding or changing app features, tested and undoable |
-| [bug-fix](bug-fix.md) | Fixing a bug so it can't come back |
-| [weekly-content](weekly-content.md) | Every Monday: 3 Investedia pieces drafted as a pull request (on, 07:45) |
-| [build-app](build-app.md) | Building a new app (artifact) |
-| [sync-everything](sync-everything.md) | Saving work to the Second Brain, Google Drive and GitHub at once |
-| [research-to-brain](research-to-brain.md) | Researching a question and keeping the answer |
-| [weekly-optimizer](weekly-optimizer.md) | Daily self-improvement proposals as a pull request (on, 20:45) |
+| [build](build.md) | features, fixes and bugs in any project |
+| [research](research.md) | questions, updates, competitors (primary sources) |
+| [content](content.md) | Investedia posts/reels with the compliance gate |
+| [learn](learn.md) | lessons, progress, objectives, spaced reviews |
+| [close-out](close-out.md) | saving, memory, weekly Drive export |
+| [nightly](nightly.md) | the single scheduled run (1 PR max, WIP limit 1) |
+
+Tools (not workflows): daily-plan, video-notes, web-data skills; `content/investedia/tools/render.js`; `tools/metrics.py`; `tools/build-claude-page.py`.
