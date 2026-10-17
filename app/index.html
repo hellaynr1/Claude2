@@ -362,6 +362,13 @@ button { cursor: pointer; }
   .capture { width: calc(100vw - 24px); bottom: calc(10px + env(safe-area-inset-bottom, 0px)); }
   .capture-foot .hide-sm { display: none; }
 }
+.grip { display: none; }
+@media (max-width: 760px) {
+  .grip { display: block; flex: none; height: 22px; margin-bottom: -10px; touch-action: none; cursor: grab; position: relative; }
+  .grip::after { content: ""; position: absolute; left: 50%; top: 8px; width: 40px; height: 4px; margin-left: -20px; border-radius: 4px; background: rgba(255,255,255,.35); }
+  .panel.snap { transition: height .22s ease; }
+  body:has(#panel:not([hidden])) .viewtog { display: none; }
+}
 @media (prefers-reduced-motion: reduce) { .hint { transition: none; } }
 </style>
 
@@ -994,7 +1001,19 @@ button { cursor: pointer; }
   let noteQuery = "";
   const rowFor = n => el("button", { type: "button", class: "row-btn", style: `--c:${CLUSTERS[n.c].css}`, "aria-current": n.id === selected ? "true" : null, onclick: () => select(n.id) },
     el("span", { class: "dot" }), el("span", { class: "t", text: n.t }), el("small", { text: n.user ? ago(n.updated || n.created || Date.now()) : CLUSTERS[n.c].name }));
-  function drawPanel() {
+  // Mobile bottom sheet: drag the handle to see more of the brain, flick down to close
+  function drawPanel() { drawPanel0(); const p = $("#panel"); if (p.hidden) return; addGrip(p); }
+  function addGrip(p) {
+    const g = el("div", { class: "grip", role: "separator", "aria-label": "Drag to resize, drag down to close" });
+    const vh = () => innerHeight / 100, h0 = ls.get("sb.sheetH", 52);
+    if (matchMedia("(max-width: 760px)").matches) p.style.height = h0 + "vh";
+    let y0 = 0, start = 0, cur = h0;
+    g.addEventListener("pointerdown", e => { y0 = e.clientY; start = p.getBoundingClientRect().height / vh(); cur = start; p.classList.remove("snap"); g.setPointerCapture(e.pointerId); });
+    g.addEventListener("pointermove", e => { if (!g.hasPointerCapture(e.pointerId)) return; cur = Math.max(8, Math.min(78, start + (y0 - e.clientY) / vh())); p.style.height = cur + "vh"; });
+    g.addEventListener("pointerup", () => { p.classList.add("snap"); if (cur < 18) { p.style.height = ""; setPanel(null); return; } const snapH = [28, 52, 78].reduce((a, b) => Math.abs(b - cur) < Math.abs(a - cur) ? b : a); p.style.height = snapH + "vh"; ls.set("sb.sheetH", snapH); });
+    p.prepend(g);
+  }
+  function drawPanel0() {
     const p = $("#panel");
     if (!panel) { p.hidden = true; return; }
     p.hidden = false;

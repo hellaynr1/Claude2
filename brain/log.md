@@ -3,6 +3,7 @@
 What we built and learned, newest first. Claude adds an entry at the end of every session.
 
 ## 2026-10-17
+- **Mobile bottom sheet**: on the phone, panels (Learn, Notes, Today…) have a drag handle: drag down to see more of the brain, up for more panel, flick down to close. Snaps to 3 heights and remembers yours. (web app + Claude page v15)
 - **Teaching level raised**: intermediate adult learner, basic → intermediate, compact but complete lessons with 1–2 free online resources each. Updated CLAUDE.md, learner profile, `learning-tracker` skill, and the app's Teach/Ask/lesson prompts (web app + Claude page v14).
 - **New rules**: daily learning objectives (3 per day, fast-progress level) in `learning/progress.md`; be token-efficient by default and warn before token-heavy work; remember everything and never change a connected project without asking; read instructions with caution and logic.
 - **Daily learning time + teaching that adapts** (Claude page v13 + web app): Learn tab shows today's minutes vs a daily goal (20 min, adjustable), a 🔥 streak and the last 7 days; time counts in Learn, Talk and lessons while you're active, synced between devices. Claude writes short notes on how you learn best and uses them in every lesson (visible in Learn, can be cleared). When fewer than 6 topics are left, Claude adds 3 new lessons (max once a day). The Daily optimizer now also proposes teaching upgrades each evening. New rules: always improve the teaching; always test phone + computer. Tested at 390px and desktop.
