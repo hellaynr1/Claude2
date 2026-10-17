@@ -62,4 +62,5 @@ Labels: verified · inference · hypothesis · unknown. Source check per finding
 |---|---|---|---|
 | 2026-10-17 | Fast model (Haiku) by default for Ask | Typical Ask ~1,100 input tokens; quality not yet judged by owner | Owner feedback after a week |
 | 2026-10-17 | Weekly review in the app | Works in tests; no real-use data yet | Check suggestions quality after first real run |
+| 2026-10-17 | Spaced review card in Learn (1/3/7/21 days, self-graded) | Works in tests; reviews saved per device (not synced yet) | Owner use; sync later if useful |
 | 2026-10-17 | Milky Way galaxy (design C) | Looks right at 390px + desktop in tests | Owner check on iPhone (smoothness) |

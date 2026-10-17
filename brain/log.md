@@ -3,6 +3,7 @@
 What we built and learned, newest first. Claude adds an entry at the end of every session.
 
 ## 2026-10-17
+- **Spaced review in Learn**: learned topics return for a quiz after 1/3/7/21 days ('Quiz me', ✓, ✗). Smoke test extended; it caught a name clash before release. Research: news headline rules (EU art. 15), official Reels ranking.
 - **Autonomy rule**: small reversible changes without asking, big ones need a yes; every change is one commit, listed in Reports with a 'view change' link; 'undo <change>' reverts it. First use: FRED notice on Investedia (commit b944767). The Yahoo data switch counts as big (legal/data source on a live site) and still waits for the owner.
 - **Investedia data terms verified**: the site's scripts collect Yahoo Finance data automatically and republish it, which Yahoo's terms forbid. Checked official terms of Yahoo, FRED, TradingView widgets, CoinGecko, Twelve Data. Then TradingView's Terms of Use: no commercial use without an agreement, so the proposal was corrected: widgets only after TradingView's written OK while non-commercial; paid display licence once monetized. Recorded in RESEARCH, DECISIONS, project file.
 - **Research system complete**: added Rejected approaches (DECISIONS.md) and Experiments (RESEARCH.md) so the brief's memory categories are all tracked.

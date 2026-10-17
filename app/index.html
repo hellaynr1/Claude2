@@ -1092,7 +1092,14 @@ button { cursor: pointer; }
         el("div", { class: "row" }, el("div", { class: "week7", "aria-label": "Minutes learned, last 7 days", style: "width:120px" }, week.map(sec => el("i", { class: sec >= learnGoal * 60 ? "met" : "", style: `height:${Math.max(3, Math.min(26, sec / (learnGoal * 60) * 26))}px` }))), goalSel),
         el("span", { class: "muted", style: "font-size:11.5px", text: "Counts time in Learn, Talk and lessons while you're active." }));
       maybeNewTopics();
-      p.replaceChildren(el("div", { class: "panel-head" }, el("h2", { text: "Learn AI & Claude" }), clock,
+      const due = Object.entries(reviews).filter(([id, r]) => r.due <= Date.now() && learned.has(id) && byId.has(id));
+      const revBox = due.length ? el("div", { class: "learn-clock", id: "review-due", style: "background:rgba(95,214,255,.07);border-color:rgba(95,214,255,.3)" },
+        el("div", { class: "row" }, el("b", { text: `Review due · ${due.length}` }), el("span", { class: "muted", style: "font-size:11.5px", text: "A quick quiz locks it in" })),
+        due.slice(0, 3).map(([id]) => el("div", { class: "row" }, el("span", { text: byId.get(id).t }), el("span", { style: "display:flex;gap:6px" },
+          el("button", { type: "button", class: "btn small", text: "Quiz me", onclick: () => ask(`Quiz me on "${byId.get(id).t}": 2 short questions at my level. Don't give the answers until I reply, then tell me if I got them right.`) }),
+          el("button", { type: "button", class: "btn small", "aria-label": "I got it right", title: "I got it right", text: "✓", onclick: () => reviewTopic(id, true) }),
+          el("button", { type: "button", class: "btn small", "aria-label": "Review again", title: "Review again", text: "✗", onclick: () => reviewTopic(id, false) }))))) : null;
+      p.replaceChildren(el("div", { class: "panel-head" }, el("h2", { text: "Learn AI & Claude" }), clock, revBox,
           el("p", { text: `You know ${done} of ${steps.length} topics · learning ${now.length} now` }), el("div", { class: "progress", role: "img", "aria-label": pct + "% learned" }, el("i", { style: `width:${pct}%` })),
           next ? el("div", { class: "toolrow" }, el("button", { type: "button", class: "btn small primary", onclick: () => teach(next) }, el("span", { text: "✦" }), (learning.has(next.id) ? "Continue: " : "Next: ") + next.t)) : el("p", { text: "You know every topic on the path. Ask Claude for the next level any time." }),
           el("p", { style: "font-size:12px", text: "Claude marks topics as learning when it teaches you and learned when you show you've got it. Tap a circle to change it yourself." })),
@@ -1483,13 +1490,21 @@ ${contextFor(question, opts.talk ? 6 : 14)}`;
 
   // ----- Learn -----
   let learned = new Set(ls.get("sb.learned", [])), learning = new Set(ls.get("sb.learning", [])), metaRef = null;
+  // Spaced review: quiz learned topics after 1, 3, 7 and 21 days (spaced retrieval beats rereading)
+  let reviews = ls.get("sb.reviews", {}); const IV = [1, 3, 7, 21];
+  function reviewTopic(id, ok) {
+    const r = reviews[id]; if (!r) return;
+    if (ok) { r.stage++; if (r.stage >= IV.length) { delete reviews[id]; toast("Mastered: no more reviews for this topic"); } else { r.due = Date.now() + IV[r.stage] * 864e5; toast(`Nice. Next review in ${IV[r.stage]} days`); } }
+    else { r.stage = 0; r.due = Date.now() + 864e5; learned.delete(id); learning.add(id); ls.set("sb.learned", [...learned]); ls.set("sb.learning", [...learning]); toast("Back to learning. Review again tomorrow"); }
+    ls.set("sb.reviews", reviews); drawPanel();
+  }
   let learnTime = ls.get("sb.learnTime", {}), learnGoal = ls.get("sb.learnGoal", 20), learnStyle = ls.get("sb.learnStyle", []), teachUntil = 0;
   const secToday = () => learnTime[dayKey()] || 0;
   function streakDays() { let n = 0; const goal = learnGoal * 60; for (let i = (secToday() >= goal ? 0 : 1); i < 400; i++) { const d = new Date(); d.setDate(d.getDate() - i); if ((learnTime[dayKey(d)] || 0) >= goal) n++; else break; } return n; }
   function saveLearnMeta() { ls.set("sb.learnTime", learnTime); ls.set("sb.learnGoal", learnGoal); ls.set("sb.learnStyle", learnStyle); scheduleSync(); if (metaRef) metaRef.set({ learned: [...learned], learning: [...learning], learnTime, learnGoal, learnStyle, updatedAt: Date.now() }).catch(() => {}); }
   function setProgress(id, status) {
     if (!byId.has(id)) return false;
-    if (status === "learned") { if (learned.has(id)) return false; learned.add(id); learning.delete(id); }
+    if (status === "learned") { if (learned.has(id)) return false; learned.add(id); learning.delete(id); if (!reviews[id]) { reviews[id] = { stage: 0, due: Date.now() + 864e5 }; ls.set("sb.reviews", reviews); } }
     else if (status === "learning") { if (learned.has(id) || learning.has(id)) return false; learning.add(id); }
     else { learned.delete(id); learning.delete(id); }
     ls.set("sb.learned", [...learned]); ls.set("sb.learning", [...learning]); scheduleSync();

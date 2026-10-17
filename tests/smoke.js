@@ -49,6 +49,21 @@ const MOCK = `window.puter={auth:{isSignedIn:()=>true,signIn:async()=>{}},fs:{re
     check(errs.length === 0, "data test page errors: " + errs.join(" | "));
     await p.close();
   }
+  // Spaced review: a due topic shows in Learn, ✓ schedules the next review
+  {
+    const p = await b.newPage({ viewport: { width: 390, height: 844 }, isMobile: true, hasTouch: true }), errs = [];
+    p.on("pageerror", e => errs.push(e.message));
+    await p.route("https://js.puter.com/**", r => r.fulfill({ contentType: "application/javascript", body: MOCK }));
+    await p.addInitScript(() => { localStorage.setItem("sb.learned", JSON.stringify(["prompting"])); localStorage.setItem("sb.reviews", JSON.stringify({ prompting: { stage: 0, due: 0 } })); });
+    await p.goto(url); await p.waitForTimeout(2500);
+    await p.evaluate(() => [...document.querySelectorAll("button")].find(x => x.textContent.trim().startsWith("Learn")).click()); await p.waitForTimeout(400);
+    check((await p.textContent("#review-due").catch(() => "")).includes("Review due"), "review card missing in Learn");
+    await p.click("#review-due button[aria-label='I got it right']"); await p.waitForTimeout(300);
+    const rv = await p.evaluate(() => JSON.parse(localStorage.getItem("sb.reviews")));
+    check(rv.prompting && rv.prompting.stage === 1 && rv.prompting.due > Date.now() + 2 * 864e5, "review not rescheduled: " + JSON.stringify(rv));
+    check(errs.length === 0, "review test page errors: " + errs.join(" | "));
+    await p.close();
+  }
   await b.close(); server.close();
   console.log(fails.length ? "FAIL\n- " + fails.join("\n- ") : "PASS"); process.exit(fails.length ? 1 : 0);
 })().catch(e => { console.log("FAIL\n- test crashed: " + e.message); process.exit(1); });
