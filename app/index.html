@@ -1118,21 +1118,21 @@ button { cursor: pointer; }
   });
   // ----- Voice: try the browser's speech recognition first, fall back to the keyboard's mic -----
   const SR = window.SpeechRecognition || window.webkitSpeechRecognition;
-  let micBlocked = ls.get("sb.micBlocked", false), rec = null;
+  let micBlocked = false, rec = null; try { localStorage.removeItem("sb.micBlocked"); } catch {}
   const isMac = /Mac/.test(navigator.platform || "") && !("ontouchend" in document);
   const keyboardHint = () => isMac ? "Mic blocked here: press Fn twice to dictate, then Enter" : ("ontouchend" in document ? "Tap the 🎤 on your keyboard, speak, then press send" : "Press Windows + H to dictate, then Enter");
   function dictate(target, btn, onFinal) {
     if (rec) { try { rec.stop(); } catch {} return; }
     const fallback = () => { target.focus(); try { target.setSelectionRange(target.value.length, target.value.length); } catch {} toast(keyboardHint()); };
     if (!SR || micBlocked) return fallback();
-    let r; try { r = new SR(); } catch { micBlocked = true; ls.set("sb.micBlocked", true); return fallback(); }
+    let r; try { r = new SR(); } catch { micBlocked = true; return fallback(); }
     rec = r; const base = target.value ? target.value.replace(/\s*$/, " ") : "";
     r.lang = navigator.language || "en-US"; r.interimResults = true; r.continuous = false; r.maxAlternatives = 1;
     btn.classList.add("live"); target.placeholder = "Listening…";
     r.onresult = e => { let txt = ""; let fin = false; for (let i = 0; i < e.results.length; i++) { txt += e.results[i][0].transcript; if (e.results[i].isFinal) fin = true; } target.value = base + txt; target.dispatchEvent(new Event("input")); if (fin && onFinal) onFinal(); };
-    r.onerror = e => { if (["not-allowed", "service-not-allowed", "audio-capture"].includes(e.error)) { micBlocked = true; ls.set("sb.micBlocked", true); fallback(); } else if (e.error !== "no-speech" && e.error !== "aborted") toast("Didn't catch that. Tap the mic and try again."); };
+    r.onerror = e => { if (["not-allowed", "service-not-allowed", "audio-capture"].includes(e.error)) { micBlocked = true; fallback(); } else if (e.error !== "no-speech" && e.error !== "aborted") toast("Didn't catch that. Tap the mic and try again."); };
     r.onend = () => { rec = null; btn.classList.remove("live"); setMode(capMode); talkText.placeholder = "Tap the mic and speak…"; };
-    try { r.start(); } catch { rec = null; btn.classList.remove("live"); micBlocked = true; ls.set("sb.micBlocked", true); fallback(); }
+    try { r.start(); } catch { rec = null; btn.classList.remove("live"); micBlocked = true; fallback(); }
   }
   $("#mic-tip").addEventListener("click", e => dictate(cap, e.currentTarget, () => { if (cap.value.trim()) capForm.requestSubmit(); }));
 
