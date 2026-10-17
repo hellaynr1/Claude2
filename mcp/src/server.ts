@@ -5,10 +5,15 @@ import { createMcpHandler } from "agents/mcp/server";
 import { z } from "zod";
 
 const RAW = "https://raw.githubusercontent.com/hellaynr1/Claude2/main/";
+const API = "https://api.github.com/repos/hellaynr1/Claude2/contents/";
 type Star = { id: string; c: string; t: string; d?: string; s: string; x?: string[]; l?: string[]; url?: string };
+let TOKEN = "";  // set from env per request; a read-only GitHub token is needed once the repo is private
 
 async function file(path: string): Promise<string> {
-  const r = await fetch(RAW + path, { cf: { cacheTtl: 300 } } as RequestInit);
+  // Private repo: GitHub API with a read-only token (secret GITHUB_TOKEN). Public repo: raw file link.
+  const r = TOKEN
+    ? await fetch(API + path, { headers: { Authorization: `Bearer ${TOKEN}`, Accept: "application/vnd.github.raw+json", "User-Agent": "second-brain-mcp" }, cf: { cacheTtl: 300 } } as RequestInit)
+    : await fetch(RAW + path, { cf: { cacheTtl: 300 } } as RequestInit);
   if (!r.ok) throw new Error(`Couldn't read ${path} (${r.status})`);
   return r.text();
 }
@@ -54,7 +59,8 @@ function createServer() {
 }
 
 export default {
-  fetch(request: Request, env: unknown, ctx: ExecutionContext) {
+  fetch(request: Request, env: { GITHUB_TOKEN?: string }, ctx: ExecutionContext) {
+    TOKEN = env.GITHUB_TOKEN || "";
     return createMcpHandler(createServer)(request, env, ctx);
   }
 } satisfies ExportedHandler;

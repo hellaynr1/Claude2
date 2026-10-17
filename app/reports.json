@@ -1,6 +1,12 @@
 [
  {
   "d": "2026-10-17",
+  "at": "2026-10-17T14:03:00+00:00",
+  "type": "update",
+  "t": "MCP server ready for the private repo: reads through GitHub with a read-only token (steps in mcp/README.md); still works on the public repo."
+ },
+ {
+  "d": "2026-10-17",
   "at": "2026-10-17T13:41:00+00:00",
   "type": "update",
   "t": "Going private: step-by-step guide ready (memory/projects/private-setup.md). CI now runs Chromium on every change and WebKit nightly, to fit private-repo free minutes."
