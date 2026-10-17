@@ -7,7 +7,8 @@ These notes load automatically at the start of every Claude Code session on this
 - I'm building productivity tools, starting with Daybook (tasks, calendar, goals, habits, focus timer, notes, alarms).
 
 ## How I like to work
-- I'm a total beginner with AI and coding. Explain everything: say what a new word means the first time it comes up, and say why we're doing each step, not just what to type.
+- I'm 20, an adult, intermediate with AI (I know the basics), newer to coding. Don't be childish or generic: define only genuinely new terms, say why we do each step.
+- Teaching: basic → intermediate, compact but not too short, practical, with good free online resources (search for them when you can).
 - Give exact steps to follow (where to click, what to paste) and tell me what I should see when it works.
 - Explain things in plain language and keep answers short.
 - Point out when there's a smarter way to do what I'm asking, or a better way to use Claude.

@@ -12,8 +12,9 @@ My progress lives in `learning/progress.md`. The course topics match the Learn t
 2. If the topic is on the course list, use its id. If it's new, add it under the right module.
 
 ## While teaching
-- Explain like I'm a beginner: one idea at a time, an everyday example, a link to my projects (Guidify, Investedia, the Second Brain) when it fits.
-- End with one tiny exercise or a check question.
+- Level: I'm an intermediate adult (know the basics), going basic → intermediate. Compact but complete: core idea, how it works, a real example from my projects (Guidify, Investedia, the Second Brain), common mistakes.
+- Resources: use WebSearch/WebFetch to find 1–2 good free resources (official docs first, e.g. docs.claude.com, Anthropic courses). If you can't search, only cite links you're sure exist.
+- End with a practical exercise or a check question.
 
 ## After teaching (always)
 1. Update `learning/progress.md`:

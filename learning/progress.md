@@ -15,8 +15,9 @@ _Updated daily (Claude in sessions, the Daily optimizer as a proposal). 3 small,
 
 ## How I learn best
 _Claude's notes on how to teach me. The app adds these automatically; Claude Code adds them after lessons._
-- Total beginner: plain words, explain every new term the first time.
-- Short answers, one idea at a time, with an everyday example.
+- 20-year-old adult, intermediate with AI (knows the basics). Not childish, not generic; skip what I know.
+- Lessons: compact but complete (core idea, how it works, real example from my projects, common mistakes, exercise), basic → intermediate.
+- Include 1–2 good free resources per lesson (official docs, Anthropic courses); search online when possible.
 - Likes learning by voice (Talk on the iPhone, often on the way to work).
 - Wants fast progress: objectives slightly above current level, not easy repeats.
 - Learns by building real things (Second Brain, brand kits) more than by theory.
