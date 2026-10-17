@@ -26,6 +26,9 @@ These notes load automatically at the start of every Claude Code session on this
 - My Obsidian vault in Google Drive is my main notes system (projects, planning, journal). Check it for context about my businesses.
   When we learn something worth keeping, offer to add it here (in CLAUDE.md or a skill) and to the Second Brain.
 
+## Everything in sync (rule)
+Whenever you build or change something for me, update all three at the same time: the Second Brain (galaxy stars), Google Drive (the right project folder) and this repo. Brand assets live in `brand/` and in Drive under `@ Guidify LLC / <brand> / Brand kit`.
+
 ## Auto-save (every session)
 I want everything we build and learn kept. At the end of any session where we built, changed or learned something:
 1. Add a dated entry to `brain/log.md`: what we did, what I learned, links to anything published.

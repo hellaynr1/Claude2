@@ -3,6 +3,10 @@
 What we built and learned, newest first. Claude adds an entry at the end of every session.
 
 ## 2026-10-17
+- **Investedia brand kit** (https://claude.ai/artifact/CZhqQatKudTSVtbeKQSKYp): 25 assets from the investedia.com logo: logos, profile pictures, icons, banners, website share image, 5 highlight covers, 4 post templates, story template, guidelines. PNG + SVG in `brand/investedia/`. Drive folder `@ Guidify LLC / Investedia / Brand kit` has the icon, app icon, favicon and profile picture; the page's button uploads the rest.
+- **Talk mic**: tapping the mic tries instant voice typing and falls back to keyboard dictation. Talk sends when you stop speaking and listens again after answering.
+- Removed the NBU and Pinterest drafts. Guidify assets wait for the owner's pictures.
+- New rule: update the Second Brain, Google Drive and this repo at the same time.
 - **Second Brain v3** (same link): Galaxy ⇄ Brain switch (a real 3D particle brain with one region per color), cleaner design with the Geist font and no big title, Key panel explaining every color, Today's notes journal with my daily template, Learn AI course (15 steps with progress and "Teach me" mini lessons), Talk mode (dictate, Claude answers out loud), two new colors: Learn AI and Brand & assets.
 - Found my Obsidian vault in Google Drive and added my businesses (Guidify, Investedia), plus draft brand stars (logos still to confirm).
 - Limits: a web page can't use the microphone directly, so Talk uses keyboard dictation. For fully hands-free talking, the Claude mobile app's voice mode is the best option.

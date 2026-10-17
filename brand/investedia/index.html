@@ -1,0 +1,205 @@
+<title>Investedia Brand Kit</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@500;600&family=Inter:wght@400;500;600&family=Geist+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: the brand's own black canvas. A sticky action bar, then the palette, then asset groups as galleries of cards. Single dark theme on purpose: it's the brand. */
+:root {
+  color-scheme: dark;
+  --ink: #0A0A0B; --carbon: #141416; --card: #1A1A1D; --graphite: #2A2A2E;
+  --amber: #FEA501; --orange: #FF7A1A; --white: #FFFFFF; --mist: #D4D4D8; --slate: #8A8A93; --good: #22C55E; --bad: #F04444;
+  --display: "Poppins", "Avenir Next", system-ui, sans-serif;
+  --body: "Inter", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --mono: "Geist Mono", ui-monospace, Menlo, monospace;
+}
+* { box-sizing: border-box; }
+[hidden] { display: none !important; }
+body { margin: 0; background: var(--ink); color: var(--mist); font-family: var(--body); font-size: 15px; line-height: 1.5;
+  padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); padding-block: 0 60px; }
+button { font: inherit; color: inherit; cursor: pointer; }
+:focus-visible { outline: 2px solid var(--amber); outline-offset: 2px; }
+.wrap { max-width: 1200px; margin: 0 auto; display: grid; gap: 40px; }
+.bar { position: sticky; top: env(safe-area-inset-top, 0px); z-index: 5; background: rgba(10, 10, 11, .86); backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px); border-bottom: 1px solid var(--graphite); margin: 0 calc(-1 * max(16px, env(safe-area-inset-left, 0px))); padding: 12px max(16px, env(safe-area-inset-left, 0px)); }
+.bar-in { max-width: 1200px; margin: 0 auto; display: flex; align-items: center; gap: 14px; flex-wrap: wrap; }
+.bar img { height: 30px; width: auto; }
+.bar .sp { flex: 1; }
+.btn { border: 1px solid var(--graphite); background: var(--card); border-radius: 10px; padding: 9px 14px; font-weight: 500; font-size: 14px; display: inline-flex; gap: 8px; align-items: center; white-space: nowrap; }
+.btn:hover { border-color: #3a3a40; }
+.btn.primary { background: var(--amber); color: var(--ink); border-color: var(--amber); font-weight: 600; }
+.btn.primary:disabled { opacity: .6; cursor: progress; }
+.btn svg { width: 16px; height: 16px; }
+.hero { display: grid; grid-template-columns: minmax(0, 1.3fr) minmax(0, 1fr); gap: 32px; align-items: center; padding-top: 32px; }
+.hero h1 { font-family: var(--display); font-weight: 600; color: var(--white); font-size: clamp(34px, 5vw, 56px); line-height: 1.05; letter-spacing: -.02em; margin: 0 0 12px; text-wrap: balance; }
+.hero h1 i { font-style: normal; color: var(--amber); }
+.hero p { margin: 0; max-width: 56ch; font-size: 16px; }
+.hero .meta { margin-top: 14px; font-family: var(--mono); font-size: 12px; color: var(--slate); display: flex; gap: 14px; flex-wrap: wrap; }
+.hero img { width: 100%; max-width: 100%; border-radius: 22px; border: 1px solid var(--graphite); }
+@media (max-width: 760px) { .hero { grid-template-columns: minmax(0, 1fr); } }
+.status { border: 1px solid var(--graphite); background: var(--carbon); border-radius: 14px; padding: 14px 16px; display: grid; gap: 8px; }
+.status b { color: var(--white); font-weight: 600; }
+.status .row { display: flex; justify-content: space-between; gap: 10px; flex-wrap: wrap; font-size: 14px; }
+.prog { height: 6px; background: var(--graphite); border-radius: 999px; overflow: hidden; }
+.prog i { display: block; height: 100%; width: 0; background: var(--amber); transition: width .3s; }
+.status a { color: var(--amber); }
+h2 { font-family: var(--display); font-weight: 600; color: var(--white); font-size: 24px; letter-spacing: -.01em; margin: 0; }
+.sec-head { display: flex; align-items: baseline; justify-content: space-between; gap: 12px; flex-wrap: wrap; margin-bottom: 16px; }
+.sec-head p { margin: 0; color: var(--slate); font-size: 14px; }
+.palette { display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 12px; }
+.sw { border: 1px solid var(--graphite); background: var(--card); border-radius: 14px; overflow: hidden; text-align: left; padding: 0; }
+.sw span.c { display: block; height: 76px; }
+.sw div { padding: 10px 12px; display: grid; gap: 2px; }
+.sw b { color: var(--white); font-weight: 600; font-size: 14px; }
+.sw code { font-family: var(--mono); font-size: 12px; color: var(--slate); }
+.sw small { font-size: 12px; color: var(--slate); }
+.grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 16px; }
+.grid.wide { grid-template-columns: repeat(auto-fill, minmax(340px, 1fr)); }
+@media (max-width: 420px) { .grid, .grid.wide { grid-template-columns: minmax(0, 1fr); } }
+.card { background: var(--card); border: 1px solid var(--graphite); border-radius: 16px; overflow: hidden; display: flex; flex-direction: column; min-width: 0; }
+.prev { background: repeating-conic-gradient(#202024 0% 25%, #18181b 0% 50%) 50% / 18px 18px; display: grid; place-items: center; padding: 16px; aspect-ratio: 4 / 3; }
+.prev.light { background: #F4F4F5; }
+.prev img { max-width: 100%; max-height: 100%; object-fit: contain; border-radius: 6px; }
+.info { padding: 12px 14px; display: grid; gap: 8px; }
+.info b { color: var(--white); font-weight: 600; font-size: 14px; }
+.info small { font-family: var(--mono); color: var(--slate); font-size: 12px; }
+.acts { display: flex; gap: 6px; flex-wrap: wrap; }
+.acts .btn { padding: 6px 10px; font-size: 13px; }
+.chip { font-size: 11px; font-weight: 600; letter-spacing: .06em; text-transform: uppercase; padding: 2px 8px; border-radius: 999px; border: 1px solid var(--graphite); color: var(--slate); justify-self: start; }
+.chip.ok { color: var(--good); border-color: rgba(34, 197, 94, .4); }
+.rules { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 12px; }
+.rule { border: 1px solid var(--graphite); background: var(--carbon); border-radius: 14px; padding: 14px 16px; }
+.rule b { display: block; color: var(--white); margin-bottom: 4px; }
+.toast { position: fixed; left: 50%; transform: translateX(-50%); bottom: calc(20px + env(safe-area-inset-bottom, 0px)); background: var(--white); color: var(--ink); padding: 10px 16px; border-radius: 10px; font-size: 14px; font-weight: 500; max-width: calc(100% - 32px); z-index: 9; }
+</style>
+
+<div class="bar"><div class="bar-in">
+  <img src="png/06-logo-horizontal-white.png" alt="Investedia">
+  <span class="sp"></span>
+  <button class="btn primary" type="button" id="drive-btn"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"><path d="M5.5 2h5l4 7-2.5 4.5h-8L1.5 9z"/><path d="M5.5 2l4 7h5M1.5 9h8l-2.5 4.5"/></svg><span>Save all to Google Drive</span></button>
+</div></div>
+
+<main class="wrap">
+  <section class="hero">
+    <div>
+      <h1>Investedia brand kit<i>.</i></h1>
+      <p>Logos, profile pictures, banners, Instagram highlights and post templates, built from the logo on investedia.com. Every file comes as a PNG for quick use and an SVG that stays sharp at any size in Canva, Figma or Photoshop.</p>
+      <div class="meta"><span>25 assets</span><span>PNG + SVG</span><span>Poppins · Inter</span><span>v1 · 17 Oct 2026</span></div>
+    </div>
+    <img src="png/04-profile-picture.png" alt="Investedia profile picture: white wordmark with an amber dot over the i and a rising amber chart line on black">
+  </section>
+
+  <section class="status" id="status" aria-live="polite">
+    <div class="row"><b id="st-title">Google Drive</b><span id="st-count"></span></div>
+    <div class="prog" id="st-prog" hidden><i id="st-bar"></i></div>
+    <div class="row"><span id="st-text">Folder: @ Guidify LLC / Investedia / Brand kit. The icon, app icon, favicon and profile picture are already there.</span><a href="https://drive.google.com/drive/folders/1a-_Medb0MCtNfd8_Bo_bCKbaSKfRlnpG" target="_blank" rel="noopener">Open folder</a></div>
+  </section>
+
+  <section>
+    <div class="sec-head"><h2>Colors</h2><p>Tap a color to copy its code.</p></div>
+    <div class="palette" id="palette"></div>
+  </section>
+
+  <section id="groups"></section>
+
+  <section>
+    <div class="sec-head"><h2>Rules</h2><p>Keep the brand recognizable everywhere.</p></div>
+    <div class="rules">
+      <div class="rule"><b>The amber dot</b>Always keep the amber dot on the i. It's the smallest part of the logo and the most recognizable.</div>
+      <div class="rule"><b>Backgrounds</b>Use the white logo on Ink or photos with a dark overlay, and the black logo on white. Don't place it on busy images.</div>
+      <div class="rule"><b>Space</b>Leave clear space around the logo of at least four times the dot's width. Never stretch or recolor it.</div>
+      <div class="rule"><b>Type</b>Headlines in Poppins SemiBold, body in Poppins or Inter Regular, numbers in Geist Mono on the website.</div>
+      <div class="rule"><b>Charts</b>Rising amber line, Carbon area below. Use Gain green and Loss red only for real performance numbers.</div>
+      <div class="rule"><b>Honesty</b>Mark example numbers as examples and add "Not financial advice" on posts with returns.</div>
+    </div>
+  </section>
+</main>
+<div class="toast" id="toast" hidden role="status"></div>
+
+<script>
+(() => {
+  const $ = s => document.querySelector(s);
+  const el = (t, a = {}, ...k) => { const n = document.createElement(t); for (const [x, v] of Object.entries(a)) { if (v == null || v === false) continue; if (x === "class") n.className = v; else if (x === "text") n.textContent = v; else if (x.startsWith("on")) n.addEventListener(x.slice(2), v); else n.setAttribute(x, v === true ? "" : v); } k.flat().forEach(c => c != null && n.append(c)); return n; };
+  let tt; const toast = m => { const t = $("#toast"); t.textContent = m; t.hidden = false; clearTimeout(tt); tt = setTimeout(() => t.hidden = true, 2800); };
+  const ls = { get(k, f) { try { const v = localStorage.getItem(k); return v ? JSON.parse(v) : f; } catch { return f; } }, set(k, v) { try { localStorage.setItem(k, JSON.stringify(v)); } catch {} } };
+
+  const FOLDER = "1a-_Medb0MCtNfd8_Bo_bCKbaSKfRlnpG";
+  const ITEMS = [{"id": "01-icon-mark", "w": 1024, "h": 1024}, {"id": "02-app-icon-rounded", "w": 1024, "h": 1024}, {"id": "03-favicon", "w": 64, "h": 64}, {"id": "04-profile-picture", "w": 1080, "h": 1080}, {"id": "05-profile-picture-circle-safe", "w": 1080, "h": 1080}, {"id": "06-logo-horizontal-white", "w": 1205, "h": 360}, {"id": "07-logo-horizontal-black", "w": 1205, "h": 360}, {"id": "08-wordmark-white", "w": 1112, "h": 260}, {"id": "09-wordmark-black", "w": 1112, "h": 260}, {"id": "10-wordmark-amber", "w": 1112, "h": 260}, {"id": "11-banner-linkedin-1584x396", "w": 1584, "h": 396}, {"id": "12-banner-x-twitter-1500x500", "w": 1500, "h": 500}, {"id": "13-banner-youtube-2560x1440", "w": 2560, "h": 1440}, {"id": "14-website-share-image-1200x630", "w": 1200, "h": 630}, {"id": "15-highlight-about", "w": 1080, "h": 1080}, {"id": "16-highlight-tips", "w": 1080, "h": 1080}, {"id": "17-highlight-pov", "w": 1080, "h": 1080}, {"id": "18-highlight-learn", "w": 1080, "h": 1080}, {"id": "19-highlight-results", "w": 1080, "h": 1080}, {"id": "20-post-template-tip", "w": 1080, "h": 1350}, {"id": "21-post-template-pov", "w": 1080, "h": 1350}, {"id": "22-post-template-lesson", "w": 1080, "h": 1350}, {"id": "23-post-template-carousel-cover", "w": 1080, "h": 1350}, {"id": "24-story-template", "w": 1080, "h": 1920}, {"id": "25-brand-guidelines", "w": 1920, "h": 1200}];
+  const NAMES = { "01-icon-mark": "Icon mark", "02-app-icon-rounded": "App icon", "03-favicon": "Website favicon", "04-profile-picture": "Profile picture", "05-profile-picture-circle-safe": "Profile picture (circle-safe)", "06-logo-horizontal-white": "Logo, white", "07-logo-horizontal-black": "Logo, black", "08-wordmark-white": "Wordmark, white", "09-wordmark-black": "Wordmark, black", "10-wordmark-amber": "Wordmark, amber", "11-banner-linkedin-1584x396": "LinkedIn banner", "12-banner-x-twitter-1500x500": "X / Twitter header", "13-banner-youtube-2560x1440": "YouTube banner", "14-website-share-image-1200x630": "Website share image", "15-highlight-about": "Highlight: About", "16-highlight-tips": "Highlight: Tips", "17-highlight-pov": "Highlight: POV", "18-highlight-learn": "Highlight: Learn", "19-highlight-results": "Highlight: Results", "20-post-template-tip": "Post: Tip", "21-post-template-pov": "Post: POV / case study", "22-post-template-lesson": "Post: Lesson", "23-post-template-carousel-cover": "Post: Carousel cover", "24-story-template": "Story: Tip of the day", "25-brand-guidelines": "Brand guidelines sheet" };
+  const GROUPS = [
+    ["Logos", "For your website, documents and anywhere the name appears.", ["06-logo-horizontal-white", "07-logo-horizontal-black", "08-wordmark-white", "09-wordmark-black", "10-wordmark-amber"], true],
+    ["Profile pictures & icons", "Instagram, LinkedIn, TikTok avatars, app and website icons.", ["04-profile-picture", "05-profile-picture-circle-safe", "01-icon-mark", "02-app-icon-rounded", "03-favicon"]],
+    ["Banners & website", "Covers for LinkedIn, X and YouTube, plus the image shown when your website link is shared.", ["11-banner-linkedin-1584x396", "12-banner-x-twitter-1500x500", "13-banner-youtube-2560x1440", "14-website-share-image-1200x630"], true],
+    ["Instagram highlights", "Covers for the highlight circles from your plan: About, Tips, POV, Learn, plus Results.", ["15-highlight-about", "16-highlight-tips", "17-highlight-pov", "18-highlight-learn", "19-highlight-results"]],
+    ["Post & story templates", "Ready layouts with example text. Swap the words in Canva and post.", ["20-post-template-tip", "21-post-template-pov", "22-post-template-lesson", "23-post-template-carousel-cover", "24-story-template"]],
+    ["Guidelines", "One sheet with colors, type and rules to send to anyone designing for you.", ["25-brand-guidelines"], true]
+  ];
+  const ALREADY = new Set(["01-icon-mark.svg", "02-app-icon-rounded.svg", "03-favicon.svg", "04-profile-picture.svg"]);
+  let saved = new Set([...ALREADY, ...ls.get("bk.saved", [])]);
+
+  const PALETTE = [["Ink", "#0A0A0B", "Backgrounds"], ["Carbon", "#1E1E21", "Chart area, cards"], ["Graphite", "#2A2A2E", "Lines"], ["Amber", "#FEA501", "Brand accent"], ["Orange", "#FF7A1A", "Website accent"], ["White", "#FFFFFF", "Headlines"], ["Mist", "#D4D4D8", "Body text"], ["Slate", "#8A8A93", "Captions"], ["Gain", "#22C55E", "Positive returns"], ["Loss", "#F04444", "Negative returns"]];
+  $("#palette").append(...PALETTE.map(([n, c, u]) => el("button", { type: "button", class: "sw", "aria-label": `Copy ${n} ${c}`, onclick: () => { navigator.clipboard?.writeText(c).then(() => toast(`Copied ${c}`), () => toast(c)); } },
+    el("span", { class: "c", style: `background:${c}` }), el("div", {}, el("b", { text: n }), el("code", { text: c }), el("small", { text: u })))));
+
+  let dl = null;
+  async function download(name) {
+    if (!dl) { toast("Downloads aren't available here. Use Save all to Google Drive."); return; }
+    try { const r = await fetch(name); const b = await r.blob(); await dl.save({ filename: "Investedia - " + name.split("/").pop(), data: b }); }
+    catch (e) { if (!e || e.code !== "cancelled") toast("That file couldn't be saved. Try again."); }
+  }
+  const byId = Object.fromEntries(ITEMS.map(i => [i.id, i]));
+  $("#groups").replaceChildren(...GROUPS.map(([title, sub, ids, wide]) => el("section", {},
+    el("div", { class: "sec-head" }, el("h2", { text: title }), el("p", { text: sub })),
+    el("div", { class: "grid" + (wide ? " wide" : "") }, ids.map(id => {
+      const it = byId[id];
+      const light = /black/.test(id);
+      const chip = el("span", { class: "chip", id: "chip-" + id });
+      return el("article", { class: "card" },
+        el("div", { class: "prev" + (light ? " light" : "") }, el("img", { src: `png/${id}.png`, alt: NAMES[id], loading: "lazy" })),
+        el("div", { class: "info" }, el("b", { text: NAMES[id] }), el("small", { text: `${it.w} × ${it.h}` }), chip,
+          el("div", { class: "acts" }, el("button", { type: "button", class: "btn", text: "PNG", onclick: () => download(`png/${id}.png`) }), el("button", { type: "button", class: "btn", text: "SVG", onclick: () => download(`svg/${id}.svg`) }))));
+    })))));
+  function drawChips() { ITEMS.forEach(({ id }) => { const c = document.getElementById("chip-" + id); if (!c) return; const n = (saved.has(id + ".png") ? 1 : 0) + (saved.has(id + ".svg") ? 1 : 0); c.className = "chip" + (n === 2 ? " ok" : ""); c.textContent = n === 2 ? "In Drive" : n === 1 ? "Partly in Drive" : "Not in Drive yet"; }); const total = ITEMS.length * 2; $("#st-count").textContent = `${[...saved].filter(f => ITEMS.some(i => f.startsWith(i.id))).length} of ${total} files in Drive`; }
+  drawChips();
+
+  // ---- Save all to Google Drive (through the viewer's own Google Drive connector) ----
+  let mcp = null;
+  const b64 = blob => new Promise((res, rej) => { const r = new FileReader(); r.onload = () => res(String(r.result).split(",")[1]); r.onerror = rej; r.readAsDataURL(blob); });
+  const sleep = ms => new Promise(r => setTimeout(r, ms));
+  async function upload(name, type) {
+    const r = await fetch(name); if (!r.ok) throw { code: "missing" };
+    const data = await b64(await r.blob());
+    const title = "Investedia - " + NAMES[name.split("/").pop().replace(/\.(png|svg)$/, "")] + "." + name.split(".").pop();
+    const input = { title, parentId: FOLDER, contentMimeType: type, base64Content: data, disableConversionToGoogleType: true };
+    try { return await mcp.callTool("Google Drive", "create_file", input, { cache: false }); }
+    catch (e) { if (e && e.retryable) { await sleep(e.retryAfterMs || 1500); return await mcp.callTool("Google Drive", "create_file", input, { cache: false }); } throw e; }
+  }
+  $("#drive-btn").addEventListener("click", async () => {
+    if (!mcp) { toast("Google Drive isn't connected for this page. Open the page menu → Permissions to allow it."); return; }
+    const todo = [];
+    ITEMS.forEach(({ id }) => { if (!saved.has(id + ".png")) todo.push([`png/${id}.png`, "image/png", id + ".png"]); if (!saved.has(id + ".svg")) todo.push([`svg/${id}.svg`, "image/svg+xml", id + ".svg"]); });
+    if (!todo.length) { toast("Everything is already in your Drive folder."); return; }
+    const btn = $("#drive-btn"); btn.disabled = true; btn.querySelector("span").textContent = "Saving…";
+    $("#st-prog").hidden = false; let done = 0, failed = 0;
+    for (const [path, type, key] of todo) {
+      $("#st-text").textContent = `Uploading ${NAMES[key.replace(/\.(png|svg)$/, "")]} (${key.endsWith("svg") ? "SVG" : "PNG"})…`;
+      try { await upload(path, type); saved.add(key); ls.set("bk.saved", [...saved].filter(k => !ALREADY.has(k))); }
+      catch (e) {
+        failed++;
+        const code = e && e.code;
+        if (code === "denied" || code === "not_granted" || code === "consent_required" || code === "server_not_connected" || code === "unauthorized") { $("#st-text").textContent = "Google Drive access was declined or isn't connected, so the upload stopped. Allow it in the page's Permissions menu and press Save again."; break; }
+      }
+      done++; $("#st-bar").style.width = Math.round(done / todo.length * 100) + "%"; drawChips();
+    }
+    btn.disabled = false; btn.querySelector("span").textContent = "Save all to Google Drive";
+    if (!failed) { $("#st-text").textContent = "All files are in @ Guidify LLC / Investedia / Brand kit."; toast("Brand kit saved to Google Drive"); }
+    else if (!/declined/.test($("#st-text").textContent)) { $("#st-text").textContent = `${failed} file${failed === 1 ? "" : "s"} didn't upload. Press Save again to retry just those.`; }
+  });
+
+  (async () => {
+    if (!window.claude || typeof window.claude.use !== "function") { $("#drive-btn").title = "Open this page on claude.ai to save to Google Drive"; return; }
+    const [m, d] = await Promise.all([window.claude.use("mcp"), window.claude.use("downloads")]);
+    mcp = m; dl = d;
+    if (!mcp) $("#st-text").textContent = "Saving to Google Drive works when the page is opened by you on claude.ai with Google Drive connected.";
+  })();
+})();
+</script>
