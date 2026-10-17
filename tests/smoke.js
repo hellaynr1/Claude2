@@ -27,6 +27,28 @@ const MOCK = `window.puter={auth:{isSignedIn:()=>true,signIn:async()=>{}},fs:{re
     check(errs.length === 0, `${name}: page errors: ${errs.join(" | ")}`);
     await p.close();
   }
+  // Data integrity + editing: malformed records survive, links are cleaned, edits persist after reload
+  {
+    const p = await b.newPage({ viewport: { width: 390, height: 844 }, isMobile: true, hasTouch: true }), errs = [];
+    p.on("pageerror", e => errs.push(e.message));
+    await p.route("https://js.puter.com/**", r => r.fulfill({ contentType: "application/javascript", body: MOCK }));
+    await p.addInitScript(() => { if (!sessionStorage.getItem("seeded")) { sessionStorage.setItem("seeded", "1"); localStorage.setItem("sb.local", JSON.stringify({ n1: { title: "Seed note alpha", note: "hello", cluster: "ideas", links: ["n1", "n2", "n2", 5], tags: [] }, n2: { title: "Seed note beta", note: "x", cluster: "ideas", links: [] }, bad: null })); } });
+    await p.goto(url); await p.waitForTimeout(2500);
+    await p.fill("#q", "Seed note alpha"); await p.keyboard.press("Enter"); await p.waitForTimeout(600);
+    check(await p.$("#ed-body"), "search did not open the seeded note");
+    const drawer = await p.textContent("#drawer").catch(() => "");
+    check(drawer.includes("Seed note beta"), "connected star not shown in the detail panel");
+    await p.fill("#ed-body", "hello edited"); await p.waitForTimeout(1200);
+    check((await p.textContent("#ed-saved").catch(() => "")).includes("Saved"), "no save feedback after editing");
+    const stored = await p.evaluate(() => JSON.parse(localStorage.getItem("sb.local")));
+    check(stored.n1 && JSON.stringify(stored.n1.links) === '["n2"]', "links not cleaned (self/duplicate/non-string): " + JSON.stringify(stored.n1 && stored.n1.links));
+    check(!("bad" in stored), "malformed record was kept");
+    await p.reload(); await p.waitForTimeout(2500);
+    await p.fill("#q", "Seed note alpha"); await p.keyboard.press("Enter"); await p.waitForTimeout(600);
+    check((await p.inputValue("#ed-body").catch(() => "")) === "hello edited", "edit did not persist after reload");
+    check(errs.length === 0, "data test page errors: " + errs.join(" | "));
+    await p.close();
+  }
   await b.close(); server.close();
   console.log(fails.length ? "FAIL\n- " + fails.join("\n- ") : "PASS"); process.exit(fails.length ? 1 : 0);
 })().catch(e => { console.log("FAIL\n- test crashed: " + e.message); process.exit(1); });

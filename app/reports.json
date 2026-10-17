@@ -1,11 +1,57 @@
 [
- { "d": "2026-10-17", "type": "update", "t": "Reports tab: token use, savings, bug fixes and updates in one place." },
- { "d": "2026-10-17", "type": "update", "t": "Weekly review: distill notes, merge duplicates, mark outdated, add links, Investedia post ideas." },
- { "d": "2026-10-17", "type": "update", "t": "Bug agents: free automatic test on every change + nightly; fixes proposed as pull requests." },
- { "d": "2026-10-17", "type": "saving", "t": "Filing sends only the 30 most relevant stars; Talk sends 6 notes + 2 exchanges; Ask uses the fast model unless you ask 'in depth'." },
- { "d": "2026-10-17", "type": "research", "t": "6 research stars: second brains, context engineering, agent memory, workflows vs agents." },
- { "d": "2026-10-17", "type": "update", "t": "Mobile panels can be dragged up/down to see the brain." },
- { "d": "2026-10-17", "type": "fix", "t": "Notes list showed button code instead of note titles; fixed." },
- { "d": "2026-10-17", "type": "fix", "t": "Talk on iPhone couldn't answer (sign-in popup blocked); fixed." },
- { "d": "2026-10-17", "type": "fix", "t": "Typed questions got no answer in Save mode; now auto-detected." }
+ {
+  "d": "2026-10-17",
+  "type": "update",
+  "t": "Notes show 'Saved' while typing; new types Idea to explore and Next action; Today lists your next actions."
+ },
+ {
+  "d": "2026-10-17",
+  "type": "fix",
+  "t": "Reliability: save failures now warn you, broken records and bad links are cleaned, research text shown safely."
+ },
+ {
+  "d": "2026-10-17",
+  "type": "update",
+  "t": "Reports tab: token use, savings, bug fixes and updates in one place."
+ },
+ {
+  "d": "2026-10-17",
+  "type": "update",
+  "t": "Weekly review: distill notes, merge duplicates, mark outdated, add links, Investedia post ideas."
+ },
+ {
+  "d": "2026-10-17",
+  "type": "update",
+  "t": "Bug agents: free automatic test on every change + nightly; fixes proposed as pull requests."
+ },
+ {
+  "d": "2026-10-17",
+  "type": "saving",
+  "t": "Filing sends only the 30 most relevant stars; Talk sends 6 notes + 2 exchanges; Ask uses the fast model unless you ask 'in depth'."
+ },
+ {
+  "d": "2026-10-17",
+  "type": "research",
+  "t": "6 research stars: second brains, context engineering, agent memory, workflows vs agents."
+ },
+ {
+  "d": "2026-10-17",
+  "type": "update",
+  "t": "Mobile panels can be dragged up/down to see the brain."
+ },
+ {
+  "d": "2026-10-17",
+  "type": "fix",
+  "t": "Notes list showed button code instead of note titles; fixed."
+ },
+ {
+  "d": "2026-10-17",
+  "type": "fix",
+  "t": "Talk on iPhone couldn't answer (sign-in popup blocked); fixed."
+ },
+ {
+  "d": "2026-10-17",
+  "type": "fix",
+  "t": "Typed questions got no answer in Save mode; now auto-detected."
+ }
 ]

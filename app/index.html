@@ -571,7 +571,7 @@ button { cursor: pointer; }
     return n;
   };
   const uid = () => "u" + Date.now().toString(36) + Math.random().toString(36).slice(2, 6);
-  const ls = { get(k, f) { try { const v = localStorage.getItem(k); return v ? JSON.parse(v) : f; } catch { return f; } }, set(k, v) { try { localStorage.setItem(k, JSON.stringify(v)); } catch {} } };
+  const ls = { get(k, f) { try { const v = localStorage.getItem(k); return v ? JSON.parse(v) : f; } catch { return f; } }, set(k, v) { try { localStorage.setItem(k, JSON.stringify(v)); } catch { if (!ls.warned) { ls.warned = true; setTimeout(() => toast("⚠ Couldn't save on this device (storage full or blocked). Use Data → Export to keep a copy."), 0); } } } };
   let toastT; const toast = m => { const t = $("#toast"); t.textContent = m; t.hidden = false; clearTimeout(toastT); toastT = setTimeout(() => t.hidden = true, 2800); };
   const dayKey = (d = new Date()) => `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, "0")}-${String(d.getDate()).padStart(2, "0")}`;
   const ago = ts => { const m = Math.round((Date.now() - ts) / 60000); if (m < 1) return "just now"; if (m < 60) return `${m} min ago`; const h = Math.round(m / 60); if (h < 24) return `${h}h ago`; const d = Math.round(h / 24); return d < 30 ? `${d}d ago` : new Date(ts).toLocaleDateString(undefined, { month: "short", day: "numeric" }); };
@@ -895,7 +895,8 @@ button { cursor: pointer; }
       const title = el("input", { class: "edit-title", id: "ed-title", value: u.title || "", maxlength: 100, "aria-label": "Title", placeholder: "Untitled note" });
       const text = el("textarea", { class: "edit-body", id: "ed-body", maxlength: 8000, "aria-label": "Note", placeholder: "Write anything…" }); text.value = u.note || "";
       const cl = el("select", { class: "input", id: "ed-cluster", "aria-label": "Cluster", style: "width:auto" }, Object.entries(CLUSTERS).map(([k, cc]) => el("option", { value: k, text: cc.name }))); cl.value = n.c;
-      const queue = () => { clearTimeout(saveT); saveT = setTimeout(() => patchThought(n.id, { title: title.value.trim() || "Untitled note", note: text.value }), 700); };
+      const mark = t => { let sv = $("#ed-saved"); if (!sv) { sv = el("div", { id: "ed-saved", class: "muted", role: "status", style: "font-size:12px;padding:2px 2px 0" }); text.after(sv); } sv.textContent = t; };
+      const queue = () => { mark("Saving…"); clearTimeout(saveT); saveT = setTimeout(() => { patchThought(n.id, { title: title.value.trim() || "Untitled note", note: text.value }); mark("✓ Saved " + new Date().toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" })); }, 700); };
       title.addEventListener("input", queue); text.addEventListener("input", queue);
       cl.addEventListener("change", () => patchThought(n.id, { cluster: cl.value }));
       const own = (u.links || []).map(id => byId.get(id)).filter(Boolean);
@@ -911,7 +912,7 @@ button { cursor: pointer; }
       const src = el("input", { class: "input", id: "ed-source", value: u.sourceUrl || "", placeholder: "Link or where it came from", maxlength: 300 });
       src.addEventListener("change", () => patchThought(n.id, { sourceUrl: src.value.trim() }));
       const details = el("div", { class: "details" },
-        sel("ed-kind", "Type", [["raw", "Raw capture"], ["distilled", "Distilled knowledge"], ["system", "Reusable system"]], u.kind || "raw", v => patchThought(n.id, { kind: v })),
+        sel("ed-kind", "Type", [["raw", "Raw capture"], ["distilled", "Knowledge to keep"], ["idea", "Idea to explore"], ["action", "Next action"], ["system", "Reusable system"]], u.kind || "raw", v => patchThought(n.id, { kind: v })),
         sel("ed-status", "Status", [["unverified", "Not checked"], ["verified", "Verified"], ["outdated", "Outdated"]], u.status || "unverified", v => patchThought(n.id, { status: v })),
         sel("ed-imp", "Importance", [["1", "Low"], ["2", "Normal"], ["3", "High"]], String(u.importance || 2), v => patchThought(n.id, { importance: Number(v) })),
         sel("ed-project", "Project", [["", "None"], ...projects.map(m => [m.id, m.t])], u.project || "", v => { const links = v && !(u.links || []).includes(v) ? [...(u.links || []), v] : (u.links || []); patchThought(n.id, { project: v, links }); }),
@@ -963,7 +964,7 @@ button { cursor: pointer; }
       body = [
         el("h2", { text: n.t }),
         n.hub ? el("p", { text: `${members.length} ${members.length === 1 ? "star" : "stars"} in this cluster.` }) : (n.s ? el("p", { text: n.s }) : null),
-        n.x && n.x.length ? el("ul", { class: "det" }, n.x.map(t => el("li", { html: t }))) : null,
+        n.x && n.x.length ? el("ul", { class: "det" }, n.x.map(t => el("li", n.feed ? { text: t } : { html: t }))) : null,
         n.url ? el("a", { class: "extlink", href: n.url, target: "_blank", rel: "noopener", text: n.url.includes("artifact") ? "Open it" : n.url.replace("https://", "") }) : null,
         !n.hub ? el("div", { class: "meta" }, n.d ? el("span", { text: "Learned " + n.d }) : null, el("span", { text: `${nb.length} link${nb.length === 1 ? "" : "s"}` })) : null,
         n.hub ? el("div", { class: "links" }, members.map(m => chipFor(m))) : nb.length ? [el("div", { class: "sec", text: "Connected to" }), el("div", { class: "links" }, nb.map(m => chipFor(m)))] : null,
@@ -1136,6 +1137,7 @@ button { cursor: pointer; }
     const resurf = [...pool].sort(() => rnd() - .5).slice(0, 3);
     p.replaceChildren(el("div", { class: "panel-head" }, el("h2", { text: "Today" }), el("span", { class: "today-date", text: new Date().toLocaleDateString(undefined, { weekday: "long", month: "long", day: "numeric" }) })),
       el("div", { class: "panel-body" },
+        (() => { const acts = Object.entries(userNodes).filter(([, u]) => u.kind === "action" && u.status !== "outdated"); return [el("div", { class: "sub", text: `Next actions · ${acts.length}` }), acts.length ? acts.map(([id]) => byId.get(id)).filter(Boolean).map(rowFor) : el("div", { class: "wrap-pad" }, el("span", { class: "muted", style: "font-size:12.5px", text: "Open a note and set Type → Next action to list it here." }))]; })(),
         reviewSection(),
         el("div", { class: "sub", text: "Learning today" }),
         el("div", { class: "wrap-pad" }, el("button", { type: "button", class: "btn small", style: "justify-self:start", onclick: () => setPanel("learn") }, `🎓 ${Math.floor(secToday() / 60)} / ${learnGoal} min${streakDays() ? " · 🔥 " + streakDays() + " days" : ""} · open Learn`)),
@@ -1241,7 +1243,9 @@ button { cursor: pointer; }
   }
   $("#mic-tip").addEventListener("click", e => dictate(cap, e.currentTarget, () => { if (cap.value.trim()) capForm.requestSubmit(); }));
 
+  let lastCap = { t: "", at: 0 };
   function captureNote(text) {
+    if (text === lastCap.t && Date.now() - lastCap.at < 5000) { toast("Already saved"); return; } lastCap = { t: text, at: Date.now() };
     const lines = text.split(/\n/); let title = lines[0].trim();
     if (title.length > 70) title = title.slice(0, 67).replace(/\s+\S*$/, "") + "…";
     const id = uid();
@@ -1611,7 +1615,7 @@ ${contextFor(question, opts.talk ? 6 : 14)}`;
     selected = keep && byId.has(keep) ? keep : null; applyVisibility(); drawDrawer(false);
     if (panel && panel !== "ask") { const f = document.activeElement; if (!(f && (f.id === "nf-q" || f.id === "journal"))) drawPanel(); }
   }
-  function goLocal() { if (mode !== "wait") return; mode = "local"; userNodes = ls.get("sb.local", {}); setSync(cloudOn() ? "saved · syncing soon" : "saved in this browser"); refresh(); setTimeout(syncNow, 800); }
+  function goLocal() { if (mode !== "wait") return; mode = "local"; userNodes = cleanAll(ls.get("sb.local", {})); setSync(cloudOn() ? "saved · syncing soon" : "saved in this browser"); refresh(); setTimeout(syncNow, 800); }
   async function connect() {
     if (!window.claude || typeof window.claude.use !== "function") { if (window.SBWeb) { ai = meter(window.SBWeb.ai); dl = window.SBWeb.downloads; setMode(capMode); drawChat(); drawDrawer(true); } return goLocal(); }
     try {
@@ -1642,7 +1646,7 @@ ${contextFor(question, opts.talk ? 6 : 14)}`;
       for (const [id, rn] of Object.entries(rNotes)) {
         if (!rn || (tomb[id] && tomb[id] >= (rn.updatedAt || 0))) continue;
         const ln = userNodes[id];
-        if (!ln || (rn.updatedAt || 0) > (ln.updatedAt || 0)) { userNodes[id] = rn; changed = true; }
+        if (!ln || (rn.updatedAt || 0) > (ln.updatedAt || 0)) { const c = cleanNote(id, rn); if (c) { userNodes[id] = c; changed = true; } }
       }
       for (const id of Object.keys(userNodes)) if (tomb[id] && tomb[id] >= (userNodes[id].updatedAt || 0)) { delete userNodes[id]; changed = true; }
       if (remote && Array.isArray(remote.learned)) remote.learned.forEach(x => { if (!learned.has(x)) { learned.add(x); learning.delete(x); changed = true; } });
@@ -1665,8 +1669,12 @@ ${contextFor(question, opts.talk ? 6 : 14)}`;
   addEventListener("focus", () => syncNow());
   document.addEventListener("visibilitychange", () => { if (!document.hidden) syncNow(); });
   setInterval(() => { if (!document.hidden) syncNow(); }, 60000);
+  // Data integrity: keep valid records, links are unique strings, never self-links
+  function cleanLinks(id, l) { return [...new Set((Array.isArray(l) ? l : []).filter(x => typeof x === "string" && x && x !== id))]; }
+  function cleanNote(id, u) { if (!u || typeof u !== "object") return null; return { ...u, title: String(u.title || "Untitled note").slice(0, 200), note: typeof u.note === "string" ? u.note : String(u.note || ""), links: cleanLinks(id, u.links), tags: Array.isArray(u.tags) ? u.tags.map(String) : [] }; }
+  function cleanAll(obj) { const out = {}; Object.entries(obj && typeof obj === "object" ? obj : {}).forEach(([id, u]) => { const c = cleanNote(id, u); if (c) out[id] = c; }); return out; }
   function saveThought(id, data) {
-    userNodes[id] = data; refresh();
+    userNodes[id] = cleanNote(id, data); refresh();
     if (col) col.doc(id).set(data).catch(() => toast("Couldn't save that note. Check your connection and try again.")); else persistLocal();
   }
   const TRACKED = ["title", "note", "cluster", "tags", "links", "kind", "status"];
@@ -1684,6 +1692,7 @@ ${contextFor(question, opts.talk ? 6 : 14)}`;
       }
     }
     patch = { ...patch, updatedAt: Date.now() };
+    if ("links" in patch) patch = { ...patch, links: cleanLinks(id, patch.links) };
     userNodes[id] = { ...userNodes[id], ...patch }; refresh();
     if (col) col.doc(id).update(patch).catch(() => toast("Couldn't save that change. Try again.")); else persistLocal();
   }
@@ -1706,7 +1715,7 @@ ${contextFor(question, opts.talk ? 6 : 14)}`;
   // ================= boot =================
   buildGraph(); rebuildScene(); drawLegend(); drawRail(); drawPanel(); setMode("note");
   // Knowledge feed: research Claude Code saves to knowledge.json appears as built-in stars on every device
-  fetch("knowledge.json", { cache: "no-cache" }).then(r => r.ok ? r.json() : []).then(list => { let added = 0; (Array.isArray(list) ? list : []).forEach(k => { if (k && k.id && k.t && CLUSTERS[k.c] && !BASE.some(b => b.id === k.id)) { BASE.push({ x: [], l: [], ...k }); added++; } }); if (added) refresh(); }).catch(() => {});
+  fetch("knowledge.json", { cache: "no-cache" }).then(r => r.ok ? r.json() : []).then(list => { let added = 0; (Array.isArray(list) ? list : []).forEach(k => { if (k && k.id && k.t && CLUSTERS[k.c] && !BASE.some(b => b.id === k.id)) { BASE.push({ x: [], l: [], ...k, feed: true }); added++; } }); if (added) refresh(); }).catch(() => {});
   { const v0 = ls.get("sb.view", 1) ? 1 : 0; morph.v = morph.t = v0; syncPositions(); setView(v0); view.target.copy(view.goal); view.dist = view.goalDist; view.theta = view.thetaGoal; view.phi = view.phiGoal; view.thetaGoal = null; }
   requestAnimationFrame(frame);
   connect();
