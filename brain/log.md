@@ -3,6 +3,7 @@
 What we built and learned, newest first. Claude adds an entry at the end of every session.
 
 ## 2026-10-17
+- **Milky Way galaxy (design C, chosen from 3 mockups)**: 4 logarithmic spiral arms (blue-white), golden bulge, halo, pink star-forming knots, a soft colored gas cloud per cluster; clusters now sit on the arms; more top-down camera, zoomed out on phones; quieter link lines; dust no longer rotates (so clusters stay on the arms). Particle count lower on phones. Brain view unchanged. Tested: smoke test + screenshots at 390px and desktop.
 - **15 new stars** (distilled, linked): 5 Investedia actions, 6 lessons (guardrails, 2-second hook, sends vs likes, less context, consolidation, atomic stars), 3 tools (smoke test, build script, knowledge feed), 1 system (competitor watch).
 - **Competitors section**: `memory/projects/investedia-competitors.md` (TradingView, Finviz, Stock Analysis, Investopedia: estimated traffic, what works, 5 ranked actions for Investedia) + `systems/competitor-watch.md` to repeat it monthly + 1 research star.
 - **Research: Investedia** (3 stars): finfluencer rules (educate, don't advise; FSMA authorization for advice; disclose conflicts and sponsors), ESMA social media statement, Reels signals (watch time, likes and sends per reach).

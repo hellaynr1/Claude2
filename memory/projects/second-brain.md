@@ -1,5 +1,5 @@
 # Second Brain
-**Status:** working. Claude page v21 (built from app/index.html) https://claude.ai/artifact/RGPX3G4upwNNFNPNxY8Jnz · web app `app/` → https://hellaynr1.github.io/Claude2/app/ (GitHub Pages, live)
+**Status:** working. Claude page v23 (built from app/index.html) https://claude.ai/artifact/RGPX3G4upwNNFNPNxY8Jnz · web app `app/` → https://hellaynr1.github.io/Claude2/app/ (GitHub Pages, live)
 **What:** 3D galaxy/brain of everything I learn: capture, Today journal, Learn course (36+ topics, daily time, streak, adaptive teaching), Ask, Talk (voice), Data export/backup, mobile bottom-sheet panels.
 **Plan:** `docs/second-brain-plan.md` (M1 done; M2–M7 later).
 **Open:** cross-device sync not yet verified on real devices (tests only cover one browser).
