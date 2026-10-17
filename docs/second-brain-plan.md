@@ -110,7 +110,16 @@ Monthly costs for one person:
 
 Estimate assumes about 30 captures, 20 questions and one nightly review a day (~7 million input and ~0.7 million output tokens a month). Claude Pro or ChatGPT Plus subscriptions do not include API usage; the API is billed separately per token.
 
-## 8. Smallest useful milestone first: M1
+## 7b. Free route (chosen 2026-10-17: "do everything free")
+
+- Keep the Second Brain as a Claude artifact: AI calls (filing, Ask, Talk) run on the Claude subscription through the page's built-in Claude access, so there's no API bill.
+- Search: BM25 keyword ranking with simple stemming in the page; Claude does the reasoning. No paid embeddings.
+- Backups: Export (JSON/Markdown) and "Back up to Google Drive" from the page, using the owner's Google Drive connector.
+- Shared memory later (M5): Supabase free tier as the database + a small free Vercel MCP server. No AI runs there (the connected AI does the thinking), so it stays free. The artifact can reach it through its connector permission once the server is added as a custom connector.
+- Nightly review: the existing Claude Code scheduled task (included in the plan).
+- Trade-offs: subscription usage limits apply; free tiers have limits (Supabase pauses idle projects); the artifact can't use the microphone directly.
+
+## 8. Smallest useful milestone first: M1 (done 2026-10-17)
 
 Inside the current artifact, without any new accounts:
 1. **Export / import:** download all notes, journal, progress and links as JSON and as Markdown; import a file back.

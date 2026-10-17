@@ -3,6 +3,7 @@
 What we built and learned, newest first. Claude adds an entry at the end of every session.
 
 ## 2026-10-17
+- **Second Brain M1 done** (v9, same link): Data panel with Export JSON/Markdown, Import, and Back up to Google Drive; AI filing now shows a suggestion card (title, cluster, type, tags, links with reasons) that you apply or dismiss, so your own words are never overwritten; new fields: type (raw/distilled/system), status, importance, project, source; version history with Restore; Ask uses BM25 search and labels "From your notes" vs "General knowledge" and says when something isn't in your notes. Chosen: the free route (AI through the Claude subscription, no API costs).
 - **Second Brain audit & plan** (`docs/second-brain-plan.md`): what works, what's missing, recommended architecture (Supabase as source of truth, Next.js app, memory API + MCP, nightly review with approvals), phases M1–M7, costs. Proposed first milestone M1: export/import, AI suggestions instead of overwrites, item fields, version history.
 - **Systems** (new color, silver): saved recipes in `systems/` (brand-kit, build-app, sync-everything, research-to-brain) plus the `systems` skill to run and save them. Copy in the vault as `Systems.md`.
 - **Remote automation**: approved and switched on the Daily optimizer (every day 20:45 Brussels). It proposes improvements as a pull request; merge = approve. It can't read Google Drive yet (no connectors on the scheduled task).
