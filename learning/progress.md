@@ -2,6 +2,17 @@
 
 Same topics and ids as the Learn tab in the Second Brain app. Updated by Claude after each lesson (see the `learning-tracker` skill).
 
+## Daily learning time
+- Goal: **20 minutes a day** (change it in the app: Learn → the "min a day" menu).
+- The app counts time while you're in Learn, Talk or a lesson and active, shows today's minutes, a 🔥 streak and the last 7 days, and syncs between phone and computer.
+
+## How I learn best
+_Claude's notes on how to teach me. The app adds these automatically; Claude Code adds them after lessons._
+- Total beginner: plain words, explain every new term the first time.
+- Short answers, one idea at a time, with an everyday example.
+- Likes learning by voice (Talk on the iPhone, often on the way to work).
+- Learns by building real things (Second Brain, brand kits) more than by theory.
+
 ## Learned
 _Topics I've shown I understand._
 - (none confirmed yet)
@@ -36,4 +47,5 @@ _Things I've done hands-on; not yet checked as learned._
 3. `ai-content`: build your first AI content workflow for Guidify.
 
 ## Log
+- 2026-10-17: Added daily learning time (20 min goal, streak), the learner profile above, and automatic new lessons.
 - 2026-10-17: Tracker created. First Talk lesson on the web app (model, prompt, token, hallucination).

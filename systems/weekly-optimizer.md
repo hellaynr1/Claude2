@@ -10,6 +10,7 @@
 **Steps**
 1. Read `brain/log.md`, CLAUDE.md, skills, systems and the Obsidian vault's weekly note (read-only).
 2. Study: what was built, what went wrong, what got repeated, what to learn next on the Learn AI path.
+2b. **Teaching coach (every run):** read `learning/progress.md` (learned, learning now, How I learn best, daily time). Propose: 1–3 new lessons that build on what I learned, clearer explanations for topics I'm stuck on, and updates to my learner profile. Check that everything works on phone and computer.
 3. Draft improvements on a new branch `optimizer/<date>`: clearer rules in CLAUDE.md, new or better skills and systems, new galaxy stars, a short "what I learned this week" entry.
 4. Open a pull request titled "Daily proposals <date>" with a plain-language summary and a checklist. Send a push notification.
 5. Stop. Nothing is merged, published, uploaded to Drive or sent anywhere.
