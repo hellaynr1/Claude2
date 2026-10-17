@@ -505,8 +505,8 @@
   "d": "2026-10-17",
   "s": "Common model: clear disclosure ('I may earn a commission, at no cost to you') and marking which partners you actually reviewed. Broker affiliates can fall under the broker's regulator rules.",
   "x": [
-   "Source check: SECONDARY (not yet verified against a primary source).",
-   "EU specifics (MiFID II inducements, Unfair Commercial Practices) not yet researched: check before using broker affiliates.",
+   "Source check: SECONDARY/adjacent.",
+   "Belgium: FSMA treats referral exemptions narrowly (insurance guidance); for investment broker affiliates, ask FSMA or a lawyer first.",
    "Belgian factsheet: disclose any benefit openly."
   ],
   "l": [
@@ -567,8 +567,9 @@
   "d": "2026-10-17",
   "s": "Official MCP docs: a server can expose tools (functions the AI calls, with user approval), resources (readable data) and prompts (templates). Official SDK quickstarts: Python, TypeScript, Java, Kotlin, C#, Go, Ruby, Rust. Critical: a stdio server must never write to stdout, or it breaks the protocol.",
   "x": [
-   "Source check: PRIMARY (modelcontextprotocol.io).",
-   "Free hosting still unverified."
+   "Source check: PRIMARY (MCP docs; Cloudflare docs).",
+   "Free hosting: Cloudflare Workers remote MCP template; Free plan 100,000 requests/day, 10 ms CPU per call.",
+   "Personal notes: never deploy the authless template; use OAuth (e.g. GitHub) or Cloudflare Access."
   ],
   "l": [
    "r-mcp",

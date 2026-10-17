@@ -52,9 +52,9 @@ Labels: verified · inference · hypothesis · unknown. Source check per finding
 - FSMA's own page (fsma.be) still not found; the ESMA Belgium factsheet covers the basics.
 - Investopedia traffic and social stats (not found).
 - Same-month traffic comparison for all competitors (one tool).
-- EU rules for broker affiliate links (MiFID II inducements, Unfair Commercial Practices).
+- EU/BE rules for broker affiliate links: still unclear (low evidence) → ask FSMA or a lawyer before using broker affiliate links.
 - ✅ Investedia data terms checked (see table above). Remaining: TradingView commercial-use confirmation; RSS headline terms (partly answered: headline+link fine under EU art. 15; Yahoo feed reuse restricted; publisher RSS terms not found).
-- Free hosting for a personal MCP server.
+- ✅ Free MCP hosting: Cloudflare Workers (see table).
 - Google Search Central's own scaled-content page (verify).
 
 ## Experiments (what we tried, result)

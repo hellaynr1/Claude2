@@ -1,9 +1,16 @@
 [
  {
   "d": "2026-10-17",
+  "at": "2026-10-17T10:10:26+00:00",
+  "type": "research",
+  "t": "Free MCP hosting found (Cloudflare Workers free plan, needs login protection for personal notes). Broker affiliate rules still unclear: ask FSMA or a lawyer before using them."
+ },
+ {
+  "d": "2026-10-17",
   "at": "2026-10-17T10:09:34+00:00",
   "type": "update",
-  "t": "Learn: 'Review due' card. Learned topics come back for a quick quiz after 1, 3, 7 and 21 days; ✓ schedules the next review, ✗ moves the topic back to learning."
+  "t": "Learn: 'Review due' card. Learned topics come back for a quick quiz after 1, 3, 7 and 21 days; ✓ schedules the next review, ✗ moves the topic back to learning.",
+  "c": "386835b88bc1503c9ba004e030488b3224433e7b"
  },
  {
   "d": "2026-10-17",
