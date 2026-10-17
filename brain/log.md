@@ -3,6 +3,7 @@
 What we built and learned, newest first. Claude adds an entry at the end of every session.
 
 ## 2026-10-17
+- **Bug agents**: `tests/smoke.js` (free automatic check, phone + desktop, no AI tokens), a GitHub Actions run on every push and nightly, `memory/BUGS.md` (bugs never twice), full-stack-dev fixes bugs immediately in sessions, and the Daily optimizer proposes a fix PR when the check fails.
 - **Research: second brains & personal AI OS** (6 stars in `app/knowledge.json`): CODE + PARA, evergreen/atomic notes, workflows vs agents, context engineering, agent memory tiers (MemGPT/Letta), and how my OS maps to them. Main lesson: memory quality + small context + consolidation beat more tools.
 - **Knowledge feed**: the web app now loads `app/knowledge.json`, so research Claude Code does appears as stars on every device. First 4 research stars (personal AI OS, Agent Skills, MCP, Claude Code memory) with sources. The `research-to-brain` system now saves there.
 - **Token savings in the app**: filing sends only the 30 most relevant stars (not all); Talk sends 6 notes + last 2 exchanges; Ask uses the fast model (Haiku) unless you say "in depth", "in detail", "step by step" or "think hard"; Teach-me lessons keep the smart model; only 12 open course topics go in each prompt. A typical Ask is now about 1,100 tokens of input. (web app + Claude page v17)

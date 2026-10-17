@@ -13,6 +13,7 @@ One place that says where everything lives, so Claude (and any AI tool) can pick
 | Skills (how to do recurring work) | `.claude/skills/` | public repo |
 | Systems (role + skill recipes) | `systems/` (+ `Systems.md` in the vault) | public repo |
 | Research the brain knows | `app/knowledge.json` (Claude Code adds, web app loads) | public repo |
+| Known bugs + fixes | `memory/BUGS.md`; checks in `tests/smoke.js` (runs free on GitHub every push + nightly) | public repo |
 | Short context for ChatGPT / other AIs | `memory/CONTEXT.md` | public repo |
 
 ## Session routine (the `personal-intelligence` skill)

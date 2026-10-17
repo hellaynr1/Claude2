@@ -41,7 +41,8 @@ These notes load automatically at the start of every Claude Code session on this
 ## Everything in sync (rule)
 Whenever you build or change something for me, update all three at the same time: the Second Brain (galaxy stars), Google Drive (the right project folder) and this repo. Brand assets live in `brand/` and in Drive under `@ Guidify LLC / <brand> / Brand kit`. Repeatable workflows live in `systems/` (and `Systems.md` in the vault).
 - Always keep improving my teaching: track my daily learning time, adapt to how I learn (`learning/progress.md`), add new lessons as I progress (`learning-tracker` skill). The Daily optimizer proposes teaching upgrades every evening.
-- Everything must work well on phone and computer: test both widths every time.
+- Everything must work well on phone and computer: run `node tests/smoke.js` after every app change.
+- Bugs: fix them immediately in sessions, log them in `memory/BUGS.md` and add a test so they never return. Unattended agents propose fixes as pull requests.
 - Automation: anything that runs without me (scheduled sessions) only prepares and proposes. I approve before any action (merge a pull request, or say yes).
 
 ## Auto-save (every session)
