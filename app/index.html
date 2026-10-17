@@ -992,7 +992,7 @@ button { cursor: pointer; }
   // ================= rail & panels =================
   let panel = ls.get("sb.panel", "key");
   if (!["key", "notes", "today", "learn", "ask", "settings", null].includes(panel)) panel = "key";
-  const RAIL = [["key", "Key"], ["notes", "Notes"], ["today", "Today"], ["learn", "Learn"], ["ask", "Ask"], ["settings", "Data"]];
+  const RAIL = [["key", "Key"], ["notes", "Notes"], ["today", "Today"], ["learn", "Learn"], ["ask", "Ask"], ["settings", "Data"], ["reports", "Reports"]];
   function drawRail() {
     $("#rail").replaceChildren(...RAIL.map(([k, name]) => el("button", { type: "button", "aria-pressed": String(panel === k), title: panel === k ? "Close panel" : name, onclick: () => setPanel(panel === k ? null : k) }, el("span", { html: ICONS[k], style: "display:inline-flex" }), name)));
   }
@@ -1025,6 +1025,21 @@ button { cursor: pointer; }
           return el("button", { type: "button", class: "key-row", style: `--c:${c.css}`, "aria-pressed": String(!hidden.has(k)), onclick: () => { hidden.has(k) ? hidden.delete(k) : hidden.add(k); ls.set("sb.hidden", [...hidden]); if (selected && hidden.has(byId.get(selected).c)) select(null); drawPanel(); applyVisibility(); } },
             el("span", { class: "dot" }), el("span", {}, el("b", { text: c.name }), el("span", { class: "m", text: c.m })), el("span", { class: "n", text: String(count) }));
         })));
+      return;
+    }
+    if (panel === "reports") {
+      const days = Array.from({ length: 7 }, (_, i) => { const d = new Date(); d.setDate(d.getDate() - (6 - i)); return usage[dayKey(d)] || { calls: 0, fast: 0, inTok: 0, outTok: 0, saved: 0 }; });
+      const sum = k => days.reduce((a, d) => a + (d[k] || 0), 0), t = days[6], max = Math.max(1, ...days.map(d => d.inTok + d.outTok));
+      const num = n => n >= 1000 ? (n / 1000).toFixed(1) + "k" : String(n);
+      const ICON = { fix: "🐞", update: "✦", saving: "⚡", research: "🔎" };
+      p.replaceChildren(el("div", { class: "panel-head" }, el("h2", { text: "Reports" }),
+        el("div", { class: "learn-clock" },
+          el("div", { class: "row" }, el("span", {}, "Today ", el("b", { text: `~${num(t.inTok + t.outTok)} tokens` })), el("span", { class: "muted", text: `${t.calls} AI calls · ${t.fast} fast` })),
+          el("div", { class: "row" }, el("div", { class: "week7", style: "width:140px", "aria-label": "Tokens, last 7 days" }, days.map(d => el("i", { class: "met", style: `height:${Math.max(3, (d.inTok + d.outTok) / max * 26)}px` }))), el("span", { class: "muted", text: `7 days: ~${num(sum("inTok") + sum("outTok"))}` })),
+          el("div", { class: "row" }, el("span", { text: `⚡ Saved by smart context: ~${num(sum("saved"))} tokens (7 days)` })),
+          el("span", { class: "muted", style: "font-size:11.5px", text: `Fast model on ${sum("calls") ? Math.round(sum("fast") / sum("calls") * 100) : 0}% of calls. Estimates on this device (~4 characters = 1 token).` }))),
+        el("div", { class: "panel-body" }, el("div", { class: "sub", text: "Updates, bug fixes & savings" }),
+          reports.length ? reports.slice(0, 40).map(r => el("div", { class: "style-note", style: "padding:5px 16px" }, `${ICON[r.type] || "•"} `, el("b", { text: r.d + " " }), r.t)) : el("div", { class: "style-note", style: "padding:5px 16px", text: "Reports appear here when Claude fixes or improves something." })));
       return;
     }
     if (panel === "settings") {
@@ -1238,7 +1253,20 @@ button { cursor: pointer; }
 
   // ================= AI (asks Claude through the page) =================
   let ai = null;
-  const catalog = (excludeId, query) => (query ? contextFor(query, 30, true) : nodes).filter(n => !n.hub && n.id !== excludeId).map(n => `${n.id} | ${n.t} | ${CLUSTERS[n.c].name}`).join("\n");
+  const catalog = (excludeId, query) => { const fmt = list => list.filter(n => !n.hub && n.id !== excludeId).map(n => `${n.id} | ${n.t} | ${CLUSTERS[n.c].name}`).join("\n"), full = fmt(nodes); if (!query) return full; const t = fmt(contextFor(query, 30, true)); addSaved((full.length - t.length) / 4); return t; };
+  // ----- Usage meter for the Reports tab (estimate: ~4 characters = 1 token) -----
+  let usage = ls.get("sb.usage", {});
+  const useDay = () => usage[dayKey()] || (usage[dayKey()] = { calls: 0, fast: 0, inTok: 0, outTok: 0, saved: 0 });
+  function addSaved(t) { if (t > 0) { useDay().saved += Math.round(t); ls.set("sb.usage", usage); } }
+  function meter(a) {
+    const est = x => Math.ceil((typeof x === "string" ? x : JSON.stringify(x || "")).length / 4);
+    const rec = (inp, out, o) => { const u = useDay(); u.calls++; if (o && o.modelTier === "quick") u.fast++; u.inTok += est(inp); u.outTok += est(out); ls.set("sb.usage", usage); };
+    const w = async (inp, o) => { const r = await a(inp, o); rec(inp, r && r.text, o); return r; };
+    w.json = async (inp, o) => { const r = await a.json(inp, o); rec(inp, r, o); return r; };
+    return w;
+  }
+  let reports = [];
+  fetch("reports.json", { cache: "no-cache" }).then(r => r.ok ? r.json() : []).then(x => { reports = Array.isArray(x) ? x : []; if (panel === "reports") drawPanel(); }).catch(() => {});
   async function enrich(id, btn) {
     const u = userNodes[id]; if (!u || !ai) return;
     if (btn) { btn.disabled = true; btn.lastChild.textContent = "Thinking…"; }
@@ -1585,11 +1613,11 @@ ${contextFor(question, opts.talk ? 6 : 14)}`;
   }
   function goLocal() { if (mode !== "wait") return; mode = "local"; userNodes = ls.get("sb.local", {}); setSync(cloudOn() ? "saved · syncing soon" : "saved in this browser"); refresh(); setTimeout(syncNow, 800); }
   async function connect() {
-    if (!window.claude || typeof window.claude.use !== "function") { if (window.SBWeb) { ai = window.SBWeb.ai; dl = window.SBWeb.downloads; setMode(capMode); drawChat(); drawDrawer(true); } return goLocal(); }
+    if (!window.claude || typeof window.claude.use !== "function") { if (window.SBWeb) { ai = meter(window.SBWeb.ai); dl = window.SBWeb.downloads; setMode(capMode); drawChat(); drawDrawer(true); } return goLocal(); }
     try {
       const [db, user, smp, dlx, mcpx] = await Promise.all([window.claude.use("db"), window.claude.use("user"), window.claude.use("sample"), window.claude.use("downloads"), window.claude.use("mcp")]);
       dl = dlx; mcp = mcpx;
-      if (smp) { ai = smp; setMode(capMode); drawChat(); drawDrawer(true); }
+      if (smp) { ai = meter(smp); setMode(capMode); drawChat(); drawDrawer(true); }
       const id = user ? await user.id() : null;
       if (!db || !id) return goLocal();
       col = db.collection(`data/users/${id}/thoughts`); mode = "cloud"; setSync("saved to your account");

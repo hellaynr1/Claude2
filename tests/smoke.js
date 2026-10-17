@@ -9,7 +9,7 @@ const MOCK = `window.puter={auth:{isSignedIn:()=>true,signIn:async()=>{}},fs:{re
  ai:{chat:async(m,o)=>{const t='Answer.\\n[progress:tokens:learning]\\n[learnstyle: likes examples]';
  if(o&&o.stream)return(async function*(){yield{text:t}})();return{message:{content:[{text:'[]'}]}};}}};`;
 (async () => {
-  try { JSON.parse(fs.readFileSync(path.join(root, "knowledge.json"), "utf8")); } catch (e) { check(false, "knowledge.json is not valid JSON: " + e.message); }
+  for (const f of ["knowledge.json", "reports.json"]) { try { JSON.parse(fs.readFileSync(path.join(root, f), "utf8")); } catch (e) { check(false, f + " is not valid JSON: " + e.message); } }
   const url = `http://localhost:${server.address().port}/`;
   const b = await pw.chromium.launch({ args: ["--use-gl=swiftshader", "--enable-webgl", "--ignore-gpu-blocklist"] });
   for (const [name, vp, mobile] of [["phone", { width: 390, height: 844 }, true], ["desktop", { width: 1300, height: 860 }, false]]) {
@@ -22,7 +22,7 @@ const MOCK = `window.puter={auth:{isSignedIn:()=>true,signIn:async()=>{}},fs:{re
     const chat = await p.textContent("#chat").catch(() => "");
     check(chat.includes("Answer."), `${name}: Ask got no answer`);
     check(!/\[(progress|learnstyle)/.test(chat), `${name}: hidden markers visible in chat`);
-    for (const t of ["Notes", "Today", "Learn", "Key", "Data"]) { await tab(t); await p.waitForTimeout(250); const txt = await p.textContent("#panel").catch(() => ""); check(!/\[object |undefined|NaN/.test(txt), `${name}: ${t} panel shows broken text`); }
+    for (const t of ["Notes", "Today", "Learn", "Key", "Data", "Reports"]) { await tab(t); await p.waitForTimeout(250); const txt = await p.textContent("#panel").catch(() => ""); check(!/\[object |undefined|NaN/.test(txt), `${name}: ${t} panel shows broken text: ${(txt.match(/.{0,40}(\[object |undefined|NaN).{0,20}/) || [""])[0]}`); }
     check(await p.evaluate(() => document.documentElement.scrollWidth <= innerWidth), `${name}: horizontal scroll`);
     check(errs.length === 0, `${name}: page errors: ${errs.join(" | ")}`);
     await p.close();

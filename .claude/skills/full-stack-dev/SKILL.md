@@ -14,5 +14,5 @@ description: How to build or fix code in my projects. Use whenever writing, chan
 
 ## Bugs: fix immediately, never twice
 - Found a bug (smoke test fails, I report one, or you notice one while working)? Fix it in the same session without asking, and say so in one line.
-- Then add a line to `memory/BUGS.md` and, when possible, a check in `tests/smoke.js` so it can't return.
+- Then add a line to `memory/BUGS.md` and to `app/reports.json` (also for notable updates and token savings) and, when possible, a check in `tests/smoke.js` so it can't return.
 - Token-smart: read only the failing part (grep the error), smallest fix, rerun the smoke test. Don't re-test everything by hand.

@@ -3,6 +3,7 @@
 What we built and learned, newest first. Claude adds an entry at the end of every session.
 
 ## 2026-10-17
+- **Reports tab**: today's and 7-day AI token use (estimated on the device), calls on the fast model, tokens saved by smart context, and a feed of updates, bug fixes, savings and research from `app/reports.json` (Claude and the nightly optimizer add lines). The smoke test checks it. (web app + Claude page v19; the Claude page shows usage only)
 - **Weekly review (automatic CODE)**: once a week the app has Claude (fast model, one call) review your newest 60 notes and suggest: distilled one-idea stars, duplicate merges, outdated notes, missing links and 1–2 Investedia post ideas. They show in Today; you tap Apply or Skip (nothing changes without you, nothing is deleted: merges/outdated only mark status, undo in History). 'Run review now' button. On Sundays the optimizer does the same for repo knowledge. (web app + Claude page v18)
 - **Bug agents**: `tests/smoke.js` (free automatic check, phone + desktop, no AI tokens), a GitHub Actions run on every push and nightly, `memory/BUGS.md` (bugs never twice), full-stack-dev fixes bugs immediately in sessions, and the Daily optimizer proposes a fix PR when the check fails.
 - **Research: second brains & personal AI OS** (6 stars in `app/knowledge.json`): CODE + PARA, evergreen/atomic notes, workflows vs agents, context engineering, agent memory tiers (MemGPT/Letta), and how my OS maps to them. Main lesson: memory quality + small context + consolidation beat more tools.
