@@ -3,6 +3,7 @@
 What we built and learned, newest first. Claude adds an entry at the end of every session.
 
 ## 2026-10-17
+- **Mic fix**: Talk no longer restarts the mic after answering; the mic is released when the app is hidden/closed. Regression test with a fake microphone.
 - **Web research in Ask/Talk**: questions use Perplexity Sonar (live web search with sources) through Puter; 'my notes' questions use the notes; fallback to Claude with a notice. Smoke test checks the routing.
 - **Workflows + first Investedia content**: systems start-of-day, investedia-post, compliance-check, ship-feature, bug-fix. Made 2 reels (MP4, 9:16) and 2 carousels in brand style with a free renderer (HTML → Playwright → ffmpeg), captions, sources, compliance READY. Fixed during the run: logo/font not loading (embedded as data), end-card logo missing (replaceAll).
 - **Shared memory MCP server** (`mcp/`, approved): Cloudflare's official mcp-worker pattern, tools search_brain / get_star / get_memory over the public brain files; tested locally with wrangler dev (initialize, tools/list, tool calls). Deploy + connect steps in mcp/README.md.

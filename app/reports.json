@@ -1,6 +1,12 @@
 [
  {
   "d": "2026-10-17",
+  "at": "2026-10-17T11:38:36+00:00",
+  "type": "fix",
+  "t": "Mic: switches off completely after each answer and whenever you leave or close the app; tap the mic for the next question."
+ },
+ {
+  "d": "2026-10-17",
   "at": "2026-10-17T11:34:02+00:00",
   "type": "update",
   "t": "Ask and Talk now research the web by default (Perplexity Sonar via Puter, with sources). Your notes are used when you mention them (\"my notes\", \"my brain\"). Lessons stay on Claude so progress tracking keeps working."

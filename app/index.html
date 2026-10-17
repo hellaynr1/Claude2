@@ -424,7 +424,7 @@ button { cursor: pointer; }
   <div class="talk-mid"><div class="orb" id="orb" data-state="idle" aria-hidden="true"></div><div class="talk-said" id="talk-said" aria-live="polite"></div></div>
   <div class="talk-bottom">
     <form id="talk-form" autocomplete="off"><button class="send mic" type="button" id="talk-mic" aria-label="Start talking"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" aria-hidden="true"><rect x="5.5" y="1.5" width="5" height="8" rx="2.5"/><path d="M3 7.5a5 5 0 0010 0M8 12.5v2"/></svg></button><textarea id="talk-text" rows="1" maxlength="2000" placeholder="Tap the mic and speak…" aria-label="Say something to Claude"></textarea><button class="send" type="submit" aria-label="Send"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 13V3M3.5 7.5L8 3l4.5 4.5"/></svg></button></form>
-    <div class="talk-help">Tap the mic and speak. It sends when you stop, and Claude answers out loud, then listens again.</div>
+    <div class="talk-help">Tap the mic and speak. It sends when you stop, and Claude answers out loud, then the mic switches off. Tap it again for a new question.</div>
   </div>
 </section>
 <div class="scrim" id="modal" hidden></div>
@@ -1245,6 +1245,10 @@ button { cursor: pointer; }
   let micBlocked = false, rec = null; try { localStorage.removeItem("sb.micBlocked"); } catch {}
   const isMac = /Mac/.test(navigator.platform || "") && !("ontouchend" in document);
   const keyboardHint = () => isMac ? "Mic blocked here: press Fn twice to dictate, then Enter" : ("ontouchend" in document ? "Tap the 🎤 on your keyboard, speak, then press send" : "Press Windows + H to dictate, then Enter");
+  // Fully release the microphone (after an answer, when Talk closes, or when you leave the app)
+  function stopMic() { if (!rec) return; const r = rec; rec = null; try { r.onresult = null; r.abort(); } catch {} document.querySelectorAll(".live").forEach(b => b.classList.remove("live")); }
+  document.addEventListener("visibilitychange", () => { if (document.hidden) { stopMic(); try { speechSynthesis.cancel(); } catch {} } });
+  addEventListener("pagehide", () => { stopMic(); try { speechSynthesis.cancel(); } catch {} });
   function dictate(target, btn, onFinal) {
     if (rec) { try { rec.stop(); } catch {} return; }
     const fallback = () => { target.focus(); try { target.setSelectionRange(target.value.length, target.value.length); } catch {} toast(keyboardHint()); };
@@ -1613,7 +1617,7 @@ ${contextFor(question, web ? 4 : opts.talk ? 6 : 14)}${webRules}`;
     if (SR && !micBlocked) dictate(talkText, $("#talk-mic"), () => { if (talkText.value.trim()) $("#talk-form").requestSubmit(); });
     else setTimeout(() => talkText.focus(), 50);
   }
-  function closeTalk() { talkEl.hidden = true; try { speechSynthesis.cancel(); } catch {} abortCtl && busy && abortCtl.abort(); }
+  function closeTalk() { stopMic(); talkEl.hidden = true; try { speechSynthesis.cancel(); } catch {} abortCtl && busy && abortCtl.abort(); }
   $("#talk-btn").addEventListener("click", openTalk);
   $("#talk-mic").addEventListener("click", e => { try { speechSynthesis.cancel(); } catch {} dictate(talkText, e.currentTarget, () => { if (talkText.value.trim()) $("#talk-form").requestSubmit(); }); });
   $("#talk-end").addEventListener("click", closeTalk);
@@ -1629,7 +1633,7 @@ ${contextFor(question, web ? 4 : opts.talk ? 6 : 14)}${webRules}`;
     ask(t, { talk: true, onText: x => renderSaid(t, x), onDone: (x, errText) => {
       if (!x) { orb.dataset.state = "idle"; renderSaid(t, errText || "I couldn't answer that time. Try again."); return; }
       renderSaid(t, x);
-      if (talkVoice) speak(x, true, () => orb.dataset.state = "speaking", () => { orb.dataset.state = "idle"; if (talkEl.hidden) return; if (SR && !micBlocked) dictate(talkText, $("#talk-mic"), () => { if (talkText.value.trim()) $("#talk-form").requestSubmit(); }); else talkText.focus(); });
+      if (talkVoice) speak(x, true, () => orb.dataset.state = "speaking", () => { orb.dataset.state = "idle"; stopMic(); });  // done: mic stays off until you tap it again
       else { orb.dataset.state = "idle"; talkText.focus(); }
     } });
   });

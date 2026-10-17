@@ -67,6 +67,29 @@ const MOCK = `window.puter={auth:{isSignedIn:()=>true,signIn:async()=>{}},fs:{re
     check(errs.length === 0, "review test page errors: " + errs.join(" | "));
     await p.close();
   }
+  // Mic: no auto-restart after an answer; released when the app is hidden
+  {
+    const p = await b.newPage({ viewport: { width: 390, height: 844 }, isMobile: true, hasTouch: true }), errs = [];
+    p.on("pageerror", e => errs.push(e.message));
+    await p.route("https://js.puter.com/**", r => r.fulfill({ contentType: "application/javascript", body: MOCK }));
+    await p.addInitScript(() => {
+      window.__sr = { starts: 0, aborts: 0, active: null };
+      const Fake = class { start() { __sr.starts++; __sr.active = this; } stop() { __sr.active = null; this.onend && this.onend(); } abort() { __sr.aborts++; __sr.active = null; this.onend && this.onend(); } };
+      for (const k of ["SpeechRecognition", "webkitSpeechRecognition"]) Object.defineProperty(window, k, { value: Fake, configurable: true, writable: true });
+    });
+    await p.goto(url); await p.waitForTimeout(2500);
+    await p.evaluate(() => [...document.querySelectorAll("button")].find(x => x.textContent.trim() === "Talk").click()); await p.waitForTimeout(500);
+    if (!(await p.evaluate(() => __sr.starts))) await p.evaluate(() => document.querySelector("#talk-mic").click());
+    await p.evaluate(() => { const r = __sr.active, res = [Object.assign([{ transcript: "what is a token?" }], { isFinal: true })]; r.onresult({ results: res }); r.stop(); });
+    await p.waitForTimeout(2000);
+    const after = await p.evaluate(() => __sr.starts);
+    check(after === 1, "mic restarted by itself after the answer (starts=" + after + ")");
+    await p.evaluate(() => document.querySelector("#talk-mic").click()); await p.waitForTimeout(200);
+    await p.evaluate(() => { Object.defineProperty(document, "hidden", { value: true, configurable: true }); document.dispatchEvent(new Event("visibilitychange")); });
+    check((await p.evaluate(() => __sr.aborts)) >= 1 && !(await p.evaluate(() => __sr.active)), "mic not released when the app was hidden");
+    check(errs.length === 0, "mic test page errors: " + errs.join(" | "));
+    await p.close();
+  }
   await b.close(); server.close();
   console.log(fails.length ? "FAIL\n- " + fails.join("\n- ") : "PASS"); process.exit(fails.length ? 1 : 0);
 })().catch(e => { console.log("FAIL\n- test crashed: " + e.message); process.exit(1); });
