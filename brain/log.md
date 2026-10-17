@@ -3,6 +3,7 @@
 What we built and learned, newest first. Claude adds an entry at the end of every session.
 
 ## 2026-10-17
+- **Research verified (no-fluff pass)**: checked claims against primary sources (Google Search Central, Anthropic docs, MCP docs, beehiiv pricing, Euronext terms, Psychological Science abstract). 3 corrections (prompt caching prices, beehiiv referrals, market data distribution), every research star labeled PRIMARY/SECONDARY, research-strategist now requires primary sources for numbers and rules.
 - **Big research round (12 stars)**: Investedia (SEO spam rules, beehiiv vs Substack, market data licences, affiliate disclosure, young investors, Belgian ETF tax), AI (prompt caching, build an MCP server, evals, agents in practice), learning (deliberate practice, self-explanation). Research log + 4 new open questions.
 - **Research cycle**: Belgium finfluencer factsheet (ESMA, Jan 2026, official), Belgian influencer certificate, spaced retrieval (learning-tracker now schedules quizzes at 1/3/7 days), Morning Brew referral growth. 4 stars, research log updated.
 - **Autonomous research rule**: new `research-strategist` skill (gate → prioritize → max 3 quick searches → finding/evidence/implication/action/confidence → save), `memory/RESEARCH.md` research log with open questions, rule in CLAUDE.md. Balanced with the token rule: research only when it would change a decision.

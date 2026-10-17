@@ -19,7 +19,10 @@ Rank open questions by impact on my goal × relevance × urgency ÷ cost to find
 - Default: up to 3 quick searches, inline in the session.
 - Bigger (deep research, many sources, competitor sweeps): warn me in one line first ("this will use a lot of tokens").
 
-## 4. Evidence standards
+## 4. Evidence standards (serious research, no fluff)
+- Every number, price, rule or legal claim needs a PRIMARY source (official docs/pricing page, regulator, exchange, paper abstract). Open it with WebFetch or an API (Europe PMC/OpenAlex for papers); don't stop at search snippets or vendor blogs.
+- If the primary source can't be reached, say so and label the claim SECONDARY; never present it as verified.
+- Write 'Source check: PRIMARY' or 'SECONDARY' on every research star.
 - Primary sources and official docs first; cross-check important claims; dates where recency matters.
 - Label each point: **verified** (source checked), **inference**, **hypothesis**, **unknown**.
 - Never invent sources, numbers or completed actions. If search is unavailable, say so.

@@ -1,7 +1,15 @@
 # Research log
 
 What was researched, what we concluded, how sure we are. Check here before researching again.
-Labels: verified · inference · hypothesis · unknown.
+Labels: verified · inference · hypothesis · unknown. Source check per finding: PRIMARY (official docs, regulator, paper abstract) or SECONDARY (blogs, vendors, summaries).
+
+## Corrections after primary-source check (2026-10-17)
+- Prompt caching: reads are 0.05x on Opus/Sonnet 5.5 (0.025x Fable 5.1), not 0.1x; minimum 512 tokens on current models (Anthropic docs).
+- beehiiv: referral program is NOT on the free plan; needs Lite (from $49/mo annual) (beehiiv pricing).
+- Market data: Euronext delayed data is free to USE; DISTRIBUTION (public display) may need terms/fees (Euronext delayed-data terms).
+- Google scaled content abuse: confirmed verbatim (Search Central, updated 2026-08-28).
+- Deliberate practice figures: confirmed in the 2014 abstract.
+- TOB caps added (1,300 / 1,600 / 4,000 euro), still secondary.
 
 | Date | Question | Finding | Confidence | Sources |
 |---|---|---|---|---|

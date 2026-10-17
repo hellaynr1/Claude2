@@ -20,6 +20,7 @@
   "d": "2026-10-17",
   "s": "A skill is a folder with SKILL.md: a name, a description that says when to use it, and instructions. Claude loads it only when the task matches the description.",
   "x": [
+   "Source check: PRIMARY.",
    "Write the description as triggers: 'Use when I…'.",
    "Keep one skill per recurring workflow."
   ],
@@ -34,7 +35,9 @@
   "t": "MCP: connecting AI to tools",
   "d": "2026-10-17",
   "s": "Model Context Protocol: an open standard that lets AI apps use external tools and data (Drive, GitHub, browsers) through 'servers'. Add one only for a real workflow and check its permissions.",
-  "x": [],
+  "x": [
+   "Source check: PRIMARY."
+  ],
   "l": [
    "r-ai-os"
   ],
@@ -46,7 +49,9 @@
   "t": "Claude Code memory (CLAUDE.md)",
   "d": "2026-10-17",
   "s": "CLAUDE.md files load automatically at session start: project rules, preferences, key facts. Keep them short and point to other files for detail.",
-  "x": [],
+  "x": [
+   "Source check: PRIMARY."
+  ],
   "l": [
    "r-ai-os"
   ],
@@ -59,6 +64,7 @@
   "d": "2026-10-17",
   "s": "CODE = Capture (save what resonates, don't over-filter), Organize, Distill (pull out the key points over time), Express (turn notes into output). PARA files by actionability: Projects, Areas, Resources, Archives.",
   "x": [
+   "Source check: SECONDARY (not yet verified against a primary source).",
    "The goal is output (projects, content), not a pretty archive.",
    "Organize by project, not by topic: 'where will I use this?'"
   ],
@@ -75,6 +81,7 @@
   "d": "2026-10-17",
   "s": "One idea per note, titled as a claim, densely linked to other notes, rewritten over time. Links beat folders: an atomic note can be reused by every topic it touches.",
   "x": [
+   "Source check: PRIMARY.",
    "Built on Niklas Luhmann's Zettelkasten.",
    "Write notes for yourself; refine them each time you revisit."
   ],
@@ -90,6 +97,7 @@
   "d": "2026-10-17",
   "s": "Workflows: AI + tools follow fixed code paths. Agents: the model decides its own steps and tool use. Start with the simplest solution; agents trade cost and speed for flexibility.",
   "x": [
+   "Source check: PRIMARY.",
    "Successful teams use simple, composable patterns, not heavy frameworks.",
    "Predictable steps → workflow (like my systems/). Open-ended tasks → agent."
   ],
@@ -106,6 +114,7 @@
   "d": "2026-10-17",
   "s": "What the AI sees matters more than clever prompts. Context is a limited attention budget: more text can lower accuracy ('context rot'). Keep instructions small, tools few and clear, and load details just in time.",
   "x": [
+   "Source check: PRIMARY.",
    "Claude Code pattern: CLAUDE.md up front, files searched on demand (grep/glob).",
    "Long tasks: compaction, structured notes, sub-agents."
   ],
@@ -123,6 +132,7 @@
   "d": "2026-10-17",
   "s": "'LLM as an operating system': core memory always in context, recall memory (past conversations, searchable), archival memory (long-term, searchable). The agent edits its own memory and consolidates it while idle.",
   "x": [
+   "Source check: SECONDARY (not yet verified against a primary source).",
    "Paper: 'MemGPT: Towards LLMs as Operating Systems' (UC Berkeley, 2023); now Letta, open source.",
    "Memory degrades without pruning and consolidation."
   ],
@@ -184,6 +194,7 @@
   "d": "2026-10-17",
   "s": "Instagram's head Adam Mosseri reportedly named three key Reels signals: watch time (most important), likes per reach (reach among followers) and sends per reach (reach to new people). Insights now split follower vs non-follower reach.",
   "x": [
+   "Source check: SECONDARY (not yet verified against a primary source).",
    "For Investedia: strong first 2 seconds (watch time), content people DM to a friend ('send this to someone who…') for new reach.",
    "Specific multipliers (e.g. sends worth 3-5x likes) have no primary source."
   ],
@@ -199,6 +210,7 @@
   "d": "2026-10-17",
   "s": "Market-data/education sites: TradingView (~209M visits/mo), Finviz (~17.8M), Stock Analysis (~8.4M, built by one founder since 2019). Winners own one clear promise or tool, rank a page per ticker/term in Google, and grow a free newsletter.",
   "x": [
+   "Source check: SECONDARY (not yet verified against a primary source).",
    "Estimates from Semrush; check the same month in one tool before comparing.",
    "Details and actions: memory/projects/investedia-competitors.md"
   ],
@@ -384,6 +396,7 @@
   "d": "2026-10-17",
   "s": "You stay responsible for what you post; misleading or reckless messages can create legal liability. Disclose any payment, gift or benefit openly (not just a hashtag). Statements must be true, fair, clear and not misleading, with facts separated from opinions.",
   "x": [
+   "Source check: PRIMARY.",
    "High-risk products often pushed by finfluencers: CFDs, forex, futures, some crowdfunding, volatile crypto: you can lose 100%.",
    "Investedia: label opinions as opinions, show sources for facts, never promote these products."
   ],
@@ -415,6 +428,7 @@
   "d": "2026-10-17",
   "s": "Testing yourself at growing intervals (1, 3, 7, 21 days) beats cramming or rereading. A meta-analysis of 29 studies found a large benefit (g = 0.74); effects are smaller in some subjects (math g = 0.28).",
   "x": [
+   "Source check: SECONDARY (journal abstract not accessible; figure from a summary).",
    "For my learning: after learning a topic, quiz it again after 1, 3 and 7 days instead of moving on for good."
   ],
   "l": [
@@ -429,6 +443,7 @@
   "d": "2026-10-17",
   "s": "Morning Brew grew with a personal referral link in every issue and rewards at milestones. Referrals reportedly drove ~80% of growth early, ~20-30% later. It worked because readers already shared it: product first, referral second.",
   "x": [
+   "Source check: SECONDARY (not yet verified against a primary source).",
    "Before the referral program: campus ambassadors took it from ~10k to ~100k.",
    "Investedia newsletter: make issues worth forwarding first, then add a referral link (free tools exist in newsletter platforms)."
   ],
@@ -442,45 +457,46 @@
   "c": "research",
   "t": "Programmatic SEO vs Google's scaled content abuse",
   "d": "2026-10-17",
-  "s": "Template pages are fine only if each one adds real value. Google's spam policy targets many pages made mainly to rank, whether AI, people or a spreadsheet made them; manual actions started June 2025. No published page-count threshold.",
+  "s": "Google's spam policy (updated 2026-08-28): scaled content abuse = 'many pages generated for the primary purpose of manipulating search rankings and not helping users', 'no matter how it's created'. Examples: AI-generated pages without added value, scraped/stitched content, pages that make little sense but contain keywords.",
   "x": [
-   "Investedia: each stock page needs something unique (plain-language 'why it moved', own chart notes), not just a filled template.",
-   "Recovering lost trust takes a long time (Mueller, reported)."
+   "Source check: PRIMARY (Google Search Central).",
+   "Investedia: template pages are allowed only if each adds real value for users (own explanation, context), not just keywords."
   ],
   "l": [
    "inv-seo-pages"
   ],
-  "url": "https://ppc.land/scaled-content-abuse/"
+  "url": "https://developers.google.com/search/docs/essentials/spam-policies"
  },
  {
   "id": "r-newsletter-platforms",
   "c": "research",
   "t": "beehiiv vs Substack",
   "d": "2026-10-17",
-  "s": "Substack: free, takes 10% of paid subscriptions, strong discovery network. beehiiv: free up to ~2,500 subscribers, 0% of paid revenue, built-in referral program and ad network.",
+  "s": "beehiiv (official pricing): free up to 2,500 subscribers, 0% of paid subscription revenue (Stripe fees apply), but the referral program needs a paid plan (Lite, from $49/mo billed annually). Substack: free to start; takes 10% of paid subscriptions (widely reported; its help page blocked our check).",
   "x": [
-   "For Investedia (referrals matter): beehiiv fits better; check current pricing on their sites."
+   "Source check: beehiiv PRIMARY; Substack 10% secondary.",
+   "Start free on either; referrals cost money on beehiiv."
   ],
   "l": [
    "inv-newsletter",
    "r-referral-newsletter"
   ],
-  "url": "https://techradar.com/pro/software-services/beehiiv-review"
+  "url": "https://www.beehiiv.com/pricing"
  },
  {
   "id": "r-market-data-license",
   "c": "research",
-  "t": "Market data licences: showing prices isn't automatically free",
+  "t": "Market data: delayed data is free to use, distributing may cost",
   "d": "2026-10-17",
-  "s": "A site that displays exchange data can count as a distributor and need an exchange agreement and fees. Real-time data is fee-liable; delayed (15 min) and end-of-day are cheaper but sometimes still licensed. Third-party APIs don't remove exchange fees.",
+  "s": "Euronext must offer 15-minute-delayed data free of charge (MiFID II art. 13). Its terms: use is free 'except in the event of distribution', where fees and Subscriber Terms may apply. Showing prices on a public site counts as distribution. Real-time data is always fee-liable.",
   "x": [
-   "Investedia: read your data provider's terms on public display before scaling; prefer delayed or end-of-day data.",
-   "Not legal advice; rules differ per exchange."
+   "Source check: PRIMARY (Euronext delayed-data terms).",
+   "Investedia: before showing prices publicly, check your data provider's display/redistribution terms, or use charts/widgets from a provider that licenses public display."
   ],
   "l": [
    "inv-signature-tool"
   ],
-  "url": "https://www.xignite.com/exchange-agreements"
+  "url": "https://www.euronext.com/sites/default/files/stld/terms_and_conditions_for_delayed_data.pdf"
  },
  {
   "id": "r-affiliate-disclosure",
@@ -489,6 +505,7 @@
   "d": "2026-10-17",
   "s": "Common model: clear disclosure ('I may earn a commission, at no cost to you') and marking which partners you actually reviewed. Broker affiliates can fall under the broker's regulator rules.",
   "x": [
+   "Source check: SECONDARY (not yet verified against a primary source).",
    "EU specifics (MiFID II inducements, Unfair Commercial Practices) not yet researched: check before using broker affiliates.",
    "Belgian factsheet: disclose any benefit openly."
   ],
@@ -505,6 +522,7 @@
   "d": "2026-10-17",
   "s": "N26: Gen Z (18-29) assets grew 45% in H1 2026; 89% call themselves beginners; popular buys include NVIDIA, Rheinmetall, SpaceX. US survey: ~46% of Gen Z ETF investors hold crypto-themed ETFs. 84% see crypto as risky, yet ~65% plan to buy.",
   "x": [
+   "Source check: SECONDARY (not yet verified against a primary source).",
    "Content pillars for Investedia: beginner basics, ETFs, big-name stocks explained, crypto risk in plain words."
   ],
   "l": [
@@ -517,10 +535,10 @@
   "c": "research",
   "t": "Investing in ETFs from Belgium: taxes",
   "d": "2026-10-17",
-  "s": "Stock-exchange tax (TOB) per buy and sell: 0.12% for most EEA-registered (Irish/Luxembourg) ETFs not registered in Belgium, 1.32% for Belgian-registered, 0.35% non-EEA. Distributing ETFs: 30% withholding on dividends (first ~833 euro exempt for 2026). That's why accumulating ETFs are popular.",
+  "s": "Stock-exchange tax (TOB), per buy and per sell, 3 rates with caps (broker tariff Jan 2026): 0.12% (max 1,300 euro), 0.35% (max 1,600 euro), 1.32% (max 4,000 euro, Belgian-registered accumulating funds). Most Irish/Luxembourg ETFs not registered in Belgium: 0.12%. Dividends: 30% withholding (first ~833 euro exempt in 2026).",
   "x": [
-   "Check the fund's registration and your broker's applied rate; one source conflicts.",
-   "Bond funds: separate Reynders tax."
+   "Source check: SECONDARY (broker tariff + Curvo); official fin.belgium.be page blocked our check.",
+   "Check your broker's applied rate before buying."
   ],
   "l": [
    "r-genz-investors"
@@ -532,30 +550,31 @@
   "c": "research",
   "t": "Prompt caching: reuse = ~90% cheaper",
   "d": "2026-10-17",
-  "s": "Cached input reads cost ~0.1x the normal price; writing to the cache costs 1.25x (5 min) or 2x (1 hour). The 5-minute cache pays off after one reuse. Put stable parts (instructions, documents) first in the prompt.",
+  "s": "Anthropic docs: 5-minute cache writes cost 1.25x base input, 1-hour writes 2x; reads 0.1x, but 0.05x on Opus 5.5 and Sonnet 5.5 and 0.025x on Fable 5.1. Minimum cacheable prompt: 512 tokens on current models (shorter prompts silently aren't cached). Cache refreshes free each time it's used.",
   "x": [
-   "Figures from third-party docs; check Anthropic's pricing page.",
-   "Minimum cacheable length ~1024 tokens for most models."
+   "Source check: PRIMARY (Claude platform docs).",
+   "Put stable instructions and documents first, changing parts last."
   ],
   "l": [
    "less-context"
   ],
-  "url": "https://www.eesel.ai/blog/anthropic-api-pricing"
+  "url": "https://platform.claude.com/docs/en/build-with-claude/prompt-caching"
  },
  {
   "id": "r-build-mcp",
   "c": "research",
   "t": "Build your own MCP server",
   "d": "2026-10-17",
-  "s": "An MCP server exposes tools (e.g. search_brain, add_note) any MCP-capable AI can call. Official TypeScript SDK (Node 18+); local servers use stdio, remote ones HTTP (Streamable HTTP). Can run locally, in a container or as a serverless function.",
+  "s": "Official MCP docs: a server can expose tools (functions the AI calls, with user approval), resources (readable data) and prompts (templates). Official SDK quickstarts: Python, TypeScript, Java, Kotlin, C#, Go, Ruby, Rust. Critical: a stdio server must never write to stdout, or it breaks the protocol.",
   "x": [
-   "Next step for shared memory: a small server over knowledge.json + exported notes; free hosting options still to verify."
+   "Source check: PRIMARY (modelcontextprotocol.io).",
+   "Free hosting still unverified."
   ],
   "l": [
    "r-mcp",
    "tool-knowledge-feed"
   ],
-  "url": "https://learn.microsoft.com/is-is/azure/developer/ai/build-mcp-server-ts"
+  "url": "https://modelcontextprotocol.io/docs/develop/build-server"
  },
  {
   "id": "r-evals",
@@ -564,6 +583,7 @@
   "d": "2026-10-17",
   "s": "Define specific, measurable success criteria, then test with many realistic cases and automated grading (code, model or human graders). More slightly-noisier automated tests beat a few hand-graded ones.",
   "x": [
+   "Source check: PRIMARY.",
    "Apply to my skills: 5-10 test prompts per skill, check outputs before and after a change."
   ],
   "l": [
@@ -591,12 +611,14 @@
   "d": "2026-10-17",
   "s": "Macnamara 2014 (88 studies): practice explained 26% of performance in games, 21% music, 18% sports, 4% education. Reanalyses find much more when practice is individualized and high-quality.",
   "x": [
-   "For me: focused practice on weak spots with fast feedback (small builds, quizzes), not just hours."
+   "Source check: PRIMARY (abstract, Psychological Science 2014).",
+   "Critiques: reanalyses with stricter criteria find more variance explained; quality and individualization matter.",
+   "For me: focused practice on weak spots with fast feedback, not just hours."
   ],
   "l": [
    "r-spaced-retrieval"
   ],
-  "url": "https://www.sciencedaily.com/releases/2014/07/140716123835.htm"
+  "url": "https://europepmc.org/search?query=DOI%3A10.1177%2F0956797614535810"
  },
  {
   "id": "r-self-explanation",
@@ -605,6 +627,7 @@
   "d": "2026-10-17",
   "s": "Prompting learners to explain material in their own words gives a small-to-moderate learning boost (Bisra 2018 meta-analysis); preparing to teach also helps (protégé effect). The Feynman technique builds on this, though it has no direct studies.",
   "x": [
+   "Source check: SECONDARY (journal abstract not accessible; figure from a summary).",
    "Use Talk: explain a topic back to Claude in plain words; gaps show what to relearn."
   ],
   "l": [
