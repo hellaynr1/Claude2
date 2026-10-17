@@ -1,6 +1,19 @@
 [
  {
   "d": "2026-10-17",
+  "at": "2026-10-17T12:49:01+00:00",
+  "type": "fix",
+  "t": "Audit fixes: WebKit (iPhone engine) now tested on every change and passes; Google Drive caught up (Systems, Second Brain, AI Learning Progress); first approval pull request opened (#1, usage cost rules); the close-out skill was loaded for real (first custom skill use)."
+ },
+ {
+  "d": "2026-10-17",
+  "at": "2026-10-17T12:35:00+00:00",
+  "type": "update",
+  "t": "CI: smoke test runs on WebKit as well as Chromium.",
+  "c": "8a6190bb771d433c5e151485ebe4dae4e1db6713"
+ },
+ {
+  "d": "2026-10-17",
   "at": "2026-10-17T12:20:10+00:00",
   "type": "update",
   "t": "Workflow redesign: 5 workflows (build, research, content, learn, close-out) with contracts + 1 Nightly run (max 1 PR, skips while one is open); 2 extra runs paused; evals for every workflow run on each change; Targets now shown in Reports."

@@ -6,7 +6,7 @@
   {"workflow": "content", "metric": "Posts published per week", "baseline": "0", "now": "0", "target": "≥3", "source": "Instagram Insights export"},
   {"workflow": "build", "metric": "Defects you found, per week", "baseline": "4 in 1.7 days", "now": "4 in 1.7 days", "target": "≤1", "source": "memory/BUGS.md"},
   {"workflow": "build", "metric": "Fix commits share", "baseline": "11%", "now": "11%", "target": "≤8%", "source": "git history"},
-  {"workflow": "build", "metric": "Smoke + evals on main", "baseline": "29/29", "now": "pass", "target": "100%", "source": "GitHub Actions"},
+  {"workflow": "build", "metric": "Smoke + evals on main (Chromium + WebKit)", "baseline": "29/29", "now": "pass", "target": "100%", "source": "GitHub Actions"},
   {"workflow": "learn", "metric": "Topics learned", "baseline": "0", "now": "0", "target": "≥8", "source": "app export / progress.md"},
   {"workflow": "learn", "metric": "Review pass rate", "baseline": "no data", "now": "no data", "target": "≥80%", "source": "app export"},
   {"workflow": "research", "metric": "Findings with a primary source", "baseline": "see RESEARCH.md", "now": "see RESEARCH.md", "target": "≥70%", "source": "app/knowledge.json labels"},

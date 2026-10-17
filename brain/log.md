@@ -3,6 +3,7 @@
 What we built and learned, newest first. Claude adds an entry at the end of every session.
 
 ## 2026-10-17
+- **Audit fixes**: WebKit (iPhone engine) added to CI, green on both engines (8a6190b); Google Drive caught up with 3 notes (old versions renamed, not deleted); first approval PR #1 (usage cost rules: publish the Claude page once per session); close-out skill loaded via the Skill tool (first real custom-skill use). Learning and posting outcomes need the owner (quiz + first post).
 - **Workflow redesign (from the raw-data audit)**: 14 systems + 9 skills + 3 runs → 5 workflows with contracts + 1 Nightly run (max 1 PR, skips while one is open); old files moved to archives; evals (31 code-graded checks + 25 model-graded cases) run in CI; Targets section in Reports; Drive → weekly export.
 - **Upgrades 2, 3, 7, 8**: Talk voice picker + speed (59876ac), offline capture via service worker (02660ce), reel voice-over + subtitles with Piper TTS (a2438e4), weekly content scheduled run Mondays 07:45 (systems/weekly-content.md). Smoke test now also tests offline mode.
 - **Related ideas** in the note panel: 5 most similar unlinked stars (BM25 keyword ranking, free), tap to open, + to link. Smoke test checks it.
