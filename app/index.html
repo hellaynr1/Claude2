@@ -78,8 +78,17 @@
     a.href = url; a.download = filename; document.body.append(a); a.click(); a.remove(); setTimeout(() => URL.revokeObjectURL(url), 4000);
     return { saved: true };
   } };
+  const SYNC_PATH = "SecondBrain/sync.json";
+  const cloud = {
+    ready: () => { try { return !!(window.puter && puter.auth.isSignedIn()); } catch { return false; } },
+    pull: async () => {
+      try { const r = await puter.fs.read(SYNC_PATH); const t = typeof r === "string" ? r : await r.text(); return JSON.parse(t); }
+      catch (e) { const m = String((e && (e.message || e.code)) || e); if (/not.?found|no such|does not exist|subject_does_not_exist|404/i.test(m)) return null; throw e; }
+    },
+    push: async data => { await puter.fs.write(SYNC_PATH, JSON.stringify(data), { overwrite: true, createMissingParents: true }); }
+  };
   window.SBWeb = {
-    ai, downloads,
+    ai, downloads, cloud,
     signIn: async () => { if (!window.puter) throw new Error("no puter"); if (!puter.auth.isSignedIn()) await puter.auth.signIn(); },
     status: () => { try { return window.puter && puter.auth.isSignedIn() ? "Connected" + (working ? " · " + working : "") : "Not connected yet (it also asks the first time you use AI)"; } catch { return "Not connected yet"; } }
   };
@@ -967,8 +976,9 @@ button { cursor: pointer; }
       p.replaceChildren(el("div", { class: "panel-head" }, el("h2", { text: "Your data" }), el("p", { text: mode === "cloud" ? "Saved privately to your Claude account." : mode === "local" ? "Saved in this browser only. Export regularly." : "Connecting…" })),
         el("div", { class: "panel-body" },
           el("div", { class: "set-block" }, el("b", { text: `${mine} notes · ${versions} saved versions · ${learned.size} Learn steps done` }), el("p", { text: "Built-in stars (what you learned with Claude) are included in exports for reference." })),
-          window.SBWeb ? el("div", { class: "set-block" }, el("b", { text: "AI (free, through Puter)" }), el("p", { text: "Claude runs through a free Puter account instead of a paid API key. Sign in once; if Claude ever stops answering, the free allowance may be used up for now." }),
-            el("div", { class: "toolrow" }, el("button", { type: "button", class: "btn small primary", text: "Connect AI", onclick: async () => { try { await window.SBWeb.signIn(); toast("AI connected"); drawPanel(); } catch { toast("Sign-in was closed. Try again."); } } }), el("span", { class: "muted", style: "font-size:12px", text: window.SBWeb.status() }))) : null,
+          window.SBWeb ? el("div", { class: "set-block" }, el("b", { text: "Account: AI + sync (free, through Puter)" }), el("p", { text: "Sign in with the same free Puter account on your iPhone and MacBook. Claude then works without an API key, and your notes sync between devices through a private file in your Puter account." }),
+            el("div", { class: "toolrow" }, cloudOn() ? el("button", { type: "button", class: "btn small", text: "Sync now", onclick: () => syncNow() }) : el("button", { type: "button", class: "btn small primary", text: "Sign in", onclick: async () => { try { await window.SBWeb.signIn(); toast("Signed in. Syncing your notes…"); drawPanel(); syncNow(); } catch { toast("Sign-in was closed. Try again."); } } }),
+              el("span", { class: "muted", style: "font-size:12px", text: cloudOn() ? (syncErr ? "Sync paused: " + syncErr : lastSync ? "Last synced " + ago(lastSync) : "Not synced yet") : "Not signed in: notes stay on this device" }))) : null,
           window.SBWeb ? el("div", { class: "set-block" }, el("b", { text: "Back up to Google Drive" }), el("p", { text: "Press Export JSON below, then upload the file to your Google Drive (Second Brain backups folder). Notes are stored in this browser on this device." })) :
           el("div", { class: "set-block" }, el("b", { text: "Back up to Google Drive" }), el("p", { text: "Saves a full backup (JSON) and a readable copy (Markdown) into a \"Second Brain backups\" folder in your Drive. The first time, Claude asks you to allow Google Drive." }),
             el("div", { class: "toolrow" }, el("button", { type: "button", class: "btn small primary", id: "backup-btn", text: "Back up now", onclick: e => backupToDrive(e.currentTarget) }), el("span", { class: "muted", style: "font-size:12px", id: "backup-state", text: lastBackup ? "Last backup " + ago(lastBackup) : "No backup yet" }))),
@@ -999,10 +1009,10 @@ button { cursor: pointer; }
         const all = nodes.filter(n => !n.hub && noteFilter.has(n.c) && (!s || (n.t + " " + stripHtml(n.s) + " " + (n.tags || []).join(" ")).toLowerCase().includes(s)));
         const mine = all.filter(n => n.user).sort((a, b) => (b.updated || 0) - (a.updated || 0));
         const base = all.filter(n => !n.user).sort((a, b) => a.c.localeCompare(b.c) || a.t.localeCompare(b.t));
-        list.replaceChildren(
+        list.replaceChildren(...[
           el("div", { class: "sub", text: `Your notes · ${mine.length}` }),
           mine.length ? mine.map(rowFor) : el("div", { class: "emptytxt", text: s ? "No notes match." : "Nothing yet. Type in the box at the bottom and press Enter to save your first note." }),
-          el("div", { class: "sub", text: `Learned with Claude · ${base.length}` }), base.map(rowFor));
+          el("div", { class: "sub", text: `Learned with Claude · ${base.length}` }), base.map(rowFor)].flat());
       };
       p.replaceChildren(el("div", { class: "panel-head" }, el("h2", { text: "Notes" }), q,
         el("div", { class: "filters" }, Object.entries(CLUSTERS).map(([k, c]) => el("button", { type: "button", class: "fchip", style: `--c:${c.css}`, "aria-pressed": String(noteFilter.has(k)), onclick: e => { noteFilter.has(k) ? noteFilter.delete(k) : noteFilter.add(k); e.currentTarget.setAttribute("aria-pressed", String(noteFilter.has(k))); drawList(); } }, el("span", { class: "dot" }), c.name)))), list);
@@ -1333,7 +1343,7 @@ ${contextFor(question)}`;
   let learned = new Set(ls.get("sb.learned", [])), metaRef = null;
   function toggleLearned(id) {
     learned.has(id) ? learned.delete(id) : learned.add(id);
-    ls.set("sb.learned", [...learned]);
+    ls.set("sb.learned", [...learned]); scheduleSync();
     if (metaRef) metaRef.set({ learned: [...learned], updatedAt: Date.now() }).catch(() => toast("Couldn't save your progress. Try again."));
     if (panel === "learn") drawPanel();
   }
@@ -1386,7 +1396,7 @@ ${contextFor(question)}`;
     selected = keep && byId.has(keep) ? keep : null; applyVisibility(); drawDrawer(false);
     if (panel && panel !== "ask") { const f = document.activeElement; if (!(f && (f.id === "nf-q" || f.id === "journal"))) drawPanel(); }
   }
-  function goLocal() { if (mode !== "wait") return; mode = "local"; userNodes = ls.get("sb.local", {}); setSync("saved in this browser"); refresh(); }
+  function goLocal() { if (mode !== "wait") return; mode = "local"; userNodes = ls.get("sb.local", {}); setSync(cloudOn() ? "saved · syncing soon" : "saved in this browser"); refresh(); setTimeout(syncNow, 800); }
   async function connect() {
     if (!window.claude || typeof window.claude.use !== "function") { if (window.SBWeb) { ai = window.SBWeb.ai; dl = window.SBWeb.downloads; setMode(capMode); drawChat(); drawDrawer(true); } return goLocal(); }
     try {
@@ -1401,7 +1411,39 @@ ${contextFor(question)}`;
       col.onSnapshot(snap => { const next = {}; snap.docs.forEach(d => next[d.id] = { ...d.data() }); userNodes = next; refresh(); }, () => setSync("offline"));
     } catch { goLocal(); }
   }
-  const persistLocal = () => { if (!col) ls.set("sb.local", userNodes); };
+  const persistLocal = () => { if (!col) { ls.set("sb.local", userNodes); scheduleSync(); } };
+  // ----- Cross-device sync (web app): one file in the user's own Puter account, merged per note -----
+  let tomb = ls.get("sb.deleted", {}), syncT = null, syncing = false, lastSync = ls.get("sb.lastSync", 0), syncErr = "";
+  const cloudOn = () => !!(window.SBWeb && window.SBWeb.cloud && window.SBWeb.cloud.ready());
+  function scheduleSync() { if (!cloudOn()) return; clearTimeout(syncT); syncT = setTimeout(syncNow, 1500); }
+  async function syncNow() {
+    if (!cloudOn() || syncing || col) return;
+    syncing = true; setSync("syncing…");
+    try {
+      const remote = await window.SBWeb.cloud.pull();
+      let changed = false;
+      const rNotes = (remote && remote.notes) || {}, rTomb = (remote && remote.deleted) || {};
+      Object.entries(rTomb).forEach(([id, t]) => { if (!tomb[id] || t > tomb[id]) tomb[id] = t; });
+      for (const [id, rn] of Object.entries(rNotes)) {
+        if (!rn || (tomb[id] && tomb[id] >= (rn.updatedAt || 0))) continue;
+        const ln = userNodes[id];
+        if (!ln || (rn.updatedAt || 0) > (ln.updatedAt || 0)) { userNodes[id] = rn; changed = true; }
+      }
+      for (const id of Object.keys(userNodes)) if (tomb[id] && tomb[id] >= (userNodes[id].updatedAt || 0)) { delete userNodes[id]; changed = true; }
+      if (remote && Array.isArray(remote.learned)) remote.learned.forEach(x => { if (!learned.has(x)) { learned.add(x); changed = true; } });
+      const cutoff = Date.now() - 90 * 864e5; Object.keys(tomb).forEach(k => { if (tomb[k] < cutoff) delete tomb[k]; });
+      ls.set("sb.deleted", tomb); ls.set("sb.learned", [...learned]); ls.set("sb.local", userNodes);
+      await window.SBWeb.cloud.push({ app: "second-brain", format: 1, updatedAt: Date.now(), notes: userNodes, deleted: tomb, learned: [...learned] });
+      lastSync = Date.now(); ls.set("sb.lastSync", lastSync); syncErr = "";
+      setSync("synced across devices");
+      if (changed) { refresh(); if (panel === "learn") drawPanel(); }
+    } catch (e) { syncErr = String((e && (e.message || e.code)) || "error").slice(0, 120); setSync("saved here · sync paused"); }
+    syncing = false;
+    if (panel === "settings") { const f = document.activeElement; if (!(f && f.tagName === "INPUT")) drawPanel(); }
+  }
+  addEventListener("focus", () => syncNow());
+  document.addEventListener("visibilitychange", () => { if (!document.hidden) syncNow(); });
+  setInterval(() => { if (!document.hidden) syncNow(); }, 60000);
   function saveThought(id, data) {
     userNodes[id] = data; refresh();
     if (col) col.doc(id).set(data).catch(() => toast("Couldn't save that note. Check your connection and try again.")); else persistLocal();
@@ -1425,7 +1467,7 @@ ${contextFor(question)}`;
     if (col) col.doc(id).update(patch).catch(() => toast("Couldn't save that change. Try again.")); else persistLocal();
   }
   function removeThought(id) {
-    delete userNodes[id];
+    delete userNodes[id]; tomb[id] = Date.now(); ls.set("sb.deleted", tomb);
     Object.entries(userNodes).forEach(([k, u]) => { if ((u.links || []).includes(id)) { u.links = u.links.filter(x => x !== id); if (col) col.doc(k).update({ links: u.links }).catch(() => {}); } });
     select(null); refresh(); toast("Note deleted");
     if (col) col.doc(id).delete().catch(() => toast("Couldn't delete that note. Try again.")); else persistLocal();
