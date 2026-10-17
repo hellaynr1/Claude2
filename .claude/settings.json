@@ -1,0 +1,14 @@
+{
+  "hooks": {
+    "UserPromptSubmit": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "echo '{\"hookSpecificOutput\":{\"hookEventName\":\"UserPromptSubmit\",\"additionalContext\":\"Skill check: if this prompt is a build, research, content, learn or close-out task (or daily-plan, video-notes, web-data), load that skill with the Skill tool before working.\"}}'"
+          }
+        ]
+      }
+    ]
+  }
+}
