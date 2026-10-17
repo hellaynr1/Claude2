@@ -34,6 +34,7 @@ These notes load automatically at the start of every Claude Code session on this
 ## My projects
 - Daybook: productivity workspace (tasks, calendar, goals, habits, focus timer, notes, alarms). https://claude.ai/artifact/YNuKimVQYiEoxTvTG2ZTUi
 - Second Brain: 3D galaxy / brain I can talk to: capture notes, daily journal, Learn AI course, Ask, and Talk (spoken answers). https://claude.ai/artifact/RGPX3G4upwNNFNPNxY8Jnz
+- Second Brain: edit only `app/index.html`; run `tools/build-claude-page.py` to update the Claude page (personal stars come from the published page via `--private`, never the repo).
 - Second Brain web app (free, mic works): `app/` → https://hellaynr1.github.io/Claude2/app/ (AI via Puter.js, notes in the browser). Keep personal details out of `app/` because the repo is public.
 - My Obsidian vault in Google Drive is my main notes system (projects, planning, journal). Check it for context about my businesses.
   When we learn something worth keeping, offer to add it here (in CLAUDE.md or a skill) and to the Second Brain.
