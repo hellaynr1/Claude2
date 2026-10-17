@@ -2,6 +2,8 @@
 
 Newest first. Format: decision · why · alternatives · reconsider when.
 
+- **2026-10-17 · Daily research run at 07:15 Brussels** (scheduled task trig_01WuM4sHVVZUSsd3Ti1i9doF): 3 open questions/day, primary sources, one pull request. Why: owner wants much more research. Cost: daily usage. Reconsider: if weekly limit runs out or PRs are low value.
+
 - **2026-10-17 · Autonomy for small changes.** Claude makes small, reversible changes in any project without asking; big ones (delete, money, legal/data-source on live sites, redesigns, data storage, new publishing, hard to undo) still need a yes. Every change: own commit + Reports line with link; undo = git revert. Scheduled (unattended) runs stay pull-request only.
 
 - **2026-10-17 · PROPOSED (needs owner's yes): replace Yahoo scraping in Investedia with licensed/permitted sources.** Why: Yahoo's terms ban automated collection, commercial reuse and redistribution (primary source). Proposal (corrected after TradingView ToS check): while Investedia earns nothing, TradingView widgets with attribution after written OK from TradingView; once monetized, a paid licence that includes public display; CoinGecko only after confirming Demo-plan commercial terms; FRED kept with its required notice. Alternatives: paid licensed API with public-display rights (cost), or end-of-day data only. Reconsider: if TradingView terms forbid commercial sites.

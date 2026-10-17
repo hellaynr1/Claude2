@@ -1,6 +1,12 @@
 [
  {
   "d": "2026-10-17",
+  "at": "2026-10-17T10:12:08+00:00",
+  "type": "update",
+  "t": "Daily research run switched on: every morning at 07:15 it researches 3 open questions with primary sources and proposes them as a pull request (merge = approve)."
+ },
+ {
+  "d": "2026-10-17",
   "at": "2026-10-17T10:10:26+00:00",
   "type": "research",
   "t": "Free MCP hosting found (Cloudflare Workers free plan, needs login protection for personal notes). Broker affiliate rules still unclear: ask FSMA or a lawyer before using them."
